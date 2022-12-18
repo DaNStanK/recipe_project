@@ -1,0 +1,19 @@
+{
+  "services": {
+    "proxy": {
+      "port": 10000,
+      "storage": 10001,
+      "auth": 10002,
+      "recipes": 10003
+    }
+  },
+  "security": {
+    "jwt_secret": "daniel123"
+  },
+  "db": {
+    "url": "cluster0.f9yoihl.mongodb.net",
+    "username": "DanStan",
+    "password": "FWCMUJZCEhLzfDPZ",
+    "dbname": "services"
+  }
+}

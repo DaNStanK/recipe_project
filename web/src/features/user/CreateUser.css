@@ -1,0 +1,66 @@
+.container__box {
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+
+.container__descriptionBox-create {
+   display: flex;
+   flex-direction: column;
+   gap: 29px;
+   max-width: 412px;
+   margin-right: 102px;
+}
+
+.container__descriptionBox h1 {
+   font-family: Roboto Slab;
+   font-size: 46px;
+   font-weight: bold;
+   color: #626262;
+   letter-spacing: 0;
+
+}
+
+.container__descriptionBox p {
+   word-break: break-all;
+   width: 100%;
+   font-family: Roboto Slab;
+   font-weight: normal;
+   font-size: 20px;
+   letter-spacing: 0;
+}
+
+.container__registerInputs {
+   display: grid;
+   grid-template-columns: auto auto;
+   gap: 23px 33px;
+}
+
+.button-create {
+   background: none;
+   border: 1px solid #A5A5A5;
+   font-family: Roboto;
+   font-size: 16px;
+   text-align: center;
+   text-transform: uppercase;
+   text-decoration: none;
+   font-weight: bold;
+   letter-spacing: 0;
+   color: inherit;
+   padding: 9.91px 10px 9.09px 10px;
+   width: 201.8px;
+   height: 40px;
+   border-radius: 5px;
+   margin-top: 19px;
+   cursor: pointer;
+}
+
+.button-create:hover,
+.button-create:active,
+.button-create:focus {
+   border: 1px solid #96BB36;
+   background: #96BB36;
+   color: #FFFFFF;
+   box-shadow: 0px 3px 6px #00000029;
+   opacity: 1;
+}

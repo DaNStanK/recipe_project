@@ -1,0 +1,115 @@
+.container__home {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   gap: 47px;
+   width: 100%;
+   height: 100%;
+   text-align: left;
+   margin-top: 70px;
+   margin-bottom: 93px;
+}
+
+.container__recipes {
+   display: grid;
+   width: 100%;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 55px 64px;
+}
+
+.recipe {
+   display: flex;
+   flex-direction: column;
+   border: 1px solid gray;
+   /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+   position: relative;
+}
+
+.recipe_type {
+   position: absolute;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   top: 17px;
+   left: 25px;
+   font-family: Roboto Slab;
+   font-weight: bold;
+   text-align: center;
+   font-size: 14px;
+   color: white;
+   background-color: #96BB36;
+   width: 85px;
+   height: 26px;
+   border-radius: 15px;
+}
+
+.recipe_type p {
+   padding: auto;
+}
+
+.recipe__icon {
+   display: flex;
+   justify-content: center;
+   position: absolute;
+   bottom: 19px;
+   right: 27px;
+   background-color: #96BB36;
+   width: 28px;
+   height: 28px;
+   border-radius: 5px;
+   padding: 9px;
+   cursor: pointer
+}
+
+.recipe__image {
+   background: linear-gradient(#F0972A, #96BB36);
+   width: 100%;
+   height: 234px;
+}
+
+.recipe_descriptionBox {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   gap: 15px;
+   padding: 16px 30px 26px 25px;
+}
+
+.recipe_descriptionBox span {
+   text-transform: capitalize;
+}
+
+.recipe__description {
+   font: normal normal normal 14px/19px Roboto;
+   letter-spacing: 0;
+   opacity: 1;
+   color: #A5A5A5;
+   text-align: left;
+   height: 79px;
+}
+
+.recipe__descriptionIcons {
+   display: flex;
+   flex-direction: row;
+   gap: 13px;
+}
+
+.recipe__container {
+   display: flex;
+   flex-direction: row;
+   gap: 5px;
+   align-items: center;
+   justify-content: flex-start;
+}
+
+.recipe__container img {
+   width: 16.31px;
+   height: 16.31px;
+}
+
+.recipe__container h3 {
+   font-family: Roboto Slab;
+   font-weight: bold;
+   font-size: 12px;
+   text-align: left;
+}
