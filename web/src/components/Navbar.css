@@ -21,7 +21,8 @@
 }
 
 .navbar-links:active,
-.navbar-links:focus {
+.navbar-links:focus,
+.navbar-links:hover {
   color: #F0972A;
 }
 
@@ -65,4 +66,38 @@
   color: #F0972A;
   font-size: 1rem;
   font-weight: 900;
+}
+
+.navbar__logged-users .login-links {
+  font: normal normal 900 1.125rem/1.5rem Roboto;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  border-bottom: 0.125rem solid #B5B5B4;
+}
+
+.navbar__logged-users .one {
+  color: #96BB36;
+}
+
+.navbar__logged-users .one:hover {
+  color: #626262;
+  border-bottom: 0.125rem solid #626262;
+}
+
+.navbar__logged-users .two {
+  color: #F0972A;
+}
+
+.navbar__logged-users .two:hover {
+  color: #626262;
+  border-bottom: 0.125rem solid #626262;
+}
+
+.navbar__logged-users .three {
+  color: #B5B5B4;
+}
+
+.navbar__logged-users .three:hover {
+  color: #626262;
+  border-bottom: 0.125rem solid #626262;
 }

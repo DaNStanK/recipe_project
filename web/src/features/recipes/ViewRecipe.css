@@ -1,0 +1,105 @@
+.view-recipe {
+   display: flex;
+   flex-direction: column;
+   width: 1027px;
+   height: 599px;
+   background: #FFFFFF;
+   box-shadow: 0px 10px 20px #00000012;
+   border: 1px solid #D8D8D8;
+   border-radius: 5px;
+   opacity: 1;
+   margin: auto;
+   padding: 22px 32px;
+}
+
+.view-recipe__title-box {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin-bottom: 17px;
+}
+
+.view-recipe__title-box h1 {
+   text-align: left;
+   font: normal normal bold 2.375rem/3.125rem Roboto Slab;
+   letter-spacing: 0px;
+   color: #F0972A;
+   opacity: 1;
+}
+
+.view-recipe__title-box img {
+   cursor: pointer;
+}
+
+.view-recipe__container-box {
+   display: flex;
+   flex-direction: row;
+   gap: 43px;
+   text-align: left;
+   font: normal normal normal 1rem/1.313rem Roboto;
+   letter-spacing: 0px;
+   color: #A5A5A5;
+   opacity: 1;
+}
+
+.view-recipe__img {
+   display: block;
+   background: linear-gradient(#F0972A, #96BB36);
+   width: 100%;
+   height: 243px;
+}
+
+.view-recipe__left-section {
+   width: 50%;
+}
+
+.view-recipe__title-category {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin-top: 22px;
+}
+
+.view-recipe__short-description {
+   height: 12.6vh;
+}
+
+.view-recipe__title-category,
+h2 {
+   text-align: left;
+   font: normal normal bold 1.125rem/1.5rem Roboto Slab;
+   letter-spacing: 0px;
+   color: #96BB36;
+   opacity: 1;
+}
+
+.view-recipe__category {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: Roboto Slab;
+   font-weight: bold;
+   text-align: center;
+   font-size: 0.875rem;
+   color: white;
+   background-color: #96BB36;
+   width: 61px;
+   height: 26px;
+   border-radius: 15px;
+}
+
+.view-recipe__left-section .recipe__descriptionIcons {
+   margin-top: 25px;
+}
+
+.view-recipe__right-section {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   width: 50%;
+}
+
+.view-recipe__right-section p {
+   padding-right: 10px;
+   overflow-wrap: break-word;
+}

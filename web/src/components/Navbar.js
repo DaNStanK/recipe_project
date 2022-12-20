@@ -11,17 +11,11 @@ import { LoggedOut } from './LoggedOut';
 // images
 import logoImg from "../icons/logo_color.svg";
 
-import { useEffect } from "react";
-
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export const Navbar = () => {
 
    const { isLoggedIn } = useAuthContext();
-
-   useEffect(() => {
-      console.log(isLoggedIn);
-   }, []);
 
    return (
       <div id="navbar">

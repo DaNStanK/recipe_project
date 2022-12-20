@@ -2,28 +2,20 @@
 import "./EditUser.css";
 
 // pictures
-import avatarPic from "../uploads/avatar7_big.png";
+import avatarPic from "../../uploads/avatar7_big.png";
 
-// custom hooks
-import { useUserFetch } from "../hooks/useUserFetch";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 // react hooks
 import { useCallback, useEffect, useState } from "react";
 
 export const EditUser = () => {
+   const { token } = useAuthContext();
 
    const [data, setData] = useState(null);
-   const [isPending, setIsPending] = useState(null);
-   const [error, setError] = useState(null);
-
-   const { updateUser } = useUserFetch();
 
    useEffect(() => {
-      const { token } = JSON.parse(localStorage.getItem('user'));
-
       const getUser = async () => {
-         setError(null);
-         setIsPending(true);
          try {
             let out = await fetch(
                '/api/v1/auth/users',
@@ -40,13 +32,9 @@ export const EditUser = () => {
                throw new Error(out.statusText);
             }
             let user = await out.json();
-            setData(user);
-            setIsPending(false);
-            return setError(null);
+            return setData(user);
          } catch (err) {
-            console.log(err.message);
-            setError(err.message);
-            return setIsPending(false);
+            return console.log(err.message);
          }
       };
       getUser();
@@ -61,11 +49,11 @@ export const EditUser = () => {
       });
    }, [setData]);
 
-   const handleSubmit = useCallback((e) => {
-      e.preventDefault();
-      console.log(data);
-      updateUser(data);
-   }, [data, updateUser]);
+   // const handleSubmit = useCallback((e) => {
+   //    e.preventDefault();
+   //    console.log(data);
+   //    updateUser(data);
+   // }, [data, updateUser]);
 
    return (
 
@@ -82,7 +70,7 @@ export const EditUser = () => {
             </div>
 
             <div className="container__inputBox edit__profile">
-               <form onSubmit={handleSubmit} className="container__registerInputs">
+               <form className="container__registerInputs">
                   <label>
                      <span>First Name</span>
                      <input type="text" name="first_name" value={data.first_name} onChange={dataChange} />
@@ -109,8 +97,6 @@ export const EditUser = () => {
                   </label>
                   <button id="button">Save</button>
                </form>
-               {isPending && <h1>Loading...</h1>}
-               {error && <p>{error}</p>}
             </div>
          </div>}
 

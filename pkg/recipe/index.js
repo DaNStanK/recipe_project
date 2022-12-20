@@ -64,7 +64,7 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-   return Recipe.find({ _id: id });
+   return Recipe.findOne({ _id: id });
 };
 
 const getUserRecipes = async (author_id) => {
