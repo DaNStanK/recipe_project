@@ -61,7 +61,8 @@
 }
 
 .view-recipe__short-description {
-   height: 12.6vh;
+   height: 126px;
+   margin-top: 17px;
 }
 
 .view-recipe__title-category,

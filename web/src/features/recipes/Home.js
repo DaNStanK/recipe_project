@@ -36,7 +36,7 @@ export const Home = () => {
    }, []);
 
    return (
-      <div className="container__home">
+      <div className="container">
          <div className="container__tittleBox">
             <h2 className="container__title">Home</h2>
             <div className="container__afterTitle"></div>

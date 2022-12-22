@@ -11,14 +11,14 @@ const getAll = async (req, res) => {
       return res.status(500).send('ISE!');
    }
 };
-
-const getMine = async (req, res) => {
+const getMyRecipes = async (req, res) => {
    try {
+      console.log(req.auth.uid)
       let r = await recipes.getUserRecipes(req.auth.uid);
-      if (r.length === null) {
+      if (r.length === 0) {
          return res.status(404).send('There are no recipes');
       }
-      res.status(200).send(r);
+      return res.status(200).send(r);
    } catch (err) {
       return res.status(500).send('ISE!');
    }
@@ -38,6 +38,7 @@ const getRecipe = async (req, res) => {
 
 const getByCategory = async (req, res) => {
    try {
+      console.log(req.params.category)
       let r = await recipes.getCategory(req.params.category);
       if (r.length === null) {
          return res.status(404).send('There are no recipes');
@@ -94,7 +95,7 @@ const remove = async (req, res) => {
 
 module.exports = {
    getAll,
-   getMine,
+   getMyRecipes,
    getByCategory,
    getRecipe,
    create,

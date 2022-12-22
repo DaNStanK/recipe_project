@@ -67,8 +67,8 @@ const getById = async (id) => {
    return Recipe.findOne({ _id: id });
 };
 
-const getUserRecipes = async (author_id) => {
-   return Recipe.find({ author_id });
+const getUserRecipes = async (uid) => {
+   return Recipe.find({ author_id: uid });
 };
 
 const getCategory = async (name) => {

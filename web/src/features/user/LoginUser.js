@@ -10,50 +10,51 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 export const Login = () => {
-   const navigate = useNavigate();
 
    const { dispatch } = useAuthContext();
+
+   const navigate = useNavigate();
 
    const email = useRef();
    const password = useRef();
 
-   const loginUser = async (data) => {
-      try {
-         let out = await fetch(
-            '/api/v1/auth/login',
-            {
-               method: 'post',
-               body: JSON.stringify(data),
-               headers: {
-                  'Content-Type': 'application/json'
-               }
-            }
-         );
-         // check if the fetch was successful   
-         if (!out.ok) {
-            console.log(out.statusText);
-            return new Error(out.statusText);
-         }
-
-         let res = await out.json();
-         let u = {
-            user: data.email,
-            token: res.token,
-            isLoggedIn: true
-         };
-         localStorage.setItem('user', JSON.stringify(u));
-         dispatch({
-            type: 'LOGIN',
-            payload: u
-         });
-         return navigate('/');
-      } catch (err) {
-         return console.log(err.message);
-      }
-   };
-
    const handleSubmit = useCallback((e) => {
       e.preventDefault();
+      const loginUser = async (data) => {
+         try {
+            let out = await fetch(
+               '/api/v1/auth/login',
+               {
+                  method: 'post',
+                  body: JSON.stringify(data),
+                  headers: {
+                     'Content-Type': 'application/json'
+                  }
+               }
+            );
+            // check if the fetch was successful   
+            if (!out.ok) {
+               console.log(out.statusText);
+               return new Error(out.statusText);
+            }
+
+            let res = await out.json();
+            let u = {
+               user: data.email,
+               token: res.token,
+               isLoggedIn: true
+            };
+            localStorage.setItem('user', JSON.stringify(u));
+            dispatch({
+               type: 'LOGIN',
+               payload: u
+            });
+            return navigate('/');
+         } catch (err) {
+            return console.log(err.message);
+         }
+      };
+
       loginUser({
          email: email.current.value,
          password: password.current.value

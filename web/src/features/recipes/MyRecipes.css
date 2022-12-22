@@ -1,0 +1,17 @@
+.container__inputBox {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   cursor: pointer;
+}
+
+.innerLeft {
+   display: flex;
+   flex-direction: row;
+   width: 50%;
+   justify-content: space-around;
+}
+
+.innerRight {
+   margin-right: 30px;
+}

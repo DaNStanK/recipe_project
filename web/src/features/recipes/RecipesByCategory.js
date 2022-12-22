@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 
 export const RecipesByCategory = () => {
-   const { category } = useParams();
 
+   const { category } = useParams();
 
    return (
       <div className="container">
@@ -11,5 +11,5 @@ export const RecipesByCategory = () => {
             <div className="container__afterTitle"></div>
          </div>
       </div>
-   )
-}
+   );
+};

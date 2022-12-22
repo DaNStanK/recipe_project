@@ -119,11 +119,12 @@ input {
   letter-spacing: 0;
   padding-right: 0.65rem;
   background-color: #F8F7F2;
+  z-index: 1;
 }
 
 .container__afterTitle {
   position: absolute;
-  top: 2rem;
+  top: 22px;
   width: 100%;
   margin: 0 auto;
   z-index: -1;

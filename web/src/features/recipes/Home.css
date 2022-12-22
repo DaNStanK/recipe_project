@@ -72,6 +72,7 @@
    justify-content: flex-start;
    gap: 15px;
    padding: 16px 30px 26px 25px;
+   background-color: #FFFFFF;
 }
 
 .recipe_descriptionBox span {

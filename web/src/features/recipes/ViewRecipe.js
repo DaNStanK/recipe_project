@@ -27,7 +27,7 @@ export const ViewRecipe = ({ setView, recipe }) => {
                         alt="Image_recipe"
                      />
                      <div className="view-recipe__title-category">
-                        <h2>Best serve for</h2>
+                        <h2>Best served for</h2>
                         <div className="view-recipe__category">
                            <p>{recipe.category}</p>
                         </div>

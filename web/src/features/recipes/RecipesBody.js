@@ -6,6 +6,7 @@ import arrowIcon from "../../icons/icon_arrows_white.svg";
 import plateIcon from "../../icons/icon_plate.svg";
 import starIcon from "../../icons/icon_star.svg";
 import clockIcon from "../../icons/icon_time.svg";
+
 import { ViewRecipe } from "./ViewRecipe";
 
 
