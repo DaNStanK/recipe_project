@@ -2,20 +2,20 @@
 import "../../index.css";
 
 // react hooks
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 
 // react-router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-//custom hooks
-import { usePostRecipes } from "../../hooks/usePostRecipes"
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 // icons
-import plusIcon from "../../icons/icon_plus_white.svg";
+import backIcon from "../../icons/icon_back_white.svg";
 
 
 export const CreateRecipes = () => {
-   // const image_url = useRef();
+
+   const image_url = useRef();
    const title = useRef();
    const category = useRef();
    const preparation_time = useRef();
@@ -23,18 +23,67 @@ export const CreateRecipes = () => {
    const short_description = useRef();
    const long_description = useRef();
 
-   const { createRecipe, error } = usePostRecipes();
+   const { token } = useAuthContext();
+   const navigate = useNavigate();
 
-   useEffect(() => {
-      let payload = {
-         category: category.current.value,
-         preparation_time: +preparation_time.current.value,
-         number_persons: +number_persons.current.value,
-         short_description: short_description.current.value,
-         long_description: long_description.current.value
-      };
-      createRecipe(payload);
-   }, [createRecipe]);
+   const createRecipe = useCallback(async () => {
+      try {
+         let out = await fetch(
+            `/api/v1/recipes/create`,
+            {
+               method: 'post',
+               headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': token ? `Bearer ${token}` : ''
+               }
+            }
+         );
+         //check if the the fetch was successful
+         if (!out.ok) {
+            throw new Error(out.statusText);
+         }
+         let response = await out.json();
+         console.log(response);
+         return navigate('/recipes');
+      } catch (err) {
+         return console.log(err.message);
+      }
+   }, []);
+
+   const handleSubmit = useCallback(() => {
+      // const downloadImg = {};
+      // const uploadImg = async () => {
+      //    try {
+      //       let out = await fetch(
+      //          `/api/v1/storage`,
+      //          {
+      //             method: 'post',
+      //             headers: {
+      //                'Content-Type': 'application/json'
+      //             }
+      //          }
+      //       );
+      //       //check if the the fetch was successful
+      //       if (!out.ok) {
+      //          throw new Error(out.statusText);
+      //       }
+      //       downloadImg = await out.json();
+      //       return downloadImg
+      //    } catch (err) {
+      //       return console.log(err.message);
+      //    }
+      // };
+      console.log(image_url.current.value);
+
+      // let payload = {
+      //    category: category.current.value,
+      //    preparation_time: +preparation_time.current.value,
+      //    number_persons: +number_persons.current.value,
+      //    short_description: short_description.current.value,
+      //    long_description: long_description.current.value
+      // };
+      // createRecipe(payload);
+   }, []);
 
    return (
       <div className="container">
@@ -42,18 +91,24 @@ export const CreateRecipes = () => {
             <h2 className="container__title">My Recipes</h2>
             <div className="container__afterTitle"></div>
             <div className="container__button">
-               <Link className="container__link" to="/my-recipes">
-                  <img src={plusIcon} alt="back_icon" />
+               <Link className="container__link" to="/recipes">
+                  <img src={backIcon} alt="back_icon" />
                </Link>
             </div>
          </div>
 
-         <form className="container__inputBox">
-            {/* <label>
+         <form onSubmit={handleSubmit} className="container__inputBox">
+            <label>
                <span>Recipe Image</span>
                <img src="#" alt="#" />
-               <input type="file" name="picture" ref={image_url} />
-            </label> */}
+               <form encType="multipart/form-data"></form>
+               <input
+                  type="file"
+                  name="picture"
+                  ref={image_url}
+                  accept="image/*"
+               />
+            </label>
             <label>
                <span>Recipe Title</span>
                <input type="text" name="title" ref={title} />
@@ -78,8 +133,7 @@ export const CreateRecipes = () => {
                <span>Recipe</span>
                <input type="text" name="long_description" ref={long_description} />
             </label>
-            <button id="button">Submit</button>
-            {error && <h1>{error}</h1>}
+            <button id="button">Save</button>
          </form>
       </div>
    )
