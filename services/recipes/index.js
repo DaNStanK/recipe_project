@@ -16,7 +16,7 @@ api.use(
    }).unless({
       path: [
          "/api/v1/recipes/all",
-         "/api/v1/recipes/recipe/:id",
+         "/api/v1/recipes/get-recipe/:id",
          "/api/v1/recipes/category/:category"
       ]
    })
@@ -24,11 +24,11 @@ api.use(
 
 api.get('/api/v1/recipes/all', recipes.getAll);
 api.get('/api/v1/recipes/my', recipes.getMyRecipes);
-api.get('/api/v1/recipes/recipe/:id', recipes.getRecipe);
+api.get('/api/v1/recipes/get-recipe/:id', recipes.getRecipe);
 
 api.post('/api/v1/recipes/create', recipes.createRecipe);
 
-api.put('/api/v1/recipes/recipe/:id', recipes.update);
+api.put('/api/v1/recipes/update-recipe/:id', recipes.update);
 
 api.delete('/api/v1/recipes/recipe/:id', recipes.remove);
 

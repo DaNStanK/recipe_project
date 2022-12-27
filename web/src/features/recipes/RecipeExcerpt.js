@@ -22,7 +22,7 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
 
    const deleteRecipe = useCallback(async () => {
       try {
-         let out = await fetch(
+         let response = await fetch(
             `/api/v1/recipes/recipe/${recipe._id}`,
             {
                method: 'delete',
@@ -33,10 +33,10 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
             }
          );
          //check if the the fetch was successful
-         if (!out.ok) {
-            throw new Error(out.statusText);
+         if (!response.ok) {
+            throw new Error(response.statusText);
          }
-         // setRecipes(recipes.filter(r => r._id !== recipe._id));
+         setRecipes(prevState => prevState = recipes.filter(r => r._id !== recipe._id));
          return navigate('/recipes');
       } catch (err) {
          return console.log(err.message);
@@ -44,9 +44,8 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
    }, [recipe, navigate, token]);
 
    const handleDelete = useCallback(() => {
-      setRecipes(recipes.filter(r => r._id !== recipe._id));
       deleteRecipe();
-   }, [setRecipes, recipe._id, recipes]);
+   }, [deleteRecipe]);
 
    return (
       <div className="container_inputBox content">

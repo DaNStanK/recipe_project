@@ -1,19 +1,15 @@
 // styles
 import "./CreateRecipes.css"
 
-// react hooks
-import { useState } from "react";
-
 // react-router
 import { Link } from "react-router-dom";
 
-import { RecipeFormExcerpt } from "./RecipeFormExcerpt";
+import { RecipeCreateForm } from "./RecipeCreateForm";
 
 // icons
 import backIcon from "../../icons/icon_back_white.svg";
 
 export const CreateRecipes = () => {
-   const [recipe, setRecipe] = useState('');
 
    return (
       <div className="container">
@@ -22,14 +18,11 @@ export const CreateRecipes = () => {
             <div className="container__afterTitle"></div>
             <div className="container__button">
                <Link className="container__link" to="/recipes">
-                  <img src={backIcon} alt="back_icon" />
+                  <img src={backIcon} alt="back icon" />
                </Link>
             </div>
          </div>
-         <RecipeFormExcerpt
-            recipe={recipe}
-            setRecipe={setRecipe}
-         />
+         <RecipeCreateForm />
       </div>
-   )
+   );
 };

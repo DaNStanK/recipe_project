@@ -10,7 +10,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 // images
 import recipeImage from "../../uploads/recipe.jpg"
 
-export const RecipeFormExcerpt = ({ recipe }) => {
+export const RecipeCreateForm = ({ recipe }) => {
 
    const { token } = useAuthContext();
 
@@ -121,7 +121,7 @@ export const RecipeFormExcerpt = ({ recipe }) => {
                <label htmlFor="category" >
                   <span>Category</span><br />
                   <select className="category" name="category" ref={category} id="category" >
-                     <option selected></option>
+                     <option defaultValue=''></option>
                      <option value="breakfast">Breakfast</option>
                      <option value="brunch">Brunch</option>
                      <option value="lunch">Lunch</option>

@@ -23,7 +23,7 @@ export const App = () => {
    return (
       <Routes>
          <Route path="/" element={<Layout />}>
-            <Route index element={isLoggedIn ? <Home /> : <Login />} />
+            <Route index element={<Home />} />
 
             <Route path="users">
                <Route index element={isLoggedIn ? <Home /> : <Login />} />

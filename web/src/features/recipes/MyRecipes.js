@@ -16,6 +16,7 @@ import addIcon from "../../icons/icon_plus_white.svg"
 // components
 import { RecipeExcerpt } from "./RecipeExcerpt";
 
+
 export const MyRecipes = () => {
    const { token } = useAuthContext();
    const [recipes, setRecipes] = useState('');
@@ -47,6 +48,7 @@ export const MyRecipes = () => {
       getMyRecipes();
    }, []);
 
+
    return (
       <div className="container">
          <div className="container__tittleBox">
@@ -54,7 +56,7 @@ export const MyRecipes = () => {
             <div className="container__afterTitle"></div>
             <div className="container__button">
                <Link className="container__link" to="/recipes/create">
-                  <img src={addIcon} alt="add_icon" />
+                  <img src={addIcon} alt="add icon" />
                </Link>
             </div>
          </div>

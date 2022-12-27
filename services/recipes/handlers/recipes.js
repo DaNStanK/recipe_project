@@ -29,10 +29,9 @@ const getAll = async (req, res) => {
 };
 const getMyRecipes = async (req, res) => {
    try {
-      console.log(req.auth.uid)
       let r = await recipes.getUserRecipes(req.auth.uid);
       if (r.length === 0) {
-         return res.status(404).payloadsend('There are no recipes');
+         return res.status(404).send('There are no recipes');
       }
       return res.status(200).send(r);
    } catch (err) {
@@ -43,7 +42,7 @@ const getMyRecipes = async (req, res) => {
 const getRecipe = async (req, res) => {
    try {
       let r = await recipes.getById(req.params.id);
-      if (r.length === null) {
+      if (r.length === 0) {
          return res.status(404).send('There are no recipes');
       }
       res.status(200).send(r);
@@ -72,7 +71,10 @@ const update = async (req, res) => {
          ...req.body,
          last_updated: new Date()
       };
-      let r = await recipe.update(req.params.id, req.auth.uid, payload);
+      let r = await recipes.update(req.params.id, req.auth.uid, payload);
+      if (r.modifiedCount < 1) {
+         res.status(409).send('Recipe not found')
+      }
       return res.status(200).send('Recipe updated');
    } catch (err) {
       return res.status(500).send('ISE!');
