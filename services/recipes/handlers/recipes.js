@@ -1,5 +1,21 @@
 const recipes = require('../../../pkg/recipe');
 
+const createRecipe = async (req, res) => {
+   try {
+      let payload = {
+         ...req.body,
+         author_id: req.auth.uid,
+         created_on: new Date(),
+         last_updated: new Date(),
+         likes: 0
+      };
+      let recipe = await recipes.create(payload);
+      return res.status(201).send(recipe);
+   } catch (err) {
+      return res.status(500).send('ISE!');
+   }
+};
+
 const getAll = async (req, res) => {
    try {
       let r = await recipes.getAll();
@@ -16,7 +32,7 @@ const getMyRecipes = async (req, res) => {
       console.log(req.auth.uid)
       let r = await recipes.getUserRecipes(req.auth.uid);
       if (r.length === 0) {
-         return res.status(404).send('There are no recipes');
+         return res.status(404).payloadsend('There are no recipes');
       }
       return res.status(200).send(r);
    } catch (err) {
@@ -49,22 +65,6 @@ const getByCategory = async (req, res) => {
    }
 };
 
-const create = async (req, res) => {
-   try {
-      let payload = {
-         ...req.body,
-         author_id: req.auth.uid,
-         created_on: new Date(),
-         last_updated: new Date(),
-         likes: 0
-      };
-      let recipe = await recipes.create(payload);
-      console.log(recipe);
-      return req.status(201).send(recipe);
-   } catch (err) {
-      return res.status(500).send('ISE!');
-   }
-};
 
 const update = async (req, res) => {
    try {
@@ -94,11 +94,11 @@ const remove = async (req, res) => {
 };
 
 module.exports = {
+   createRecipe,
    getAll,
    getMyRecipes,
    getByCategory,
    getRecipe,
-   create,
    update,
    remove
 };

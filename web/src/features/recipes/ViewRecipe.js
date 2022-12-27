@@ -3,7 +3,8 @@ import "./ViewRecipe.css";
 import plateIcon from "../../icons/icon_plate.svg";
 import starIcon from "../../icons/icon_star.svg";
 import clockIcon from "../../icons/icon_time.svg";
-import exIcon from "../../icons/icon_close.svg"
+import closeIcon from "../../icons/icon_close.svg"
+import recipeImg from "../../uploads/recipe.jpg"
 
 export const ViewRecipe = ({ setView, recipe }) => {
 
@@ -14,7 +15,7 @@ export const ViewRecipe = ({ setView, recipe }) => {
                <div className="view-recipe__title-box">
                   <h1>{recipe.title}</h1>
                   <img
-                     src={exIcon}
+                     src={closeIcon}
                      alt="Close icon"
                      onClick={() => setView(prevState => !prevState)}
                   />
@@ -23,8 +24,8 @@ export const ViewRecipe = ({ setView, recipe }) => {
                   <div className="view-recipe__left-section">
                      <img
                         className="view-recipe__img"
-                        src="#"
-                        alt="Image_recipe"
+                        src={recipeImg}
+                        alt="Recipe image"
                      />
                      <div className="view-recipe__title-category">
                         <h2>Best served for</h2>
@@ -32,18 +33,18 @@ export const ViewRecipe = ({ setView, recipe }) => {
                            <p>{recipe.category}</p>
                         </div>
                      </div>
-                     <p className="view-recipe__short-description">{recipe.short_description}</p>
+                     <p className="view-recipe__short-description">{recipe.short_description.substring(0, 330)}</p>
                      <div className="recipe__descriptionIcons">
                         <div className="recipe__container">
-                           <img src={clockIcon} className="icon" alt="" />
+                           <img src={clockIcon} />
                            <h3>{recipe.preparation_time} min</h3>
                         </div>
                         <div className="recipe__container">
-                           <img src={plateIcon} className="icon" alt="" />
+                           <img src={plateIcon} />
                            <h3>{recipe.number_persons} persons</h3>
                         </div>
                         <div className="recipe__container">
-                           <img src={starIcon} className="icon" alt="" />
+                           <img src={starIcon} className="star-icon" />
                            <h3>{recipe.likes}</h3>
                         </div>
                      </div>

@@ -8,6 +8,7 @@ const api = express();
 db.init();
 
 api.use(express.json());
+api.get('/api/v1/recipes/category/:category', recipes.getByCategory);
 api.use(
    jwt({
       algorithms: ['HS256'],
@@ -22,11 +23,13 @@ api.use(
 );
 
 api.get('/api/v1/recipes/all', recipes.getAll);
-api.get('/api/v1/recipes/category/:category', recipes.getByCategory);
 api.get('/api/v1/recipes/my', recipes.getMyRecipes);
 api.get('/api/v1/recipes/recipe/:id', recipes.getRecipe);
-api.post('/api/v1/recipes/create', recipes.create);
+
+api.post('/api/v1/recipes/create', recipes.createRecipe);
+
 api.put('/api/v1/recipes/recipe/:id', recipes.update);
+
 api.delete('/api/v1/recipes/recipe/:id', recipes.remove);
 
 api.listen(config.get('services').proxy.recipes, err => {

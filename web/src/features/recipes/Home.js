@@ -15,7 +15,7 @@ export const Home = () => {
 
    const getRecipes = useCallback(async () => {
       try {
-         let res = await fetch(
+         let response = await fetch(
             `/api/v1/recipes/all`,
             {
                method: 'get',
@@ -25,11 +25,11 @@ export const Home = () => {
             }
          );
          //check if the the fetch was successful
-         if (!res.ok) {
-            throw new Error(res.statusText);
+         if (!response.ok) {
+            throw new Error(response.statusText);
          }
-         let r = await res.json();
-         return setRecipes(prevState => prevState = r);
+         let fetchedRecipes = await response.json();
+         return setRecipes(prevState => prevState = fetchedRecipes);
       } catch (err) {
          return console.log(err.message);
       }

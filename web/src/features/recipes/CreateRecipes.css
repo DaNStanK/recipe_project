@@ -1,4 +1,123 @@
-.container__inputBox img {
-   width: 234px;
-   height: 147px;
+.container {
+   gap: 5.63rem;
+}
+
+.container-form {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 2.25rem;
+   width: 100%;
+   text-align: left;
+   font: normal normal normal 0.875rem/1.186rem Roboto;
+}
+
+.container-form input,
+.container-form select,
+.container-form textarea {
+   margin-top: 10px;
+   height: 40px;
+   background: #F0EFEA 0% 0% no-repeat padding-box;
+   border: 1px solid #A5A5A5;
+   border-radius: 5px;
+   opacity: 1;
+   text-align: left;
+   font: normal normal normal 0.875rem/1.188rem Roboto;
+   letter-spacing: 0px;
+   color: #A5A5A5;
+   opacity: 1;
+   resize: none;
+}
+
+.container-form .box-left {
+   width: 18%;
+}
+
+.box-left .fileUpload {
+   display: block;
+   width: 100%;
+   height: 32px;
+   padding: 6px;
+   border: 1px solid #A5A5A5;
+   border-radius: 5px;
+   text-align: center;
+   font: normal 0.875rem/1.186rem Roboto;
+   letter-spacing: 0px;
+   color: #A5A5A5;
+   opacity: 1;
+   cursor: pointer;
+}
+
+.box-left img,
+.box-left label,
+.box-left input {
+   width: 100%;
+}
+
+.box-left img {
+   margin-top: 10px;
+   margin-bottom: 17px;
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+
+.fileUpload input {
+   display: none;
+}
+
+.box-middle {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 23px;
+   width: 42%;
+}
+
+.box-middle .recipe-title {
+   width: 100%;
+}
+
+.middle-innerBox {
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   gap: 1.688rem;
+}
+
+.box-middle .category {
+   width: 179px;
+   padding: 6px;
+}
+
+.box-middle .preparation-time,
+.box-middle .persons-number {
+   width: 165px;
+}
+
+.short-description textarea {
+   width: 100%;
+   height: 96px;
+   padding: 10px 14px 12px 12px;
+}
+
+.box-middle #button {
+   box-shadow: 0px 3px 6px #00000029;
+   width: 22%;
+   font: normal normal 900 1rem/1.313rem Roboto;
+   color: #ffffff;
+   background: #96BB36;
+}
+
+.container-form .box-right {
+   width: 28%;
+}
+
+.box-right textarea {
+   width: 100%;
+   height: 284px;
+   padding: 10px 13px 14px 12px;
+   background: #F0EFEA 0% 0% no-repeat padding-box;
+   border: 1px solid #A5A5A5;
+   border-radius: 5px;
+   opacity: 1;
 }

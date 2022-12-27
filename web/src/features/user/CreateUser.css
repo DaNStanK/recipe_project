@@ -12,22 +12,21 @@
    margin-right: 102px;
 }
 
-.container__descriptionBox h1 {
-   font-family: Roboto Slab;
-   font-size: 46px;
-   font-weight: bold;
+.container__descriptionBox-create h1 {
+   text-align: left;
+   font: normal bold 2.875rem/3.75rem Roboto Slab;
+   letter-spacing: 0px;
+   opacity: 1;
    color: #626262;
-   letter-spacing: 0;
-
 }
 
-.container__descriptionBox p {
+.container__descriptionBox-create p {
    word-break: break-all;
    width: 100%;
-   font-family: Roboto Slab;
-   font-weight: normal;
-   font-size: 20px;
-   letter-spacing: 0;
+   font: normal normal normal 1.25rem/1.63rem Roboto Slab;
+   letter-spacing: 0px;
+   color: #A5A5A5;
+   opacity: 1;
 }
 
 .container__registerInputs {
