@@ -1,39 +1,27 @@
 // styles
 import "./Home.css";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { RecipesBody } from "./RecipesBody";
 
+import { useDispatch, useSelector } from "react-redux"
+
+import { fetchRecipes } from "./recipesSlice";
+
 export const Home = () => {
 
-   const [recipes, setRecipes] = useState('');
+   const dispatch = useDispatch();
+
+   const recipes = useSelector(state => state.recipes.entities);
+   const recipesStatus = useSelector(state => state.recipes.status);
+   const recipesError = useSelector(state => state.recipes.error);
 
    useEffect(() => {
-      getRecipes();
-   }, []);
-
-   const getRecipes = useCallback(async () => {
-      try {
-         let response = await fetch(
-            `/api/v1/recipes/all`,
-            {
-               method: 'get',
-               headers: {
-                  'Content-Type': 'application/json'
-               }
-            }
-         );
-         //check if the the fetch was successful
-         if (!response.ok) {
-            throw new Error(response.statusText);
-         }
-         let fetchedRecipes = await response.json();
-         return setRecipes(prevState => prevState = fetchedRecipes);
-      } catch (err) {
-         return console.log(err.message);
+      if (recipesStatus === 'idle') {
+         dispatch(fetchRecipes());
       }
-   }, []);
+   }, [recipesStatus, dispatch]);
 
    return (
       <div className="container">
@@ -51,6 +39,10 @@ export const Home = () => {
                   />
                ))}
             </div>}
+
+         {recipesError &&
+            <div>{recipesError}</div>
+         }
       </div>
    );
 };

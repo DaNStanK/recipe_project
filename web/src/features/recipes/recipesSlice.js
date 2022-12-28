@@ -1,15 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllRecipes } from "../../hooks/useGetRecipes";
 
-export const fetchRecipes = createAsyncThunk(
-   'recipes/fetchRecipes', async () => {
-      try {
-         let response = getAllRecipes();
-         return response.data;
-      } catch (err) {
-         return console.log(err.message);
-      };
-   });
+export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () => {
+   try {
+      let response = await fetch(
+         `/api/v1/recipes/all`,
+         {
+            method: 'get',
+            headers: {
+               'Content-Type': 'application/json'
+            }
+         }
+      );
+      //check if the the fetch was successful
+      if (!response.ok) {
+         throw new Error(response.statusText);
+      }
+      let result = response.json();
+      return result;
+   } catch (err) {
+      return err.message;
+   };
+});
 
 const initialState = {
    entities: [],
@@ -23,26 +34,8 @@ export const recipesSlice = createSlice({
    reducers: {
       createRecipe: {
          reducer: (state, action) => {
-            state.entities.push(action.payload);
-         },
-         prepare: (
-            title,
-            category,
-            preparation_time,
-            number_persons,
-            short_description,
-            long_description
-         ) => {
-            return {
-               payload: {
-                  title,
-                  category,
-                  preparation_time,
-                  number_persons,
-                  short_description,
-                  long_description
-               }
-            }
+            console.log(action.payload)
+            state.recipes.push(action.payload);
          }
       }
    },
@@ -53,6 +46,7 @@ export const recipesSlice = createSlice({
          })
          .addCase(fetchRecipes.fulfilled, (state, action) => {
             state.status = 'succeeded';
+            state.entities = action.payload;
          })
          .addCase(fetchRecipes.rejected, (state, action) => {
             state.status = 'failed';
