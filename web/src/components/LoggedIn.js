@@ -1,42 +1,27 @@
 import "./Navbar.css"
 
-import { useCallback } from 'react';
-
 import { Link } from 'react-router-dom';
 
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useDispatch } from "react-redux";
+
+import { setLogout } from "../features/user/userSlice";
 
 export const LoggedIn = () => {
-  const { dispatch } = useAuthContext();
 
-  const handleClick = useCallback(() => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
     localStorage.clear();
-    dispatch({
-      type: 'LOGOUT'
-    });
-  }, [dispatch]);
+    dispatch(setLogout);
+  };
 
   return (
     <div className="navbar__logged-users">
-      <Link
-        className="login-links one"
-        to='/recipes'
-      >MY RECIPES</Link>
-
+      <Link className="login-links one" to='/recipes'>MY RECIPES</Link>
       <div className='navbar-types__login-circles'></div>
-
-      <Link
-        className="login-links two"
-        to='/users/edit'
-      >MY PROFILE</Link>
-
+      <Link className="login-links two" to='/users/edit'>MY PROFILE</ Link>
       <div className='navbar-types__login-circles'></div>
-
-      <Link
-        className="login-links three"
-        to='/users'
-        onClick={handleClick}
-      >LOG OUT</Link>
+      <Link className="login-links three" to='/users' onClick={handleClick}>LOG OUT</Link>
     </div>
   )
 }

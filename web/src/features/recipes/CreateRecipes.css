@@ -55,10 +55,13 @@
 }
 
 .box-left img {
+   display: block;
    margin-top: 10px;
    margin-bottom: 17px;
-   background-size: cover;
+   background-size: contain;
    background-repeat: no-repeat;
+   width: 100%;
+   height: 147px;
 }
 
 .fileUpload input {

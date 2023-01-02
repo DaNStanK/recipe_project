@@ -4,13 +4,18 @@ import "./EditUser.css";
 // pictures
 import avatarPic from "../../uploads/avatar7_big.png";
 
-import { useAuthContext } from "../../hooks/useAuthContext";
+// import { useAuthContext } from "../../hooks/useAuthContext";
 
 // react hooks
 import { useCallback, useEffect, useState } from "react";
 
+import { useSelector } from "react-redux";
+
+import { getUser } from "./userSlice";
+
 export const EditUser = () => {
-   const { token } = useAuthContext();
+
+   const { token } = useSelector(getUser);
 
    const [data, setData] = useState(null);
 

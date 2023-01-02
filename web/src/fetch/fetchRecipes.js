@@ -38,7 +38,7 @@ export const createRecipe = async (token, initData, data, setData) => {
 
 export const updateRecipe = async (data, token) => {
   try {
-    await fetch(
+    const response = await fetch(
       `/api/v1/recipes/create-recipe`,
       {
         method: 'post',
@@ -49,7 +49,9 @@ export const updateRecipe = async (data, token) => {
         }
       }
     );
-    setData(initData);
+    const result = response.json();
+    return result;
+
   } catch (err) {
     console.log(err);
   }

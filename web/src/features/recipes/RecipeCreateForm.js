@@ -1,24 +1,22 @@
-// react hooks
-import { useRef, useCallback, useState } from "react";
+import { useRef, useState } from "react";
 
-// react router
+import { useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 
-// context hook
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { getUser } from "../user/userSlice";
 
-// images
-import recipeImage from "../../uploads/recipe.jpg"
+import recipeImage from "../../uploads/recipe.jpg";
+
 
 export const RecipeCreateForm = ({ recipe }) => {
 
-   const { token } = useAuthContext();
+   const { token } = useSelector(getUser);
 
    const navigate = useNavigate();
 
-   // const [filename, setFilename] = useState('');
+   const [filename, setFilename] = useState('');
 
-   const image_url = useRef(recipe ? recipe?.image_url : '');
    const title = useRef(recipe ? recipe?.title : '');
    const category = useRef(recipe ? recipe?.category : '');
    const preparation_time = useRef(recipe ? recipe.preparation_time : '');
@@ -26,7 +24,7 @@ export const RecipeCreateForm = ({ recipe }) => {
    const short_description = useRef(recipe ? recipe?.short_description : '');
    const long_description = useRef(recipe ? recipe?.long_description : '');
 
-   const createRecipe = useCallback(async (data) => {
+   const createRecipe = async (data, redirect) => {
       try {
          let out = await fetch(
             `/api/v1/recipes/create`,
@@ -40,24 +38,21 @@ export const RecipeCreateForm = ({ recipe }) => {
             }
          );
          //check if the the fetch was successful
-         console.log(JSON.stringify(data));
          if (!out.ok) {
             throw new Error(out.statusText);
          }
-         // let response = await out.json();
-         // console.log(response);
-         return navigate('/recipes');
+
+         return redirect('/recipes');
       } catch (err) {
          return console.log(err.message);
       }
-   }, []);
+   };
 
-   const uploadFile = useCallback(async (e) => {
+   const uploadFile = async (e, setImgUrl) => {
       e.preventDefault();
 
-      const formData = new FormData();
-      formData.append(e.target.files[0].name, e.target.files[0]);
-      console.log(formData);
+      let formData = new FormData();
+      formData.append('picture', e.target.files[0]);
 
       try {
          let out = await fetch(
@@ -66,7 +61,6 @@ export const RecipeCreateForm = ({ recipe }) => {
                method: 'POST',
                body: formData,
                headers: {
-                  'Content-Type': 'multipart/form-data',
                   'Authorization': token ? `Bearer ${token}` : ''
                }
             }
@@ -76,20 +70,18 @@ export const RecipeCreateForm = ({ recipe }) => {
             throw new Error(response.statusText);
          }
 
-         const response = out.json();
-         console.log(out);
-         // return setFilename(prevState => prevState = {...prevState, image_url: out.filename});
+         const response = await out.json();
+         return setImgUrl(prevState => prevState = response.fileName);
       } catch (err) {
          return console.log(err.message);
       }
-   }, []);
+   };
 
    const handleSubmit = (e) => {
-
       e.preventDefault();
 
       const payload = {
-         // image_url: filename,
+         image_url: filename,
          title: title.current.value,
          category: category.current.value,
          preparation_time: +preparation_time.current.value,
@@ -98,7 +90,8 @@ export const RecipeCreateForm = ({ recipe }) => {
          long_description: long_description.current.value
       };
 
-      createRecipe(payload);
+      // console.log(payload)
+      createRecipe(payload, navigate);
    };
 
    return (
@@ -107,7 +100,7 @@ export const RecipeCreateForm = ({ recipe }) => {
             <span>Recipe Image</span>
             <img src={recipeImage} alt="#" />
             <label className="fileUpload"> UPLOAD
-               <input name="picture" type="file" accept="image/*" ref={image_url} onChange={uploadFile} />
+               <input name="image_url" type="file" accept="image/*" onChange={e => uploadFile(e, setFilename)} />
             </label>
          </div>
          <div className="box-middle">

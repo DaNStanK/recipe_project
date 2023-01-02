@@ -1,16 +1,15 @@
-// react hooks
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
-// react router
 import { useNavigate } from "react-router-dom";
 
-// context hook
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useSelector } from "react-redux";
+
+import { getUser } from "../user/userSlice";
 
 
 export const RecipeEditForm = ({ recipe, recipeID }) => {
 
-   const { token } = useAuthContext();
+   const { token } = useSelector(getUser);
 
    const [data, setData] = useState(recipe);
 
@@ -21,14 +20,9 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
          ...prevState,
          [e.target.name]: isNaN(e.target.value) ? e.target.value : +e.target.value
       });
-   }, [setData, data]);
+   }, [data]);
 
-   useEffect(() => {
-      console.log(data);
-      console.log(recipeID);
-   }, []);
-
-   const updateRecipe = useCallback(async (newData) => {
+   const updateRecipe = async (newData, redirect) => {
       try {
          let response = await fetch(
             `/api/v1/recipes/update-recipe/${recipeID}`,
@@ -46,27 +40,25 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
             throw new Error(response.statusText);
          }
 
-         return navigate('/recipes');
+         return redirect('/recipes');
       } catch (err) {
          return console.log(err.message);
       }
-   }, [recipeID, token, navigate]);
+   };
 
-   const uploadFile = useCallback(async (e) => {
+   const uploadFile = async (e, recipe) => {
       e.preventDefault();
 
-      const formData = new FormData();
-      formData.append(e.target.files[0].name, e.target.files[0]);
-      console.log(formData);
+      let formData = new FormData();
+      formData.append('picture', e.target.files[0]);
 
       try {
          let out = await fetch(
             `/api/v1/storage`,
             {
                method: 'POST',
-               body: JSON.stringify(formData),
+               body: formData,
                headers: {
-                  'Content-Type': 'multipart/form-data',
                   'Authorization': token ? `Bearer ${token}` : ''
                }
             }
@@ -76,31 +68,29 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
             throw new Error(response.statusText);
          }
 
-         const response = out.json();
-         console.log(out);
-         // return setFilename(prevState => prevState = {...prevState, image_url: out.filename});
+         const response = await out.json();
+         return recipe.image_url = response;
       } catch (err) {
          return console.log(err.message);
       }
-   }, [token]);
+   };
 
-   const handleClick = useCallback(e => {
+   const handleClick = e => {
       e.preventDefault();
-      // console.log(data);
-      updateRecipe(data);
-   }, [data]);
+      updateRecipe(data, navigate);
+   };
 
    return (
       <div className="container-form">
          <div className="box-left">
             <span>Recipe Image</span>
-            <img src={require('../../uploads/recipe.jpg')} alt="recipe image" />
+            <img src={require(`../../uploads/${data.image_url}`)} alt="recipe image" />
             <label className="fileUpload"> UPLOAD
                <input
                   name="image_url"
                   type="file"
                   accept="image/*"
-                  onChange={dataChange}
+                  onChange={e => uploadFile(e, data)}
                />
             </label>
          </div>

@@ -53,7 +53,6 @@ const getRecipe = async (req, res) => {
 
 const getByCategory = async (req, res) => {
    try {
-      console.log(req.params.category)
       let r = await recipes.getCategory(req.params.category);
       if (r.length === null) {
          return res.status(404).send('There are no recipes');

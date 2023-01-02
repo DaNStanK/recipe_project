@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const Recipe = mongoose.model(
    'recipe',
    {
-      // image_url: {
-      //    type: String,
-      //    required: true
-      // },
+      image_url: {
+         type: String,
+         required: true
+      },
       author_id: {
          type: String,
          required: true

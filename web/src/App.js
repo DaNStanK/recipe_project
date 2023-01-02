@@ -13,12 +13,7 @@ import { EditUser } from "./features/user/EditUser";
 // react-router
 import { Routes, Route } from "react-router-dom";
 
-// context hook
-import { useAuthContext } from "./hooks/useAuthContext";
-
 export const App = () => {
-
-   const { isLoggedIn } = useAuthContext();
 
    return (
       <Routes>
@@ -26,8 +21,8 @@ export const App = () => {
             <Route index element={<Home />} />
 
             <Route path="users">
-               <Route index element={isLoggedIn ? <Home /> : <Login />} />
-               <Route path="create" element={isLoggedIn ? <Home /> : <CreateUser />} />
+               <Route index element={<Login />} />
+               <Route path="create" element={<CreateUser />} />
                <Route path="edit" element={<EditUser />} />
             </Route>
 

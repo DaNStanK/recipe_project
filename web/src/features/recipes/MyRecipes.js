@@ -1,8 +1,7 @@
 // styles
 import "./MyRecipes.css"
 
-// context api
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useSelector } from "react-redux";
 
 // react router
 import { Link } from "react-router-dom";
@@ -16,9 +15,13 @@ import addIcon from "../../icons/icon_plus_white.svg"
 // components
 import { RecipeExcerpt } from "./RecipeExcerpt";
 
+import { getUser } from "../user/userSlice";
+
 
 export const MyRecipes = () => {
-   const { token } = useAuthContext();
+
+   const { token } = useSelector(getUser);
+
    const [recipes, setRecipes] = useState('');
 
    const getMyRecipes = useCallback(async () => {

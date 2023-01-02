@@ -2,8 +2,6 @@ const strings = require('../../../pkg/strings');
 
 const upload = async (req, res) => {
     try {
-        console.log(req.files.picture);
-
         let fileTypes = ['image/png', 'image/jpg', 'image/tif', 'image/jpeg', 'image/gif'];
 
         let maxFileSize = 1024 * 1024;
@@ -23,6 +21,7 @@ const upload = async (req, res) => {
         await req.files.picture.mv(uploadedPath);
         return res.status(201).send({ fileName: newFileName });
     } catch (error) {
+        console.log(error);
         return res.status(500).send('ISE');
     }
 };
@@ -30,8 +29,10 @@ const upload = async (req, res) => {
 const download = async (req, res) => {
     try {
         let filePath = `${__dirname}/../../../web/src/uploads/${req.params.file}`;
-        res.download(filePath, req.params.file.split('__')[1]);
+
+        return res.download(filePath, req.params.file.split('__')[1]);
     } catch (error) {
+        console.log(error);
         return res.status(500).send('ISE');
     }
 };

@@ -44,7 +44,7 @@
 
 .view-recipe__img {
    object-fit: cover;
-   background: transparent 0% 0% no-repeat padding-box;
+   /* background: transparent 0% 0% no-repeat padding-box; */
    vertical-align: top;
    width: 100%;
    height: 243px;

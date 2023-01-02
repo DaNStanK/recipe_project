@@ -11,16 +11,18 @@ import backIcon from "../../icons/icon_back_white.svg";
 import { useEffect, useState } from "react";
 
 // context api
-import { useAuthContext } from "../../hooks/useAuthContext";
+// import { useAuthContext } from "../../hooks/useAuthContext";
 
 import { RecipeEditForm } from "./RecipeEditForm";
+import { useSelector } from "react-redux";
+import { getUser } from "../user/userSlice";
 
 export const EditRecipe = () => {
    const [recipe, setRecipe] = useState('');
 
    const { recipeID } = useParams();
 
-   const { token } = useAuthContext();
+   const { token } = useSelector(getUser);
 
    useEffect(() => {
       const getRecipe = async () => {
@@ -40,7 +42,7 @@ export const EditRecipe = () => {
                throw new Error(response.statusText);
             }
             let r = await response.json();
-            setRecipe(prevState => prevState = r);
+            return setRecipe(prevState => prevState = r);
          } catch (err) {
             return console.log(err.message);
          }

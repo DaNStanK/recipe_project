@@ -2,7 +2,7 @@
 import "./Home.css";
 
 // react hooks
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 // react router
 import { useParams } from "react-router-dom";
@@ -16,13 +16,13 @@ export const RecipesByCategory = () => {
    const [recipes, setRecipes] = useState('');
 
    useEffect(() => {
-      getRecipesByCategory();
+      getRecipesByCategory(category, setRecipes);
    }, [category]);
 
-   const getRecipesByCategory = useCallback(async () => {
+   const getRecipesByCategory = async (categoryName, setData) => {
       try {
          let response = await fetch(
-            `/api/v1/recipes/category/${category}`,
+            `/api/v1/recipes/category/${categoryName}`,
             {
                method: 'get',
                headers: {
@@ -35,11 +35,11 @@ export const RecipesByCategory = () => {
             throw new Error(response.statusText);
          }
          let fetchedRecipes = await response.json();
-         return setRecipes(prevState => prevState = fetchedRecipes);
+         return setData(prevState => prevState = fetchedRecipes);
       } catch (err) {
          return console.log(err.message);
       }
-   }, [category]);
+   };
 
    return (
       <div className="container">

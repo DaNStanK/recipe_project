@@ -11,11 +11,12 @@ import { LoggedOut } from './LoggedOut';
 // images
 import logoImg from "../icons/logo_color.svg";
 
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useSelector } from "react-redux";
+import { getUser } from "../features/user/userSlice";
 
 export const Navbar = () => {
 
-   const { isLoggedIn } = useAuthContext();
+   const { user } = useSelector(getUser);
 
    return (
       <div id="navbar">
@@ -36,8 +37,9 @@ export const Navbar = () => {
                <div className='navbar-types__circles'></div>
                <Link to='/recipes/category/dinner' className='navbar-links'>DINNER</Link>
             </div>
-            {isLoggedIn && <LoggedIn />}
-            {!isLoggedIn && <LoggedOut />}
+
+            {user.isLoggedIn && <LoggedIn />}
+            {!user.isLoggedIn && <LoggedOut />}
          </nav>
       </div>
    )

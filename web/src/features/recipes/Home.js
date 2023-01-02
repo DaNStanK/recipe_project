@@ -1,27 +1,19 @@
 // styles
 import "./Home.css";
 
-import { useEffect } from "react";
-
+// components
 import { RecipesBody } from "./RecipesBody";
 
-import { useDispatch, useSelector } from "react-redux"
+// redux hooks
+import { useSelector } from "react-redux"
 
-import { fetchRecipes } from "./recipesSlice";
+// redux reducers
+import { getRecipes, getRecipesFetchError } from "./recipesSlice";
 
 export const Home = () => {
 
-   const dispatch = useDispatch();
-
-   const recipes = useSelector(state => state.recipes.entities);
-   const recipesStatus = useSelector(state => state.recipes.status);
-   const recipesError = useSelector(state => state.recipes.error);
-
-   useEffect(() => {
-      if (recipesStatus === 'idle') {
-         dispatch(fetchRecipes());
-      }
-   }, [recipesStatus, dispatch]);
+   const recipes = useSelector(getRecipes);
+   const recipesFetchError = useSelector(getRecipesFetchError);
 
    return (
       <div className="container">
@@ -40,8 +32,8 @@ export const Home = () => {
                ))}
             </div>}
 
-         {recipesError &&
-            <div>{recipesError}</div>
+         {recipesFetchError &&
+            <div>{recipesFetchError}</div>
          }
       </div>
    );

@@ -23,7 +23,7 @@ export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () =>
 });
 
 const initialState = {
-   entities: [],
+   entries: [],
    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
    error: null
 };
@@ -32,21 +32,19 @@ export const recipesSlice = createSlice({
    name: 'recipes',
    initialState,
    reducers: {
-      createRecipe: {
-         reducer: (state, action) => {
-            console.log(action.payload)
-            state.recipes.push(action.payload);
-         }
+      createRecipe: (state, action) => {
+         state.recipes.push(action.payload);
       }
+
    },
-   extraReducers(builder) {
+   extraReducers: (builder) => {
       builder
          .addCase(fetchRecipes.pending, (state, action) => {
             state.status = 'loading';
          })
          .addCase(fetchRecipes.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.entities = action.payload;
+            state.entries = action.payload;
          })
          .addCase(fetchRecipes.rejected, (state, action) => {
             state.status = 'failed';
@@ -55,9 +53,9 @@ export const recipesSlice = createSlice({
    }
 });
 
-export const getRecipes = (state) => state.recipes.entities;
+export const getRecipes = (state) => state.recipes.entries;
 export const getRecipesStatus = (state) => state.recipes.status;
-export const getRecipesError = (state) => state.recipes.error;
+export const getRecipesFetchError = (state) => state.recipes.error;
 
 export const { createRecipe } = recipesSlice.actions;
 

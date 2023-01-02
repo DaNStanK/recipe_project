@@ -1,23 +1,23 @@
 // react hook
 import { useState } from "react";
 
-// icon svgs
+// icon svg
 import arrowIcon from "../../icons/icon_arrows_white.svg";
 import plateIcon from "../../icons/icon_plate.svg";
 import starIcon from "../../icons/icon_star.svg";
 import clockIcon from "../../icons/icon_time.svg";
-import recipeImg from "../../uploads/recipe.jpg"
 
 import { ViewRecipe } from "./ViewRecipe";
 
 
 export const RecipesBody = ({ recipe }) => {
+
    const [view, setView] = useState(false);
 
    return (
 
       <div className="recipe">
-         <img src={recipeImg} alt="recipe image" className="recipe__image" />
+         <img src={require(`../../uploads/${recipe.image_url}`)} alt="recipe image" className="recipe__image" />
 
          <div className="recipe_descriptionBox">
 

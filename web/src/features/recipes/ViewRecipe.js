@@ -4,7 +4,6 @@ import plateIcon from "../../icons/icon_plate.svg";
 import starIcon from "../../icons/icon_star.svg";
 import clockIcon from "../../icons/icon_time.svg";
 import closeIcon from "../../icons/icon_close.svg"
-import recipeImg from "../../uploads/recipe.jpg"
 
 export const ViewRecipe = ({ setView, recipe }) => {
 
@@ -24,7 +23,7 @@ export const ViewRecipe = ({ setView, recipe }) => {
                   <div className="view-recipe__left-section">
                      <img
                         className="view-recipe__img"
-                        src={recipeImg}
+                        src={require(`../../uploads/${recipe.image_url}`)}
                         alt="Recipe image"
                      />
                      <div className="view-recipe__title-category">
