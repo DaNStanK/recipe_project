@@ -1,12 +1,7 @@
-// styles
 import "./EditUser.css";
 
-// pictures
 import avatarPic from "../../uploads/avatar7_big.png";
 
-// import { useAuthContext } from "../../hooks/useAuthContext";
-
-// react hooks
 import { useCallback, useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
@@ -15,33 +10,35 @@ import { getUser } from "./userSlice";
 
 export const EditUser = () => {
 
-   const { token } = useSelector(getUser);
-
    const [data, setData] = useState(null);
 
+   const { user } = useSelector(getUser);
+
    useEffect(() => {
+
       const getUser = async () => {
          try {
-            let out = await fetch(
+            let response = await fetch(
                '/api/v1/auth/users',
                {
                   method: 'get',
                   headers: {
                      'Content-Type': 'application/json',
-                     'Authorization': token ? `Bearer ${token}` : ''
+                     'Authorization': user.token ? `Bearer ${user.token}` : ''
                   }
                }
             );
             //check if the the fetch was successful
-            if (!out.ok) {
-               throw new Error(out.statusText);
+            if (!response.ok) {
+               throw new Error(response.statusText);
             }
-            let user = await out.json();
-            return setData(user);
+            let output = await response.json();
+            return setData(prevState => prevState = output);
          } catch (err) {
             return console.log(err.message);
          }
       };
+
       getUser();
    }, []);
 

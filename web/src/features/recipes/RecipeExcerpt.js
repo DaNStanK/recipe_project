@@ -13,16 +13,15 @@ import { useNavigate } from "react-router-dom";
 // react hook
 import { useCallback } from "react";
 
-// context api
-// import { useAuthContext } from "../../hooks/useAuthContext";
 import { useSelector } from "react-redux";
+
 import { getUser } from "../user/userSlice";
 
 export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
 
    const navigate = useNavigate();
 
-   const { token } = useSelector(getUser);
+   const { user } = useSelector(getUser);
 
    const deleteRecipe = useCallback(async () => {
       try {
@@ -32,7 +31,7 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
                method: 'delete',
                headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': token ? `Bearer ${token}` : ''
+                  'Authorization': user?.token ? `Bearer ${user?.token}` : ''
                }
             }
          );
@@ -45,7 +44,7 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
       } catch (err) {
          return console.log(err.message);
       }
-   }, [recipe, navigate, token]);
+   }, [recipe, navigate, user]);
 
    const handleDelete = useCallback(() => {
       deleteRecipe();

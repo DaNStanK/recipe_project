@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const storageUser = JSON.parse(localStorage.getItem('user'));
+
 export const loginUser = createAsyncThunk('users/loginUsers', async (data) => {
    try {
       let out = await fetch(
@@ -31,7 +33,11 @@ export const loginUser = createAsyncThunk('users/loginUsers', async (data) => {
 });
 
 const initialState = {
-   user: { isLoggedIn: false },
+   user: {
+      user: storageUser ? storageUser?.user : null,
+      token: storageUser ? storageUser?.token : null,
+      isLoggedIn: storageUser ? true : false
+   },
    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
    error: null
 };

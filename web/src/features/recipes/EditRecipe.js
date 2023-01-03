@@ -1,17 +1,11 @@
 // styles
 import "./CreateRecipes.css"
 
-// react router
 import { useParams, Link } from "react-router-dom";
 
-// icons
 import backIcon from "../../icons/icon_back_white.svg";
 
-// react hooks
 import { useEffect, useState } from "react";
-
-// context api
-// import { useAuthContext } from "../../hooks/useAuthContext";
 
 import { RecipeEditForm } from "./RecipeEditForm";
 import { useSelector } from "react-redux";
@@ -22,7 +16,7 @@ export const EditRecipe = () => {
 
    const { recipeID } = useParams();
 
-   const { token } = useSelector(getUser);
+   const { user } = useSelector(getUser);
 
    useEffect(() => {
       const getRecipe = async () => {
@@ -33,7 +27,7 @@ export const EditRecipe = () => {
                   method: 'get',
                   headers: {
                      'Content-Type': 'application/json',
-                     'Authorization': token ? `Bearer ${token}` : ''
+                     'Authorization': user?.token ? `Bearer ${user?.token}` : ''
                   }
                }
             );

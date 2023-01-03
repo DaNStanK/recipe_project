@@ -1,18 +1,14 @@
 // styles
-import "./MyRecipes.css"
+import "./MyRecipes.css";
 
 import { useSelector } from "react-redux";
 
-// react router
 import { Link } from "react-router-dom";
 
-// react hooks
 import { useCallback, useEffect, useState } from "react";
 
-// icons
-import addIcon from "../../icons/icon_plus_white.svg"
+import addIcon from "../../icons/icon_plus_white.svg";
 
-// components
 import { RecipeExcerpt } from "./RecipeExcerpt";
 
 import { getUser } from "../user/userSlice";
@@ -20,7 +16,7 @@ import { getUser } from "../user/userSlice";
 
 export const MyRecipes = () => {
 
-   const { token } = useSelector(getUser);
+   const { user } = useSelector(getUser);
 
    const [recipes, setRecipes] = useState('');
 
@@ -32,7 +28,7 @@ export const MyRecipes = () => {
                method: 'get',
                headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': token ? `Bearer ${token}` : ''
+                  'Authorization': user?.token ? `Bearer ${user?.token}` : ''
                }
             }
          );
@@ -45,7 +41,7 @@ export const MyRecipes = () => {
       } catch (err) {
          return console.log(err.message);
       }
-   }, [token]);
+   }, [user]);
 
    useEffect(() => {
       getMyRecipes();
