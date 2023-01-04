@@ -43,7 +43,7 @@ export const EditRecipe = () => {
       };
 
       getRecipe();
-   }, []);
+   }, [recipeID, user?.token]);
 
    return (
       <div className="container">

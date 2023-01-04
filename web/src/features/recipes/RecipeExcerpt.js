@@ -26,7 +26,7 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
    const deleteRecipe = useCallback(async () => {
       try {
          let response = await fetch(
-            `/api/v1/recipes/recipe/${recipe._id}`,
+            `/api/v1/recipes/recipe/${recipe?._id}`,
             {
                method: 'delete',
                headers: {
@@ -44,7 +44,7 @@ export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
       } catch (err) {
          return console.log(err.message);
       }
-   }, [recipe, navigate, user]);
+   }, [recipes, setRecipes, recipe?._id, navigate, user]);
 
    const handleDelete = useCallback(() => {
       deleteRecipe();
