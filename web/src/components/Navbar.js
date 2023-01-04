@@ -1,5 +1,5 @@
 //styles
-import "./Navbar.css"
+import "./Navbar.css";
 
 // react router
 import { Link } from 'react-router-dom';
@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 import { getUser } from "../features/user/userSlice";
 
 export const Navbar = () => {
-
    const { user } = useSelector(getUser);
 
    return (
@@ -38,9 +37,9 @@ export const Navbar = () => {
                <Link to='/recipes/category/dinner' className='navbar-links'>DINNER</Link>
             </div>
 
-            {user.isLoggedIn && <LoggedIn />}
-            {!user.isLoggedIn && <LoggedOut />}
+            {user?.isLoggedIn && <LoggedIn />}
+            {!user?.isLoggedIn && <LoggedOut />}
          </nav>
       </div>
-   )
+   );
 };

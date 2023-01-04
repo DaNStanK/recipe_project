@@ -17,7 +17,7 @@ export const RecipesBody = ({ recipe }) => {
    return (
 
       <div className="recipe">
-         <img src={require(`../../uploads/${recipe.image_url}`)} alt="recipe image" className="recipe__image" />
+         <img src={require(`../../uploads/${recipe.image_url}`)} alt="recipe pic" className="recipe__image" />
 
          <div className="recipe_descriptionBox">
 
@@ -26,15 +26,15 @@ export const RecipesBody = ({ recipe }) => {
 
             <div className="recipe__descriptionIcons">
                <div className="recipe__container">
-                  <img src={clockIcon} />
+                  <img src={clockIcon} alt="clock pic" />
                   <h3>{recipe.preparation_time} min</h3>
                </div>
                <div className="recipe__container">
-                  <img src={plateIcon} />
+                  <img src={plateIcon} alt="plate pic" />
                   <h3>{recipe.number_persons} persons</h3>
                </div>
                <div className="recipe__container">
-                  <img src={starIcon} className="star-icon" />
+                  <img src={starIcon} className="star-icon" alt="star pic" />
                   <h3>{recipe.likes}</h3>
                </div>
             </div>
@@ -56,5 +56,5 @@ export const RecipesBody = ({ recipe }) => {
                <ViewRecipe recipe={recipe} setView={setView} />
             </div>}
       </div>
-   )
+   );
 };

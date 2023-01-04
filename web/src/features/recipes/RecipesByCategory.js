@@ -10,36 +10,20 @@ import { useParams } from "react-router-dom";
 // recipes components
 import { RecipesBody } from "./RecipesBody";
 
+// redux
+import { useSelector } from "react-redux";
+import { getRecipes } from "./recipesSlice";
+
 export const RecipesByCategory = () => {
 
    const { category } = useParams();
+   const recipesByCategory = useSelector(getRecipes);
    const [recipes, setRecipes] = useState('');
 
    useEffect(() => {
-      getRecipesByCategory(category, setRecipes);
-   }, [category]);
-
-   const getRecipesByCategory = async (categoryName, setData) => {
-      try {
-         let response = await fetch(
-            `/api/v1/recipes/category/${categoryName}`,
-            {
-               method: 'get',
-               headers: {
-                  'Content-Type': 'application/json'
-               }
-            }
-         );
-         //check if the the fetch was successful
-         if (!response.ok) {
-            throw new Error(response.statusText);
-         }
-         let fetchedRecipes = await response.json();
-         return setData(prevState => prevState = fetchedRecipes);
-      } catch (err) {
-         return console.log(err.message);
-      }
-   };
+      console.log(recipesByCategory);
+      setRecipes(prevState => prevState = recipesByCategory.filter(recipe => recipe.category === category));
+   }, [category, recipesByCategory]);
 
    return (
       <div className="container">

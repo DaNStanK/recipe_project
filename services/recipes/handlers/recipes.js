@@ -12,6 +12,7 @@ const createRecipe = async (req, res) => {
       let recipe = await recipes.create(payload);
       return res.status(201).send(recipe);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -24,6 +25,7 @@ const getAll = async (req, res) => {
       }
       return res.status(200).send(r);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -35,6 +37,7 @@ const getMyRecipes = async (req, res) => {
       }
       return res.status(200).send(r);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -47,6 +50,7 @@ const getRecipe = async (req, res) => {
       }
       res.status(200).send(r);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -59,6 +63,7 @@ const getByCategory = async (req, res) => {
       }
       res.status(200).send(r);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -72,10 +77,11 @@ const update = async (req, res) => {
       };
       let r = await recipes.update(req.params.id, req.auth.uid, payload);
       if (r.modifiedCount < 1) {
-         res.status(409).send('Recipe not found')
+         res.status(409).send('Recipe not found');
       }
-      return res.status(200).send('Recipe updated');
+      return res.status(200).send(payload);
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };
@@ -90,6 +96,7 @@ const remove = async (req, res) => {
       }
       return res.status(200).send('User deleted!');
    } catch (err) {
+      console.log(err);
       return res.status(500).send('ISE!');
    }
 };

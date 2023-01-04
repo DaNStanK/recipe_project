@@ -1,20 +1,11 @@
 import { useRef, useState } from "react";
-
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { fetchCreateRecipe } from "./recipesSlice";
 import { getUser } from "../user/userSlice";
-
 import recipeImage from "../../uploads/recipe.jpg";
 
-
 export const RecipeCreateForm = ({ recipe }) => {
-
-   const { token } = useSelector(getUser);
-
-   const navigate = useNavigate();
-
    const [filename, setFilename] = useState('');
 
    const title = useRef(recipe ? recipe?.title : '');
@@ -24,63 +15,46 @@ export const RecipeCreateForm = ({ recipe }) => {
    const short_description = useRef(recipe ? recipe?.short_description : '');
    const long_description = useRef(recipe ? recipe?.long_description : '');
 
-   const createRecipe = async (data, redirect) => {
-      try {
-         let out = await fetch(
-            `/api/v1/recipes/create`,
-            {
-               method: 'post',
-               body: JSON.stringify(data),
-               headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': token ? `Bearer ${token}` : ''
-               }
-            }
-         );
-         //check if the the fetch was successful
-         if (!out.ok) {
-            throw new Error(out.statusText);
-         }
+   // from redux user slice
+   const { user } = useSelector(getUser);
 
-         return redirect('/recipes');
-      } catch (err) {
-         return console.log(err.message);
-      }
-   };
+   // from react redux
+   const dispatch = useDispatch();
+
+   // from react router dom
+   const navigate = useNavigate();
 
    const uploadFile = async (e, setImgUrl) => {
       e.preventDefault();
-
       let formData = new FormData();
       formData.append('picture', e.target.files[0]);
 
       try {
-         let out = await fetch(
+         let response = await fetch(
             `/api/v1/storage`,
             {
                method: 'POST',
                body: formData,
                headers: {
-                  'Authorization': token ? `Bearer ${token}` : ''
+                  'Authorization': user?.token ? `Bearer ${user?.token}` : ''
                }
             }
          );
          //check if the the fetch was successful
-         if (!out.ok) {
+         if (!response.ok) {
             throw new Error(response.statusText);
          }
 
-         const response = await out.json();
-         return setImgUrl(prevState => prevState = response.fileName);
+         const output = await response.json();
+         return setImgUrl(prevState => prevState = output.fileName);
       } catch (err) {
          return console.log(err.message);
       }
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = e => {
       e.preventDefault();
-
-      const payload = {
+      dispatch(fetchCreateRecipe({
          image_url: filename,
          title: title.current.value,
          category: category.current.value,
@@ -88,17 +62,15 @@ export const RecipeCreateForm = ({ recipe }) => {
          number_persons: +number_persons.current.value,
          short_description: short_description.current.value,
          long_description: long_description.current.value
-      };
-
-      // console.log(payload)
-      createRecipe(payload, navigate);
+      }));
+      navigate('/recipes');
    };
 
    return (
       <form className="container-form" onSubmit={handleSubmit}>
          <div className="box-left">
             <span>Recipe Image</span>
-            <img src={recipeImage} alt="#" />
+            <img src={recipeImage} alt="recipe pic" />
             <label className="fileUpload"> UPLOAD
                <input name="image_url" type="file" accept="image/*" onChange={e => uploadFile(e, setFilename)} />
             </label>

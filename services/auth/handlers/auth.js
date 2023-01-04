@@ -106,14 +106,4 @@ module.exports = {
    validate,
    updateUser,
    remove
-   // forgotPassword,
-   // resetPassword,
 };
-
-// const forgotPassword = (req, res) => {
-//    return res.send('ok');
-// };
-
-// const resetPassword = (req, res) => {
-//    return res.send('ok');
-// };

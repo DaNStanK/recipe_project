@@ -1,25 +1,37 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getAllRecipes, createRecipes, updateRecipes } from "../../fetch/fetchRecipes";
 
-export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () => {
+export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async (arg, thunkAPI) => {
    try {
-      let response = await fetch(
-         `/api/v1/recipes/all`,
-         {
-            method: 'get',
-            headers: {
-               'Content-Type': 'application/json'
-            }
-         }
-      );
-      //check if the the fetch was successful
-      if (!response.ok) {
-         throw new Error(response.statusText);
-      }
-      let result = response.json();
-      return result;
+      const response = await getAllRecipes();
+      return response;
    } catch (err) {
-      return err.message;
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
    };
+});
+
+export const fetchCreateRecipe = createAsyncThunk('recipes/fetchCreateRecipe', async (arg, thunkAPI) => {
+   try {
+      const user = thunkAPI.getState().user.user;
+      const response = await createRecipes(arg, user?.token);
+      return response;
+   } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
+   }
+});
+
+export const fetchUpdateRecipe = createAsyncThunk('recipes/fetchUpdateRecipe', async (arg, thunkAPI) => {
+   try {
+      const user = thunkAPI.getState().user.user;
+      const { data, recipeID } = arg;
+      const response = await updateRecipes(data, recipeID, user?.token);
+      return response;
+   } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
+   }
 });
 
 const initialState = {
@@ -46,10 +58,28 @@ export const recipesSlice = createSlice({
             state.status = 'succeeded';
             state.entries = action.payload;
          })
-         .addCase(fetchRecipes.rejected, (state, action) => {
+         .addCase(fetchCreateRecipe.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.entries.push(action.payload);
+         })
+         .addCase(fetchUpdateRecipe.fulfilled, (state, action) => {
+            const { _id: recipeID } = action.payload;
+            state.status = 'succeeded';
+            state.entries.map(recipe => {
+               if (recipe._id === recipeID) {
+                  return action.payload;
+               }
+               return recipe;
+            });
+         })
+         .addCase(fetchCreateRecipe.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message;
          })
+         .addCase(fetchRecipes.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+         });
    }
 });
 

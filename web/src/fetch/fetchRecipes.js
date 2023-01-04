@@ -1,58 +1,99 @@
-export const AllRecipes = async (token, setRecipes) => {
+export const getAllRecipes = async () => {
   try {
-    let res = await fetch(
-      `/api/v1/recipes`,
+    let response = await fetch(
+      `/api/v1/recipes/all`,
       {
         method: 'get',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ``
+          'Content-Type': 'application/json'
         }
       }
     );
-    let out = await res.json();
-    setRecipes(out);
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const result = await response.json();
+    return result;
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    return err;
   }
 };
 
-export const createRecipe = async (token, initData, data, setData) => {
-  try {
-    await fetch(
-      `/api/v1/recipes/create-recipe`,
-      {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ``,
-          'Body': data ? JSON.stringify(data) : ``
-        }
-      }
-    );
-    setData(initData);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const updateRecipe = async (data, token) => {
+export const createRecipes = async (data, token) => {
   try {
     const response = await fetch(
-      `/api/v1/recipes/create-recipe`,
+      `/api/v1/recipes/create`,
       {
         method: 'post',
+        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ``,
-          'Body': data ? JSON.stringify(data) : ``
+          'Authorization': token ? `Bearer ${token}` : ""
         }
       }
     );
-    const result = response.json();
-    return result;
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
+    const output = await response.json();
+    return output;
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    return err;
+  }
+};
+
+export const updateRecipes = async (data, recipeID, token) => {
+  try {
+    const response = await fetch(
+      `/api/v1/recipes/update-recipe/${recipeID}`,
+      {
+        method: 'put',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+      }
+    );
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const output = await response.json();
+    return output;
+  } catch (err) {
+    console.log(err.message);
+    return err;
+  }
+};
+
+export const getRecipesByCategory = async (categoryName) => {
+  try {
+    let response = await fetch(
+      `/api/v1/recipes/category/${categoryName}`,
+      {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    let output = await response.json();
+    return output;
+  } catch (err) {
+    console.log(err.message);
+    return err;
   }
 };
