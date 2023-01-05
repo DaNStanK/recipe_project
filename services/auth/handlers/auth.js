@@ -40,7 +40,12 @@ const login = async (req, res) => {
          full_name: u.full_name
       };
       let token = jwt.sign(payload, config.get('security').jwt_secret);
-      return res.status(200).send({ token });
+      return res.status(200).send({
+         token,
+         uid: u._id,
+         email: u.email,
+         isLoggedIn: true
+      });
    } catch (err) {
       console.log(err);
       return res.status(500).send('Internal server error');
