@@ -6,13 +6,12 @@ import { fetchDeleteRecipe } from "./recipesSlice";
 // icon
 import garbageIcon from "../../icons/icon_trashcan.svg";
 
-export const RecipeExcerpt = ({ recipe, recipes, setRecipes }) => {
+export const RecipeExcerpt = ({ recipe }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
    const handleDelete = () => {
       dispatch(fetchDeleteRecipe(recipe?._id));
-      setRecipes(prevState => prevState = recipes.filter(r => r._id !== recipe._id));
       return navigate('/recipes');
    };
 
