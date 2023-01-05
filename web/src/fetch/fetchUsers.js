@@ -48,3 +48,54 @@ export const loginUser = async (data) => {
       return err;
    }
 };
+
+export const fetchUser = async (token) => {
+   try {
+      let response = await fetch(
+         '/api/v1/auth/user',
+         {
+            method: 'get',
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': token ? `Bearer ${token}` : ''
+            }
+         }
+      );
+      //check if the the fetch was successful
+      if (!response.ok) {
+         throw new Error(response.statusText);
+      }
+
+      let output = await response.json();
+      return output;
+   } catch (err) {
+      console.log(err.message);
+      return err;
+   }
+};
+
+export const updateUser = async (data, token) => {
+   try {
+      let response = await fetch(
+         '/api/v1/auth/update',
+         {
+            method: 'get',
+            body: JSON.stringify(data),
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': token ? `Bearer ${token}` : ''
+            }
+         }
+      );
+      //check if the the fetch was successful
+      if (!response.ok) {
+         throw new Error(response.statusText);
+      }
+
+      let output = await response.json();
+      return output;
+   } catch (err) {
+      console.log(err.message);
+      return err;
+   }
+};
