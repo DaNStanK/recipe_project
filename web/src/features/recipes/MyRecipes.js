@@ -1,51 +1,46 @@
-// styles
 import "./MyRecipes.css";
-
 import { useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
-
-import { useCallback, useEffect, useState } from "react";
-
-import addIcon from "../../icons/icon_plus_white.svg";
-
+import { useEffect, useState } from "react";
 import { RecipeExcerpt } from "./RecipeExcerpt";
-
 import { getUser } from "../user/userSlice";
+// icons
+import addIcon from "../../icons/icon_plus_white.svg";
 
 
 export const MyRecipes = () => {
+   const [recipes, setRecipes] = useState('');
 
    const { user } = useSelector(getUser);
 
-   const [recipes, setRecipes] = useState('');
-
-   const getMyRecipes = useCallback(async () => {
-      try {
-         let res = await fetch(
-            `/api/v1/recipes/my`,
-            {
-               method: 'get',
-               headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': user?.token ? `Bearer ${user?.token}` : ''
-               }
-            }
-         );
-         //check if the the fetch was successful
-         if (!res.ok) {
-            throw new Error(res.statusText);
-         }
-         let r = await res.json();
-         return setRecipes(prevState => prevState = r);
-      } catch (err) {
-         return console.log(err.message);
-      }
-   }, [user]);
-
    useEffect(() => {
-      getMyRecipes();
-   }, []);
+      console.log(user);
+
+      const getMyRecipes = async (token) => {
+         try {
+            let res = await fetch(
+               `/api/v1/recipes/my`,
+               {
+                  method: 'get',
+                  headers: {
+                     'Content-Type': 'application/json',
+                     'Authorization': token ? `Bearer ${token}` : ''
+                  }
+               }
+            );
+            //check if the the fetch was successful
+            if (!res.ok) {
+               throw new Error(res.statusText);
+            }
+            let r = await res.json();
+            return setRecipes(prevState => prevState = r);
+         } catch (err) {
+            return console.log(err.message);
+         }
+      };
+
+      getMyRecipes(user?.token);
+   }, [user?.token, user]);
 
 
    return (

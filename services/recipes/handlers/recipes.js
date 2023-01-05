@@ -68,7 +68,6 @@ const getByCategory = async (req, res) => {
    }
 };
 
-
 const update = async (req, res) => {
    try {
       let payload = {
@@ -94,7 +93,7 @@ const remove = async (req, res) => {
             message: 'Bad request'
          });
       }
-      return res.status(200).send('User deleted!');
+      return res.status(200).send(req.params.id);
    } catch (err) {
       console.log(err);
       return res.status(500).send('ISE!');

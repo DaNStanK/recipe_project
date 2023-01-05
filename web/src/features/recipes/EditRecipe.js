@@ -1,21 +1,16 @@
-// styles
-import "./CreateRecipes.css"
-
+import "./CreateRecipes.css";
 import { useParams, Link } from "react-router-dom";
-
-import backIcon from "../../icons/icon_back_white.svg";
-
 import { useEffect, useState } from "react";
-
 import { RecipeEditForm } from "./RecipeEditForm";
 import { useSelector } from "react-redux";
 import { getUser } from "../user/userSlice";
+// icons
+import backIcon from "../../icons/icon_back_white.svg";
 
 export const EditRecipe = () => {
+
    const [recipe, setRecipe] = useState('');
-
    const { recipeID } = useParams();
-
    const { user } = useSelector(getUser);
 
    useEffect(() => {
@@ -35,8 +30,9 @@ export const EditRecipe = () => {
             if (!response.ok) {
                throw new Error(response.statusText);
             }
-            let r = await response.json();
-            return setRecipe(prevState => prevState = r);
+
+            let output = await response.json();
+            return setRecipe(prevState => prevState = output);
          } catch (err) {
             return console.log(err.message);
          }

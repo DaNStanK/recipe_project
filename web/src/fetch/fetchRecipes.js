@@ -97,3 +97,28 @@ export const getRecipesByCategory = async (categoryName) => {
     return err;
   }
 };
+
+export const deleteRecipe = async (recipeID, token) => {
+  try {
+    let response = await fetch(
+      `/api/v1/recipes/recipe/${recipeID}`,
+      {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+      }
+    );
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const output = response.json();
+    return output;
+  } catch (err) {
+    console.log(err.message);
+    return err;
+  }
+};
