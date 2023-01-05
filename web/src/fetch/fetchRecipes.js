@@ -98,6 +98,31 @@ export const getRecipesByCategory = async (categoryName) => {
   }
 };
 
+export const getMyRecipes = async (token) => {
+  try {
+    let response = await fetch(
+      `/api/v1/recipes/my`,
+      {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : ''
+        }
+      }
+    );
+    //check if the the fetch was successful
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    let output = await response.json();
+    return output;
+  } catch (err) {
+    console.log(err.message);
+    return err;
+  }
+};
+
 export const deleteRecipe = async (recipeID, token) => {
   try {
     let response = await fetch(
