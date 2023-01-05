@@ -24,7 +24,7 @@ api.use(
    })
 );
 
-api.get('/api/v1/auth/users', auth.getUser);
+api.get('/api/v1/auth/user', auth.getUser);
 api.put('/api/v1/auth/update', auth.updateUser);
 api.delete('/api/v1/auth/delete', auth.remove);
 
