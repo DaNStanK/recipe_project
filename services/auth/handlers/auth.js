@@ -79,7 +79,7 @@ const updateUser = async (req, res) => {
          last_updated: new Date()
       };
       let u = await user.update(req.auth.uid, payload);
-      return res.status(200).send(u);
+      return res.status(200).send(req.body);
    } catch (error) {
       console.log(error);
       return res.status(500).send('ISE');
