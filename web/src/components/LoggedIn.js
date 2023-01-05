@@ -1,13 +1,9 @@
-import "./Navbar.css"
-
+import "./Navbar.css";
 import { Link } from 'react-router-dom';
-
 import { useDispatch } from "react-redux";
-
 import { setLogout } from "../features/user/userSlice";
 
 export const LoggedIn = () => {
-
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -23,5 +19,5 @@ export const LoggedIn = () => {
       <div className='navbar-types__login-circles'></div>
       <Link className="login-links three" to='/users' onClick={handleClick}>LOG OUT</Link>
     </div>
-  )
-}
+  );
+};

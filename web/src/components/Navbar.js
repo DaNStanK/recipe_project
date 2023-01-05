@@ -1,18 +1,11 @@
-//styles
 import "./Navbar.css";
-
-// react router
 import { Link } from 'react-router-dom';
-
-// components
 import { LoggedIn } from './LoggedIn';
 import { LoggedOut } from './LoggedOut';
-
-// images
-import logoImg from "../icons/logo_color.svg";
-
 import { useSelector } from "react-redux";
 import { getUser } from "../features/user/userSlice";
+// images
+import logoImg from "../icons/logo_color.svg";
 
 export const Navbar = () => {
    const { user } = useSelector(getUser);

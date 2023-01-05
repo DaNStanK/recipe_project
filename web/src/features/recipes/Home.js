@@ -1,13 +1,6 @@
-// styles
 import "./Home.css";
-
-// components
 import { RecipesBody } from "./RecipesBody";
-
-// redux hooks
 import { useSelector } from "react-redux";
-
-// redux reducers
 import { getRecipes, getRecipesFetchError } from "./recipesSlice";
 
 export const Home = () => {

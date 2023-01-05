@@ -1,47 +1,32 @@
-import "./MyRecipes.css";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { RecipeExcerpt } from "./RecipeExcerpt";
+import { useSelector } from "react-redux";
 import { getUser } from "../user/userSlice";
+import { getMyRecipes } from "../../fetch/fetchRecipes";
+
+// styles
+import "./MyRecipes.css";
+
 // icons
 import addIcon from "../../icons/icon_plus_white.svg";
 
-
 export const MyRecipes = () => {
+
    const [recipes, setRecipes] = useState('');
 
    const { user } = useSelector(getUser);
 
    useEffect(() => {
-      console.log(user);
-
-      const getMyRecipes = async (token) => {
+      (async () => {
          try {
-            let res = await fetch(
-               `/api/v1/recipes/my`,
-               {
-                  method: 'get',
-                  headers: {
-                     'Content-Type': 'application/json',
-                     'Authorization': token ? `Bearer ${token}` : ''
-                  }
-               }
-            );
-            //check if the the fetch was successful
-            if (!res.ok) {
-               throw new Error(res.statusText);
-            }
-            let r = await res.json();
-            return setRecipes(prevState => prevState = r);
+            let output = await getMyRecipes(user?.token);
+            return setRecipes(prevState => prevState = output);
          } catch (err) {
-            return console.log(err.message);
+            return console.log(err);
          }
-      };
-
-      getMyRecipes(user?.token);
+      })();
    }, [user?.token, user]);
-
 
    return (
       <div className="container">
@@ -68,8 +53,6 @@ export const MyRecipes = () => {
                <RecipeExcerpt
                   key={recipe._id}
                   recipe={recipe}
-                  recipes={recipes}
-                  setRecipes={setRecipes}
                />
             ))}
          </div>
