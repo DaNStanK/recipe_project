@@ -1,18 +1,11 @@
-// styles
 import "./CreateUser.css";
-
-// react hooks
 import { useCallback, useRef } from "react";
-
 import { useNavigate } from "react-router-dom";
-
-// custom hooks
-// import { useUserFetch } from "../../hooks/useUserFetch";
+import { createUser } from "../../fetch/fetchUsers";
 
 export const CreateUser = () => {
    const navigate = useNavigate();
 
-   // userRef for not rerendering page on each change of input field
    const email = useRef();
    const first_name = useRef();
    const last_name = useRef();
@@ -20,33 +13,10 @@ export const CreateUser = () => {
    const password = useRef();
    const password2 = useRef();
 
-   // fetch ws create user
-   const createAccount = useCallback(async (userInput) => {
-      try {
-         let out = await fetch(
-            '/api/v1/auth/create-account',
-            {
-               method: 'post',
-               body: JSON.stringify(userInput),
-               headers: {
-                  'Content-Type': 'application/json'
-               }
-            }
-         );
-         //check if the login was successful
-         if (!out.ok) {
-            throw new Error(out.statusText);
-         }
-         // await out.json();
-         return navigate('/login');
-      } catch (err) {
-         return console.log(err.message);;
-      }
-   }, [navigate]);
-
    const handleSubmit = useCallback(e => {
       e.preventDefault();
-      createAccount({
+
+      createUser({
          email: email.current.value,
          first_name: first_name.current.value,
          last_name: last_name.current.value,
@@ -54,7 +24,10 @@ export const CreateUser = () => {
          password: password.current.value,
          password2: password2.current.value
       });
-   }, [createAccount]);
+
+      return navigate('/users');
+
+   }, [navigate]);
 
    return (
       <div className="container">
@@ -64,7 +37,6 @@ export const CreateUser = () => {
          </div>
 
          <div className="container__box">
-
             <div className="container__descriptionBox-create">
                <h1><span>Create your</span> <br /> account</h1>
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima suscipit dolorem maiores aliquam possimus recusandae saepe quibusdam atque fugit nihil tempora quisquam ipsam repellendus veritatis animi, ratione, delectus pariatur.</p>
@@ -101,5 +73,5 @@ export const CreateUser = () => {
             </div>
          </div>
       </div >
-   )
+   );
 };
