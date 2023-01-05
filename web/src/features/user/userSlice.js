@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser } from "../../fetch/fetchUsers";
 
-const storageUser = JSON.parse(localStorage.getItem('user'));
 
 export const fetchLoginUser = createAsyncThunk('users/fetchLoginUser', async (arg, thunkAPI) => {
    try {
@@ -13,9 +12,22 @@ export const fetchLoginUser = createAsyncThunk('users/fetchLoginUser', async (ar
    }
 });
 
+export const fetchUpdateUser = createAsyncThunk('users/fetchUpdateUser', async (arg, thunkAPI) => {
+   try {
+      const user = thunkAPI.getState().user.user;
+      const response = await loginUser(arg, user?.token);
+      return response;
+   } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
+   }
+});
+
+const storageUser = JSON.parse(localStorage.getItem('user'));
+
 const initialState = {
    user: {
-      user: storageUser ? storageUser?.user : null,
+      email: storageUser ? storageUser?.email : null,
       token: storageUser ? storageUser?.token : null,
       isLoggedIn: storageUser ? true : false
    },
@@ -32,7 +44,7 @@ export const userSlice = createSlice({
             ...state,
             user: null,
             token: null,
-            isLoggedIn: null
+            isLoggedIn: false
          };
       }
    },
@@ -40,13 +52,18 @@ export const userSlice = createSlice({
       builder
          .addCase(fetchLoginUser.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.user.push(action.payload);
+            state.user = action.payload;
+         })
+         .addCase(fetchUpdateUser.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.user = {
+               ...state.user,
+               user: action.payload.email
+            };
          });
    }
 });
 
 export const getUser = (state) => state.user;
-
 export const { setLogout } = userSlice.actions;
-
 export default userSlice.reducer;
