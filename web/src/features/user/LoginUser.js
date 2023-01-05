@@ -1,12 +1,8 @@
 import "./LoginUser.css";
-
 import { useRef } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
-
-import { loginUser } from "./userSlice";
+import { fetchLoginUser } from "./userSlice";
 
 export const Login = () => {
 
@@ -18,7 +14,7 @@ export const Login = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(loginUser({
+      dispatch(fetchLoginUser({
          email: email.current.value,
          password: password.current.value
       }));
@@ -52,5 +48,5 @@ export const Login = () => {
 
          </div>
       </div>
-   )
+   );
 };
