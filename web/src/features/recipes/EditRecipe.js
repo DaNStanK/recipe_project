@@ -3,42 +3,32 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RecipeEditForm } from "./RecipeEditForm";
 import { useSelector } from "react-redux";
+import { getRecipe } from "../../fetch/fetchRecipes";
 import { getUser } from "../user/userSlice";
-// icons
 import backIcon from "../../icons/icon_back_white.svg";
+// import { getRecipes } from "./recipesSlice";
 
 export const EditRecipe = () => {
 
-   const [recipe, setRecipe] = useState('');
-   const { recipeID } = useParams();
+   // const recipes = useSelector(getRecipes);
    const { user } = useSelector(getUser);
+   const { recipeID } = useParams();
+   const [recipe, setRecipe] = useState('');
+
+   // on reload of the page there are no recipes?? have to check even so i have dispatch(fetchRecipes()) added on index.js load
+
+   // useEffect(() => {
+   //    const newRecipe = recipes
+   //       .filter(recipe => recipe._id === recipeID)
+   //       .reduce((acc, curr) => curr, {});
+   //    setRecipe(prevState => prevState = newRecipe);
+   // }, [recipeID, recipes]);
 
    useEffect(() => {
-      const getRecipe = async () => {
-         try {
-            let response = await fetch(
-               `/api/v1/recipes/get-recipe/${recipeID}`,
-               {
-                  method: 'get',
-                  headers: {
-                     'Content-Type': 'application/json',
-                     'Authorization': user?.token ? `Bearer ${user?.token}` : ''
-                  }
-               }
-            );
-            //check if the the fetch was successful
-            if (!response.ok) {
-               throw new Error(response.statusText);
-            }
-
-            let output = await response.json();
-            return setRecipe(prevState => prevState = output);
-         } catch (err) {
-            return console.log(err.message);
-         }
-      };
-
-      getRecipe();
+      (async () => {
+         let newRecipe = await getRecipe(recipeID, user?.token);
+         setRecipe(prevState => prevState = newRecipe);
+      })();
    }, [recipeID, user?.token]);
 
    return (
