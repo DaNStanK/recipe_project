@@ -39,9 +39,9 @@ export const userSlice = createSlice({
    name: 'user',
    initialState,
    reducers: {
-      setLogout: (state) => {
+      logoutUser: (state, action) => {
+         localStorage.clear();
          return {
-            ...state,
             user: null,
             token: null,
             isLoggedIn: false
@@ -56,14 +56,17 @@ export const userSlice = createSlice({
          })
          .addCase(fetchUpdateUser.fulfilled, (state, action) => {
             state.status = 'succeeded';
+            console.log(action.payload);
             state.user = {
-               ...state.user,
-               user: action.payload.email
+               ...state,
+               user: action.payload
             };
          });
    }
 });
 
 export const getUser = (state) => state.user;
-export const { setLogout } = userSlice.actions;
+
+export const { logoutUser } = userSlice.actions;
+
 export default userSlice.reducer;
