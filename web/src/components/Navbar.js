@@ -13,7 +13,6 @@ export const Navbar = () => {
    return (
       <div id="navbar">
          <nav className='navbar-container'>
-
             <div className="navbar-logo">
                <Link to='/' className='navbar-logo__image'>
                   <img src={logoImg} alt="logo icon" />

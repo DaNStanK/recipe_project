@@ -1,16 +1,9 @@
-// styles
 import "./Home.css";
 
-// react hooks
 import { useEffect, useState } from "react";
-
-// react router
 import { useParams } from "react-router-dom";
-
-// recipes components
 import { RecipesBody } from "./RecipesBody";
 
-// redux
 import { useSelector } from "react-redux";
 import { getRecipes } from "./recipesSlice";
 
@@ -21,7 +14,6 @@ export const RecipesByCategory = () => {
    const [recipes, setRecipes] = useState('');
 
    useEffect(() => {
-      console.log(recipesByCategory);
       setRecipes(prevState => prevState = recipesByCategory.filter(recipe => recipe.category === category));
    }, [category, recipesByCategory]);
 

@@ -1,4 +1,3 @@
-// components
 import { Layout } from "./components/Layout";
 import { Home } from "./features/recipes/Home";
 import { CreateRecipes } from "./features/recipes/CreateRecipes";
@@ -10,22 +9,22 @@ import { CreateUser } from "./features/user/CreateUser";
 import { EditRecipe } from "./features/recipes/EditRecipe";
 import { EditUser } from "./features/user/EditUser";
 
-// react-router
 import { Routes, Route } from "react-router-dom";
 
 export const App = () => {
 
    return (
       <Routes>
+         {/* default route */}
          <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-
+            {/* users sub-routes */}
             <Route path="users">
                <Route index element={<Login />} />
                <Route path="create" element={<CreateUser />} />
                <Route path="edit" element={<EditUser />} />
             </Route>
-
+            {/* recipes sub-routes */}
             <Route path="recipes">
                <Route index element={<MyRecipes />} />
                <Route path="create" element={<CreateRecipes />} />
@@ -37,4 +36,4 @@ export const App = () => {
          <Route path="*" element={<NotFound />} />
       </Routes>
    );
-}
+};

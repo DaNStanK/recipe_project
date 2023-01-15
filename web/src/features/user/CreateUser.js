@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { createUser } from "../../fetch/fetchUsers";
 
 export const CreateUser = () => {
-   const navigate = useNavigate();
-
    const email = useRef();
    const first_name = useRef();
    const last_name = useRef();
    const birthday = useRef();
    const password = useRef();
    const password2 = useRef();
+
+   const navigate = useNavigate();
 
    const handleSubmit = useCallback(e => {
       e.preventDefault();
@@ -26,7 +26,6 @@ export const CreateUser = () => {
       });
 
       return navigate('/users');
-
    }, [navigate]);
 
    return (
