@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../user/userSlice";
 import { fetchUpdateRecipe } from "./recipesSlice";
+import { storeFile } from "../../fetch/fetchRecipes";
 
 
 export const RecipeEditForm = ({ recipe, recipeID }) => {
 
    const [data, setData] = useState(recipe);
-
-   const { token } = useSelector(getUser);
+   const user = useSelector(getUser);
    const navigate = useNavigate();
    const dispatch = useDispatch();
+
 
    const dataChange = e => {
       setData(prevState => prevState = {
@@ -21,35 +22,17 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
    };
 
    const uploadFile = async (e) => {
-      e.preventDefault();
-      let formData = new FormData();
-      formData.append('picture', e.target.files[0]);
-
       try {
-         let response = await fetch(
-            `/api/v1/storage`,
-            {
-               method: 'POST',
-               body: formData,
-               headers: {
-                  'Authorization': token ? `Bearer ${token}` : ''
-               }
-            }
-         );
-
-         //check if the the fetch was successful
-         if (!response.ok) {
-            throw new Error(response.statusText);
-         }
-
-         const output = await response.json();
-         return setData(prevState => prevState = { ...prevState, image_url: output });
+         e.preventDefault();
+         let filename = await storeFile(e, user?.token);
+         return setData(prevState => prevState = { ...prevState, image_url: filename });
       } catch (err) {
-         return console.log(err.message);
+         console.log(err.message);
+         return err;
       }
    };
 
-   const handleClick = e => {
+   const handleClick = (e) => {
       e.preventDefault();
       dispatch(fetchUpdateRecipe({ data, recipeID }));
       return navigate('/recipes');

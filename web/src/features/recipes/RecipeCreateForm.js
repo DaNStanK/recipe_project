@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchCreateRecipe } from "./recipesSlice";
 import { getUser } from "../user/userSlice";
 import recipeImage from "../../uploads/recipe.jpg";
+import { storeFile } from "../../fetch/fetchRecipes";
 
 export const RecipeCreateForm = ({ recipe }) => {
    const [filename, setFilename] = useState('');
@@ -15,40 +16,18 @@ export const RecipeCreateForm = ({ recipe }) => {
    const short_description = useRef(recipe ? recipe?.short_description : '');
    const long_description = useRef(recipe ? recipe?.long_description : '');
 
-   // from redux user slice
    const { user } = useSelector(getUser);
-
-   // from react redux
    const dispatch = useDispatch();
-
-   // from react router dom
    const navigate = useNavigate();
 
-   const uploadFile = async (e, setImgUrl) => {
-      e.preventDefault();
-      let formData = new FormData();
-      formData.append('picture', e.target.files[0]);
-
+   const uploadFile = async (e, setImgUrl, token) => {
       try {
-         let response = await fetch(
-            `/api/v1/storage`,
-            {
-               method: 'POST',
-               body: formData,
-               headers: {
-                  'Authorization': user?.token ? `Bearer ${user?.token}` : ''
-               }
-            }
-         );
-         //check if the the fetch was successful
-         if (!response.ok) {
-            throw new Error(response.statusText);
-         }
-
-         const output = await response.json();
-         return setImgUrl(prevState => prevState = output.fileName);
+         e.preventDefault();
+         let fileName = await storeFile(e, token);
+         return setImgUrl(prevState => prevState = fileName);
       } catch (err) {
-         return console.log(err.message);
+         console.log(err.message);
+         return err;
       }
    };
 
@@ -72,7 +51,7 @@ export const RecipeCreateForm = ({ recipe }) => {
             <span>Recipe Image</span>
             <img src={recipeImage} alt="recipe pic" />
             <label className="fileUpload"> UPLOAD
-               <input name="image_url" type="file" accept="image/*" onChange={e => uploadFile(e, setFilename)} />
+               <input name="image_url" type="file" accept="image/*" onChange={(e) => uploadFile(e, setFilename, user?.token)} />
             </label>
          </div>
          <div className="box-middle">
