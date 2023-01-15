@@ -1,12 +1,10 @@
 import "./Home.css";
 import { RecipesBody } from "./RecipesBody";
 import { useSelector } from "react-redux";
-import { getRecipes, getRecipesFetchError } from "./recipesSlice";
+import { getRecipes } from "./recipesSlice";
 
 export const Home = () => {
-
    const recipes = useSelector(getRecipes);
-   const recipesFetchError = useSelector(getRecipesFetchError);
 
    return (
       <div className="container">
@@ -24,10 +22,6 @@ export const Home = () => {
                   />
                ))}
             </div>
-         }
-
-         {recipesFetchError &&
-            <div>{recipesFetchError}</div>
          }
       </div>
    );
