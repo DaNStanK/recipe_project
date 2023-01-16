@@ -9,7 +9,7 @@ import { CreateUser } from "./features/user/CreateUser";
 import { EditRecipe } from "./features/recipes/EditRecipe";
 import { EditUser } from "./features/user/EditUser";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 export const App = () => {
 
@@ -33,7 +33,7 @@ export const App = () => {
             </Route>
          </Route>
 
-         <Route path="*" element={<NotFound />} />
+         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
    );
 };
