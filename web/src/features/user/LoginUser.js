@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { fetchLoginUser } from "./userSlice";
 
 export const Login = () => {
-
    const dispatch = useDispatch();
    const navigate = useNavigate();
 

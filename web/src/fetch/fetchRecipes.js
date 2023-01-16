@@ -119,7 +119,7 @@ export const getMyRecipes = async (token) => {
       return output;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
 

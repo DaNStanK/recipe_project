@@ -10,12 +10,12 @@ import { getRecipes } from "./recipesSlice";
 export const RecipesByCategory = () => {
 
    const { category } = useParams();
-   const recipesByCategory = useSelector(getRecipes);
+   const recipesStore = useSelector(getRecipes);
    const [recipes, setRecipes] = useState('');
 
    useEffect(() => {
-      setRecipes(prevState => prevState = recipesByCategory.filter(recipe => recipe.category === category));
-   }, [category, recipesByCategory]);
+      setRecipes(prevState => prevState = recipesStore.filter(recipe => recipe.category === category));
+   }, [category, recipesStore]);
 
    return (
       <div className="container">
@@ -26,12 +26,13 @@ export const RecipesByCategory = () => {
 
          {recipes &&
             <div className="container__recipes">
-               {recipes.map(recipe => (
-                  <RecipesBody
-                     key={recipe._id}
-                     recipe={recipe}
-                  />
-               ))}
+               {recipes &&
+                  recipes.map(recipe => (
+                     <RecipesBody
+                        key={recipe._id}
+                        recipe={recipe}
+                     />
+                  ))}
             </div>}
       </div>
    );

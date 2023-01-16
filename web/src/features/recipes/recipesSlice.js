@@ -66,10 +66,9 @@ export const recipesSlice = createSlice({
             state.entries.push(action.payload);
          })
          .addCase(fetchUpdateRecipe.fulfilled, (state, action) => {
-            const { _id: recipeID } = action.payload;
             state.status = 'succeeded';
             const newState = state.entries.map(recipe => {
-               if (recipe._id === recipeID) {
+               if (recipe?._id === action.payload._id) {
                   return action.payload;
                }
                return recipe;

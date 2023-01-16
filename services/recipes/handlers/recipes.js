@@ -76,7 +76,7 @@ const update = async (req, res) => {
       };
       let r = await recipes.update(req.params.id, req.auth.uid, payload);
       if (r.modifiedCount < 1) {
-         res.status(409).send('Recipe not found');
+         return res.status(409).send('Recipe not found');
       }
       return res.status(200).send(payload);
    } catch (err) {
