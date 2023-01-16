@@ -5,25 +5,25 @@ import { useSelector } from "react-redux";
 import { getUser } from "../user/userSlice";
 import { getMyRecipes } from "../../fetch/fetchRecipes";
 
-// styles
 import "./MyRecipes.css";
 
-// icons
 import addIcon from "../../icons/icon_plus_white.svg";
 
 export const MyRecipes = () => {
-
    const [recipes, setRecipes] = useState('');
-
    const { user } = useSelector(getUser);
 
    useEffect(() => {
       (async () => {
          try {
-            let output = await getMyRecipes(user?.token);
-            return setRecipes(prevState => prevState = output);
+            let response = await getMyRecipes(user?.token);
+            if (typeof response === 'string') {
+               return null;
+            }
+            return setRecipes(prevState => prevState = response);
          } catch (err) {
-            return console.log(err);
+            console.log(err);
+            return err;
          }
       })();
    }, [user?.token, user]);
@@ -49,12 +49,13 @@ export const MyRecipes = () => {
                </div>
                <div className="innerRight"><span>Delete</span></div>
             </div>
-            {recipes && recipes.map(recipe => (
-               <RecipeExcerpt
-                  key={recipe._id}
-                  recipe={recipe}
-               />
-            ))}
+            {recipes &&
+               recipes.map(recipe => (
+                  <RecipeExcerpt
+                     key={recipe._id}
+                     recipe={recipe}
+                  />
+               ))}
          </div>
       </div>
    );
