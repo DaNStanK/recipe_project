@@ -4,7 +4,6 @@ import { CreateRecipes } from "./features/recipes/CreateRecipes";
 import { Login } from "./features/user/LoginUser";
 import { MyRecipes } from "./features/recipes/MyRecipes";
 import { RecipesByCategory } from "./features/recipes/RecipesByCategory";
-import { NotFound } from "./components/NotFound";
 import { CreateUser } from "./features/user/CreateUser";
 import { EditRecipe } from "./features/recipes/EditRecipe";
 import { EditUser } from "./features/user/EditUser";
