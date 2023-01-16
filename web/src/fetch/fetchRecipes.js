@@ -61,7 +61,13 @@ export const updateRecipes = async (data, recipeID, token) => {
             }
          }
       );
-      //check if the the fetch was successful
+
+      // return conflict string if response status is 409
+      if (response.status === 409) {
+         return response.statusText;
+      }
+
+      // check if the the fetch was not successful
       if (!response.ok) {
          throw new Error(response.statusText);
       }
