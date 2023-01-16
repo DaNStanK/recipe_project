@@ -66,14 +66,15 @@ export const recipesSlice = createSlice({
             state.entries.push(action.payload);
          })
          .addCase(fetchUpdateRecipe.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            const newState = state.entries.map(recipe => {
-               if (recipe?._id === action.payload._id) {
-                  return action.payload;
-               }
-               return recipe;
-            });
-            state.entries.push(newState);
+            if (action.payload !== 'Conflict') {
+               const newState = state.entries.map(recipe => {
+                  if (recipe?._id === action.payload._id) {
+                     return action.payload;
+                  }
+                  return recipe;
+               });
+               state.entries = newState;
+            }
          })
          .addCase(fetchDeleteRecipe.fulfilled, (state, action) => {
             const recipeID = action.payload;
