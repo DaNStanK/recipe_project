@@ -3,9 +3,24 @@ import "./ViewRecipe.css";
 import plateIcon from "../../icons/icon_plate.svg";
 import starIcon from "../../icons/icon_star.svg";
 import clockIcon from "../../icons/icon_time.svg";
-import closeIcon from "../../icons/icon_close.svg"
+import closeIcon from "../../icons/icon_close.svg";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../user/userSlice";
+import { fetchUpdateRecipe } from "./recipesSlice";
+import { useCallback } from "react";
 
 export const ViewRecipe = ({ setView, recipe }) => {
+   const dispatch = useDispatch();
+   const { user } = useSelector(getUser);
+
+   const handleClick = useCallback((e) => {
+      e.preventDefault();
+      dispatch(fetchUpdateRecipe({
+         data: { ...recipe, likes: recipe.likes + 1 },
+         recipeID: recipe._id
+      }));
+   }, [dispatch, recipe]);
 
    return (
       <>
@@ -24,7 +39,7 @@ export const ViewRecipe = ({ setView, recipe }) => {
                      <img
                         className="view-recipe__img"
                         src={require(`../../uploads/${recipe.image_url}`)}
-                        alt="Recipe image"
+                        alt="recipe"
                      />
                      <div className="view-recipe__title-category">
                         <h2>Best served for</h2>
@@ -43,7 +58,16 @@ export const ViewRecipe = ({ setView, recipe }) => {
                            <h3>{recipe.number_persons} persons</h3>
                         </div>
                         <div className="recipe__container">
-                           <img src={starIcon} className="star-icon" />
+                           {!user?.isLoggedIn &&
+                              <img src={starIcon} className="star-icon" alt="star pic" />
+                           }
+                           {user?.isLoggedIn &&
+                              <img
+                                 src={starIcon}
+                                 className="star-icon" alt="star pic"
+                                 onClick={handleClick}
+                              />
+                           }
                            <h3>{recipe.likes}</h3>
                         </div>
                      </div>
@@ -56,5 +80,5 @@ export const ViewRecipe = ({ setView, recipe }) => {
                </div>
             </article>}
       </>
-   )
+   );
 };
