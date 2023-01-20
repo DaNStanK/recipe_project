@@ -3,6 +3,7 @@ const express = require('express');
 const proxy = require('express-http-proxy');
 
 const app = express();
+app.use('/uploads', express.static(`${__dirname}/../../uploads/`));
 
 app.use(
     '/api/v1/storage',
@@ -48,12 +49,5 @@ app.listen(PORT, err => {
         return console.log(err);
     }
     console.log('Service [proxy] successfully started on port', PORT);
-})
+});
 
-
-// client (postman) --> service:port
-
-// client (postman) --> proxy:port --> service1:port
-// client (postman) --> proxy:port --> service2:port
-// client (postman) --> proxy:port --> service3:port
-// client (postman) --> proxy:port --> serviceN:port
