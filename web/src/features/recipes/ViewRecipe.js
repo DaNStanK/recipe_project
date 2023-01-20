@@ -38,7 +38,7 @@ export const ViewRecipe = ({ setView, recipe }) => {
                   <div className="view-recipe__left-section">
                      <img
                         className="view-recipe__img"
-                        src={require(`../../uploads/${recipe.image_url}`)}
+                        src={`../../uploads/${recipe.image_url}`}
                         alt="recipe"
                      />
                      <div className="view-recipe__title-category">
