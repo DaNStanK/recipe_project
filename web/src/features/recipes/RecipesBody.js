@@ -25,7 +25,7 @@ export const RecipesBody = ({ recipe }) => {
 
    return (
       <article className="recipe">
-         <img src={require(`../../uploads/${recipe.image_url}`)} alt="recipe pic" className="recipe__image" />
+         <img src={`../../uploads/${recipe.image_url}`} alt="recipe pic" className="recipe__image" />
          <div className="recipe_descriptionBox">
             <span>{recipe.title}</span>
             <p className="recipe__description">{recipe.short_description.substring(0, 200)}...</p>
