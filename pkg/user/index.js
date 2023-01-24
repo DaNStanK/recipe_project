@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const User = mongoose.model(
    'user',
    {
+      image_url: {
+         type: String
+      },
       first_name: {
          type: String,
          required: true
