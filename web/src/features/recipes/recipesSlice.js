@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { getAllRecipes, createRecipes, updateRecipes, deleteRecipe } from "../../fetch/fetchRecipes";
 
 export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async (arg, thunkAPI) => {
@@ -25,8 +25,7 @@ export const fetchCreateRecipe = createAsyncThunk('recipes/fetchCreateRecipe', a
 export const fetchUpdateRecipe = createAsyncThunk('recipes/fetchUpdateRecipe', async (arg, thunkAPI) => {
    try {
       const user = thunkAPI.getState().user.user;
-      const { data, recipeID } = arg;
-      const response = await updateRecipes(data, recipeID, user?.token);
+      const response = await updateRecipes(arg.data, arg.recipeID, user?.token);
       return response;
    } catch (err) {
       console.log(err);
@@ -37,7 +36,7 @@ export const fetchUpdateRecipe = createAsyncThunk('recipes/fetchUpdateRecipe', a
 export const fetchDeleteRecipe = createAsyncThunk('recipes/fetchDeleteRecipe', async (arg, thunkAPI) => {
    try {
       const user = thunkAPI.getState().user.user;
-      const response = await deleteRecipe(arg, user?.token);
+      const response = await deleteRecipe(arg.recipeID, user?.token);
       return response;
    } catch (err) {
       console.log(err);
@@ -63,12 +62,14 @@ export const recipesSlice = createSlice({
          })
          .addCase(fetchCreateRecipe.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.entries.push(action.payload);
+            state.entries = { ...action.payload };
          })
          .addCase(fetchUpdateRecipe.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            const recipes = current(state.entries);
             if (action.payload !== 'Conflict') {
-               const newState = state.entries.map(recipe => {
-                  if (recipe?._id === action.payload._id) {
+               const newState = recipes.map(recipe => {
+                  if (recipe?._id === action.payload?._id) {
                      return action.payload;
                   }
                   return recipe;
@@ -77,11 +78,10 @@ export const recipesSlice = createSlice({
             }
          })
          .addCase(fetchDeleteRecipe.fulfilled, (state, action) => {
-            const recipeID = action.payload;
-            const newState = state.entries.filter(recipe => recipe._id !== recipeID);
-            console.log(newState);
             state.status = 'succeeded';
-            state.entries.push(newState);
+            const recipes = current(state.entries);
+            const newState = recipes.filter(recipe => recipe?._id !== action.payload.id);
+            state.entries = newState;
          });
    }
 });
