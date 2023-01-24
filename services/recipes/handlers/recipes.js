@@ -93,7 +93,7 @@ const remove = async (req, res) => {
             message: 'Bad request'
          });
       }
-      return res.status(200).send(req.params.id);
+      return res.status(200).send({ id: req.params.id });
    } catch (err) {
       console.log(err);
       return res.status(500).send('ISE!');
