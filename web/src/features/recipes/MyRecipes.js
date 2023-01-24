@@ -10,8 +10,9 @@ import "./MyRecipes.css";
 import addIcon from "../../icons/icon_plus_white.svg";
 
 export const MyRecipes = () => {
-   const [recipes, setRecipes] = useState('');
    const { user } = useSelector(getUser);
+
+   const [recipes, setRecipes] = useState(null);
 
    useEffect(() => {
       (async () => {
@@ -26,7 +27,7 @@ export const MyRecipes = () => {
             return err;
          }
       })();
-   }, [user?.token, user]);
+   }, [user?.token]);
 
    return (
       <div className="container">
@@ -49,13 +50,16 @@ export const MyRecipes = () => {
                </div>
                <div className="innerRight"><span>Delete</span></div>
             </div>
+
             {recipes &&
                recipes.map(recipe => (
                   <RecipeExcerpt
                      key={recipe._id}
                      recipe={recipe}
+                     setRecipes={setRecipes}
                   />
-               ))}
+               ))
+            }
          </div>
       </div>
    );
