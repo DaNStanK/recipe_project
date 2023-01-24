@@ -27,6 +27,7 @@ const storageUser = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
    user: {
+      uid: storageUser ? storageUser?.uid : null,
       email: storageUser ? storageUser?.email : null,
       token: storageUser ? storageUser?.token : null,
       isLoggedIn: storageUser ? true : false
@@ -41,7 +42,8 @@ export const userSlice = createSlice({
    reducers: {
       logoutUser: (state, action) => {
          localStorage.clear();
-         return {
+         return state.user = {
+            uid: null,
             user: null,
             token: null,
             isLoggedIn: false
