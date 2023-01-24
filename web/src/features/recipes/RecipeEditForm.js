@@ -6,13 +6,12 @@ import { fetchUpdateRecipe } from "./recipesSlice";
 import { storeFile } from "../../fetch/fetchRecipes";
 
 
-export const RecipeEditForm = ({ recipe, recipeID }) => {
+export const RecipeEditForm = ({ recipe }) => {
 
    const [data, setData] = useState(recipe);
    const user = useSelector(getUser);
    const navigate = useNavigate();
    const dispatch = useDispatch();
-
 
    const dataChange = e => {
       setData(prevState => prevState = {
@@ -34,7 +33,7 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
 
    const handleClick = (e) => {
       e.preventDefault();
-      dispatch(fetchUpdateRecipe({ data, recipeID }));
+      dispatch(fetchUpdateRecipe({ data, recipeID: recipe?._id }));
       return navigate('/recipes');
    };
 
@@ -42,7 +41,7 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
       <div className="container-form">
          <div className="box-left">
             <span>Recipe Image</span>
-            <img src={require(`../../uploads/${data.image_url}`)} alt="recipe pic" />
+            <img src={`../../uploads/${recipe.image_url}`} alt="recipe pic" />
             <label className="fileUpload"> UPLOAD
                <input
                   name="image_url"
@@ -69,7 +68,7 @@ export const RecipeEditForm = ({ recipe, recipeID }) => {
                <label htmlFor="category" >
                   <span>Category</span><br />
                   <select
-                     className="category"
+                     classSeveral changes including img pathName="category"
                      name="category"
                      defaultValue={data.category}
                      onChange={dataChange}
