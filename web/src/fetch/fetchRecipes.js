@@ -201,7 +201,7 @@ export const storeFile = async (e, token) => {
       }
 
       const output = await response.json();
-      return output;
+      return output.fileName;
    } catch (err) {
       console.log(err.message);
       return err;
