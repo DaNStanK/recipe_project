@@ -1,11 +1,11 @@
+import "./EditUser.css";
+
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUpdateUser, getUser } from "./userSlice";
 import { fetchUser } from "../../fetch/fetchUsers";
 
-import "./EditUser.css";
-
-import avatarPic from "../../uploads/avatar7_big.png";
+import { storeFile } from "../../fetch/fetchRecipes";
 
 export const EditUser = () => {
    const { user } = useSelector(getUser);
@@ -25,6 +25,17 @@ export const EditUser = () => {
       })();
    }, [user?.token]);
 
+   const uploadFile = async (e) => {
+      try {
+         e.preventDefault();
+         let filename = await storeFile(e, user?.token);
+         return setData(prevState => prevState = { ...prevState, image_url: filename });
+      } catch (err) {
+         console.log(err.message);
+         return err;
+      }
+   };
+
    const dataChange = useCallback((e) => {
       setData(prevState => {
          return {
@@ -41,7 +52,6 @@ export const EditUser = () => {
    }, [data, dispatch]);
 
    return (
-
       <div className="container">
          {data && <div className="container__tittleBox">
             <h2 className="container__title">My Profile</h2>
@@ -51,8 +61,17 @@ export const EditUser = () => {
          {data &&
             <div className="container__input">
                <div className="container__imageBox">
-                  <img src={avatarPic} alt="Avatar Img" />
-                  <button id="button">CHANGE AVATAR</button>
+                  {/* <span>Recipe Image</span> */}
+                  <img src={'../../../../uploads/avatar7_big.png'} alt="Avatar Img" />
+                  <label className="fileUpload"> CHANGE AVATAR
+                     <input
+                        name="image_url"
+                        type="file"
+                        accept="image/*"
+                        onChange={uploadFile}
+                     />
+                  </label>
+                  {/* <button id="button">CHANGE AVATAR</button> */}
                </div>
 
                <div className="container__inputBox edit__profile">
