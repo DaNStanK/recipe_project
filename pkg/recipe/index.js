@@ -60,7 +60,7 @@ const update = async (id, uid, data) => {
 };
 
 const getAll = async () => {
-   return Recipe.find({});
+   return Recipe.find({}).sort({ created_on: -1 });
 };
 
 const getById = async (id) => {
