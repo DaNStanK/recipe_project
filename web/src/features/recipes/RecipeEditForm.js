@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getUser } from "../user/userSlice";
 import { fetchUpdateRecipe } from "./recipesSlice";
+
 import { storeFile } from "../../fetch/fetchRecipes";
 
 
@@ -20,10 +22,10 @@ export const RecipeEditForm = ({ recipe }) => {
       });
    };
 
-   const uploadFile = async (e) => {
+   const uploadFile = async (e, token) => {
       try {
          e.preventDefault();
-         let filename = await storeFile(e, user?.token);
+         let filename = await storeFile(e, token);
          return setData(prevState => prevState = { ...prevState, image_url: filename });
       } catch (err) {
          console.log(err.message);
@@ -41,13 +43,13 @@ export const RecipeEditForm = ({ recipe }) => {
       <div className="container-form">
          <div className="box-left">
             <span>Recipe Image</span>
-            <img src={`../../uploads/${recipe.image_url}`} alt="recipe pic" />
+            <img src={`../../uploads/${data?.image_url}`} alt="recipe pic" />
             <label className="fileUpload"> UPLOAD
                <input
                   name="image_url"
                   type="file"
                   accept="image/*"
-                  onChange={uploadFile}
+                  onChange={e => uploadFile(e, user?.user?.token)}
                />
             </label>
          </div>
