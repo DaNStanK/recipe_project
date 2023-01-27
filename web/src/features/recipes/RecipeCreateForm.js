@@ -8,7 +8,7 @@ import { storeFile } from "../../fetch/fetchRecipes";
 
 export const RecipeCreateForm = () => {
 
-   const [filename, setFilename] = useState('');
+   const [filename, setFilename] = useState(null);
 
    const title = useRef('');
    const category = useRef('');
@@ -52,7 +52,7 @@ export const RecipeCreateForm = () => {
          <div className="box-left">
             <span>Recipe Image</span>
             <img
-               src={'../../../../uploads/recipe.jpg'}
+               src={!filename ? '../../../../uploads/recipe.jpg' : `../../uploads/${filename}`}
                alt="recipe pic"
             />
             <label className="fileUpload"> UPLOAD
