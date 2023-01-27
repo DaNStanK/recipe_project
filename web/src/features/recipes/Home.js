@@ -8,7 +8,6 @@ export const Home = () => {
 
    const recipesByNewestDate = recipes
       .map(recipe => recipe = { ...recipe, created_on: Date.parse(recipe.created_on) })
-      .sort((a, b) => b.created_on - a.created_on)
       .splice(0, 3);
 
    const recipesByMostLikes = recipes

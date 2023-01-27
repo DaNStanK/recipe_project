@@ -79,9 +79,8 @@ export const recipesSlice = createSlice({
          })
          .addCase(fetchDeleteRecipe.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            const recipes = current(state.entries);
-            const newState = recipes.filter(recipe => recipe?._id !== action.payload.id);
-            state.entries = newState;
+            let recipes = current(state.entries);
+            state.entries = recipes.filter(recipe => recipe?._id !== action.payload.id);
          });
    }
 });
