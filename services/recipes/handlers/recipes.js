@@ -1,4 +1,5 @@
 const recipes = require('../../../pkg/recipe');
+const fs = require('fs/promises');
 
 const createRecipe = async (req, res) => {
    try {
@@ -70,14 +71,23 @@ const getByCategory = async (req, res) => {
 
 const update = async (req, res) => {
    try {
-      let payload = {
+      const currentRecipe = await recipes.getById(req.body._id);
+
+      const payload = {
          ...req.body,
          last_updated: new Date()
       };
-      let r = await recipes.update(req.params.id, req.auth.uid, payload);
+
+      const r = await recipes.update(req.params.id, req.auth.uid, payload);
+
       if (r.modifiedCount < 1) {
          return res.status(409).send('Recipe not found');
       }
+
+      if (currentRecipe.image_url !== payload.image_url) {
+         await fs.unlink(`${__dirname}/../../../uploads/${currentRecipe.image_url}`);
+      }
+
       return res.status(200).send(payload);
    } catch (err) {
       console.log(err);
