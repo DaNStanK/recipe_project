@@ -97,12 +97,18 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
    try {
-      await recipes.remove(req.params.id, req.auth.uid);
-      if (recipes.deletedCount === 0) {
+      const currentRecipe = await recipes.getById(req.params.id);
+
+      const r = await recipes.remove(req.params.id, req.auth.uid);
+
+      if (r.deletedCount === 0) {
          return res.status(400).send({
             message: 'Bad request'
          });
       }
+
+      await fs.unlink(`${__dirname}/../../../uploads/${currentRecipe.image_url}`);
+
       return res.status(200).send({ id: req.params.id });
    } catch (err) {
       console.log(err);
