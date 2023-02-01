@@ -28,12 +28,12 @@ export const Login = () => {
          </div>
 
          <div className="container__box">
-            <div className='container__descriptionBox-login'>
+            <div className='description__box'>
                <h1><span>Welcome to</span> Baby's</h1>
                <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
             </div>
 
-            <form className='container__loginInputs' onSubmit={handleSubmit}>
+            <form className='login__inputs' onSubmit={handleSubmit}>
                <label className='container__label'>
                   <span>Email:</span>
                   <input type="email" name="email" ref={email} />
@@ -42,7 +42,7 @@ export const Login = () => {
                   <span>Password:</span>
                   <input type="password" name="password" ref={password} />
                </label>
-               <button className="button-login">LOG IN</button>
+               <button className="button__login">LOG IN</button>
             </form>
 
          </div>
