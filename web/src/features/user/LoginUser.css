@@ -2,68 +2,69 @@
    display: flex;
    flex-direction: row;
    gap: 10px;
+   width: 100%;
+   letter-spacing: 0px;
+   opacity: 1;
 }
 
-.container__descriptionBox-login {
+.description__box {
    display: flex;
    flex-direction: column;
    gap: 29px;
-   width: 688px;
+   width: 62%;
    margin-right: 144px;
 }
 
-.container__descriptionBox-login h1 {
+.description__box h1 {
    text-align: left;
    font: normal bold 2.875rem/3.75rem Roboto Slab;
-   letter-spacing: 0px;
-   opacity: 1;
    color: #626262;
 }
 
-.container__descriptionBox-login p {
+.description__box p {
    word-break: break-all;
    width: 100%;
    font: normal normal normal 1.25rem/1.63rem Roboto Slab;
-   letter-spacing: 0px;
    color: #A5A5A5;
-   opacity: 1;
 }
 
-.container__loginInputs {
+.login__inputs {
    display: flex;
    flex-direction: column;
    gap: 23px;
+   width: 38%;
 }
 
 .container__label input {
+   width: 66%;
    margin-top: 0.625rem;
+   background-color: #F0EFEA;
+   border: 1px solid #A5A5A5;
+   font: normal normal bold 0.875rem/1.186rem Roboto;
+   color: #A5A5A5;
 }
 
-.button-login {
+.button__login {
    background: none;
    border: 1px solid #A5A5A5;
-   font-family: Roboto;
-   font-size: 1rem;
+   font: normal normal bold 1rem/1rem Roboto;
    text-align: center;
    text-transform: uppercase;
    text-decoration: none;
-   font-weight: bold;
-   letter-spacing: 0;
    color: inherit;
    padding: 9.91px 10px 9.09px 10px;
-   width: 122.94px;
+   width: 27%;
    height: 40px;
    border-radius: 5px;
    margin-top: 19px;
    cursor: pointer;
 }
 
-.button-login:hover,
-.button-login:active,
-.button-login:focus {
+.button__login:hover,
+.button__login:active,
+.button__login:focus {
    border: 1px solid #96BB36;
    background: #96BB36;
    color: #FFFFFF;
    box-shadow: 0px 3px 6px #00000029;
-   opacity: 1;
 }
