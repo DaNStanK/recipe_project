@@ -2,52 +2,58 @@
    display: flex;
    flex-direction: row;
    gap: 10px;
+   width: 100;
+   letter-spacing: 0px;
+   opacity: 1;
 }
 
-.container__descriptionBox-create {
+.description-box__create {
    display: flex;
    flex-direction: column;
    gap: 29px;
-   max-width: 412px;
-   margin-right: 102px;
+   width: 39%;
+   padding-right: 6.375rem;
 }
 
-.container__descriptionBox-create h1 {
+.description-box__create h1 {
    text-align: left;
    font: normal bold 2.875rem/3.75rem Roboto Slab;
-   letter-spacing: 0px;
-   opacity: 1;
    color: #626262;
 }
 
-.container__descriptionBox-create p {
+.description-box__create p {
    word-break: break-all;
    width: 100%;
    font: normal normal normal 1.25rem/1.63rem Roboto Slab;
-   letter-spacing: 0px;
    color: #A5A5A5;
-   opacity: 1;
 }
 
-.container__registerInputs {
+.input__container {
+   width: 61%;
+}
+
+.register__inputs {
    display: grid;
    grid-template-columns: auto auto;
    gap: 23px 33px;
+   width: 100%;
+}
+
+.register__inputs input {
+   width: 76%;
 }
 
 .button-create {
    background: none;
    border: 1px solid #A5A5A5;
-   font-family: Roboto;
-   font-size: 16px;
+   font: bold 1rem/1rem Roboto;
    text-align: center;
    text-transform: uppercase;
    text-decoration: none;
-   font-weight: bold;
-   letter-spacing: 0;
    color: inherit;
    padding: 9.91px 10px 9.09px 10px;
-   width: 201.8px;
+   /* width: 201.8px; */
+   width: 52%;
    height: 40px;
    border-radius: 5px;
    margin-top: 19px;
@@ -61,5 +67,4 @@
    background: #96BB36;
    color: #FFFFFF;
    box-shadow: 0px 3px 6px #00000029;
-   opacity: 1;
 }
