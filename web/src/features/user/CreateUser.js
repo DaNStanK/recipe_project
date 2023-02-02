@@ -36,13 +36,13 @@ export const CreateUser = () => {
          </div>
 
          <div className="container__box">
-            <div className="container__descriptionBox-create">
+            <div className="description-box__create">
                <h1><span>Create your</span> <br /> account</h1>
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima suscipit dolorem maiores aliquam possimus recusandae saepe quibusdam atque fugit nihil tempora quisquam ipsam repellendus veritatis animi, ratione, delectus pariatur.</p>
             </div>
 
-            <div className="container__inputBox">
-               <form onSubmit={handleSubmit} className="container__registerInputs">
+            <div className="input__container">
+               <form onSubmit={handleSubmit} className="register__inputs">
                   <label>
                      <span>First Name</span>
                      <input type="text" name="first_name" ref={first_name} />
