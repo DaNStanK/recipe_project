@@ -60,8 +60,7 @@ export const EditUser = () => {
 
          {data &&
             <div className="container__input">
-               <div className="container__imageBox">
-                  {/* <span>Recipe Image</span> */}
+               <div className="container__image-box">
                   <img src={'../../../../uploads/avatar7_big.png'} alt="Avatar Img" />
                   <label className="fileUpload"> CHANGE AVATAR
                      <input
@@ -71,12 +70,11 @@ export const EditUser = () => {
                         onChange={uploadFile}
                      />
                   </label>
-                  {/* <button id="button">CHANGE AVATAR</button> */}
                </div>
 
-               <div className="container__inputBox edit__profile">
+               <div className="container__input-box">
                   <form
-                     className="container__registerInputs"
+                     className="form__inputs"
                      onSubmit={handleSubmit}
                   >
                      <label>
