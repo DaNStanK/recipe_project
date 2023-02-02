@@ -2,19 +2,39 @@
    display: flex;
    flex-direction: row;
    gap: 96.68px;
+   width: 100%;
+   letter-spacing: 0;
+   opacity: 1;
 }
 
-.container__inputBox .edit__profile {
-   gap: 16px 33px;
-}
-
-.container__imageBox {
+.container__image-box {
    display: flex;
    flex-direction: column;
-   gap: 35px;
+   gap: 2.188rem;
+   width: 14%;
 }
 
-.container__imageBox img {
+.fileUpload {
+   height: 2rem;
+   border: 1px solid #A5A5A5;
+   padding: 0.48rem 0;
+   border-radius: 5px;
+   width: 100%;
+   font: normal normal normal 0.875rem/1.188rem Roboto;   
+   text-align: center;
+   cursor: pointer;
+}
+
+.fileUpload:hover,
+.fileUpload:focus {
+   font-weight: bold;
+   border: 1px solid #96BB36;
+   background: #96BB36;
+   color: #FFFFFF;
+   box-shadow: 0px 3px 6px #00000029;
+}
+
+.container__image-box img {
    width: 123px;
    height: 123px;
    margin: 0 auto;
@@ -22,32 +42,28 @@
    box-shadow: 0px 3px 6px #00000029
 }
 
-.container__imageBox #button {
-   width: 173.39px;
-   height: 32px;
-   font-size: 14px;
-   font-family: Roboto;
-   letter-spacing: 0;
+.container__input-box {
+   width: 55%;
 }
 
-.container__registerInputs input {
+.form__inputs {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 1rem 2rem;
+}
+
+.form__inputs input {
+   width: 100%;
    margin-top: 10px;
-   color: #A5A5A5;
-   font-weight: normal;
-   font-family: Roboto;
-   letter-spacing: 0;
 }
 
 .last__two {
    margin-top: 14px;
 }
 
-.container__inputBox #button {
-   width: 124.37px;
+.container__input-box #button {
+   width: 42.3%;
    height: 40px;
    box-shadow: 0px 3px 6px #00000029;
-   margin: 0;
-   font-weight: bold;
-   font-family: Roboto;
-   letter-spacing: 0;
+   margin-top: 1.625rem;
 }
