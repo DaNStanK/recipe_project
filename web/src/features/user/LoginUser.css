@@ -37,11 +37,6 @@
 
 .container__label input {
    width: 66%;
-   margin-top: 0.625rem;
-   background-color: #F0EFEA;
-   border: 1px solid #A5A5A5;
-   font: normal normal bold 0.875rem/1.186rem Roboto;
-   color: #A5A5A5;
 }
 
 .button__login {
