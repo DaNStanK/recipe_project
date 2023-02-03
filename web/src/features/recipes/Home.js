@@ -12,7 +12,8 @@ export const Home = () => {
 
    const recipesByMostLikes = recipes
       .map(recipe => recipe)
-      .sort((a, b) => b.likes - a.likes);
+      .sort((a, b) => b.likes - a.likes)
+      .splice(0, 6);
 
    return (
       <div className="home">
