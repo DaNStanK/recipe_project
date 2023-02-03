@@ -7,6 +7,7 @@
    box-shadow: 0px 10px 20px #00000012;
    border: 1px solid #D8D8D8;
    border-radius: 5px;
+   letter-spacing: 0;
    opacity: 1;
    margin: auto;
    padding: 22px 32px;
@@ -22,9 +23,7 @@
 .view-recipe__title-box h1 {
    text-align: left;
    font: normal normal bold 2.375rem/3.125rem Roboto Slab;
-   letter-spacing: 0px;
    color: #F0972A;
-   opacity: 1;
 }
 
 .view-recipe__title-box img {
@@ -37,9 +36,7 @@
    gap: 43px;
    text-align: left;
    font: normal normal normal 1rem/1.313rem Roboto;
-   letter-spacing: 0px;
    color: #A5A5A5;
-   opacity: 1;
 }
 
 .view-recipe__img {
@@ -70,9 +67,7 @@
 h2 {
    text-align: left;
    font: normal normal bold 1.125rem/1.5rem Roboto Slab;
-   letter-spacing: 0px;
    color: #96BB36;
-   opacity: 1;
 }
 
 .view-recipe__category {
