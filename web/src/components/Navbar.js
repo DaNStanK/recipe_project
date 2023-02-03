@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoggedIn } from './LoggedIn';
 import { LoggedOut } from './LoggedOut';
 import { useSelector } from "react-redux";
@@ -9,14 +9,13 @@ import logoImg from "../icons/logo_color.svg";
 
 export const Navbar = () => {
    const { user } = useSelector(getUser);
+   const navigate = useNavigate();
 
    return (
       <div id="navbar">
          <nav className='navbar-container'>
-            <div className="navbar-logo">
-               <Link to='/' className='navbar-logo__image'>
-                  <img src={logoImg} alt="logo icon" />
-               </Link>
+            <div className="navbar-logo" onClick={() => navigate('/')}>
+               <img src={logoImg} alt="logo icon" />
             </div>
 
             <div className="navbar-types">

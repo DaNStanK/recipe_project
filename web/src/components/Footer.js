@@ -14,7 +14,7 @@ export const Footer = () => {
 
          <div className="footer-container">
             <div className="footer-logo">
-               <Link to='/' className='footer-logo__image'>
+               <Link to='/'>
                   <img src={logoImg} alt="logo icon" />
                </Link>
             </div>
@@ -35,5 +35,5 @@ export const Footer = () => {
          </div>
 
       </div>
-   )
+   );
 };
