@@ -51,10 +51,14 @@ export const RecipeCreateForm = () => {
       <form className="container-form" onSubmit={handleSubmit}>
          <div className="box-left">
             <span>Recipe Image</span>
-            <img
-               src={!filename ? '../../../../uploads/recipe.jpg' : `../../uploads/${filename}`}
+            {filename && <img
+               src={filename}
                alt="recipe pic"
-            />
+            />}
+            {!filename && <img
+               src={'../../../../uploads/recipe.jpg'}
+               alt="recipe pic"
+            />}
             <label className="fileUpload"> UPLOAD
                <input
                   name="image_url"
@@ -72,9 +76,9 @@ export const RecipeCreateForm = () => {
                </label>
             </div>
             <div className="middle-innerBox">
-               <label htmlFor="category" >
+               <label htmlFor="category" className="category">
                   <span>Category</span><br />
-                  <select className="category" name="category" ref={category} id="category" >
+                  <select name="category" ref={category} id="category" >
                      <option defaultValue=''></option>
                      <option value="breakfast">Breakfast</option>
                      <option value="brunch">Brunch</option>
@@ -82,13 +86,13 @@ export const RecipeCreateForm = () => {
                      <option value="dinner">Dinner</option>
                   </select>
                </label>
-               <label>
+               <label className="preparation-time">
                   <span>Preparation Time</span>
-                  <input className="preparation-time" type="number" name="preparation_time" ref={preparation_time} />
+                  <input type="number" name="preparation_time" ref={preparation_time} />
                </label>
-               <label >
+               <label className="persons-number">
                   <span>No. People</span>
-                  <input className="persons-number" type="number" name="number_persons" ref={number_persons} />
+                  <input type="number" name="number_persons" ref={number_persons} />
                </label>
             </div>
             <label className="short-description">
