@@ -9,7 +9,10 @@ app.use(
     '/api/v1/storage',
     proxy(
         'http://127.0.0.1:10001',
-        { proxyReqPathResolver: (req) => `http://127.0.0.1:10001/api/v1/storage${req.url}` }
+        {
+            proxyReqPathResolver: (req) => `http://127.0.0.1:10001/api/v1/storage${req.url}`,
+            limit: '2mb'
+        }
     )
 );
 

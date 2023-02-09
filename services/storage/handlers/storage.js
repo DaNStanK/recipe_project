@@ -3,13 +3,13 @@ const strings = require('../../../pkg/strings');
 const upload = async (req, res) => {
     try {
         let fileTypes = ['image/png', 'image/jpg', 'image/tif', 'image/jpeg', 'image/gif', 'image/webp'];
-        let maxFileSize = 1024 * 1024;
+        let maxFileSize = 2 * 1024 * 1024;
         if (!fileTypes.includes(req.files.picture.mimetype)) {
-            return res.status(400).send('Bad request!');
+            return res.status(400).send('Unsupported image format!');
         }
 
         if (maxFileSize < req.files.picture.size) {
-            return res.status(400).send('Bad request!');
+            return res.status(400).send('Image size must be of maximum 2 mb size!');
         }
 
         let newFileName = `${strings.random(10)}__${req.files.picture.name}`;
