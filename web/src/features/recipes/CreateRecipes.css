@@ -27,6 +27,10 @@
    resize: none;
 }
 
+.container-form select {
+   cursor: pointer;
+}
+
 .container-form .box-left {
    width: 18%;
 }
