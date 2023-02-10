@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+/*----------------------------------*\
+  #ROOT
+\*----------------------------------*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+
 
 * {
   margin: 0;
@@ -6,7 +11,10 @@
   list-style-type: none;
   text-decoration: none;
   box-sizing: border-box;
+  letter-spacing: 0;
+  opacity: 1;
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -14,17 +22,27 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+
+
+
+
+/*----------------------------------*\
+  #HTML && #BODY
+\*----------------------------------*/
+
 html,
 body {
   width: 100%;
 }
 
+
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #F8F7F2;
-  color: #A5A5A5;
+  font-family: "Roboto", sans-serif;
+  background: #f8f7f2;
+  color: #a5a5a5;
   font-weight: bold;
 }
+
 
 #App {
   display: flex;
@@ -35,42 +53,23 @@ body {
   min-height: 66.8vh;
 }
 
-span {
-  color: #F0972A;
-  font-family: Roboto Slab;
-  font-weight: bold;
-  letter-spacing: 0;
-}
-
-#navbar {
-  background-color: #F8F7F2;
-}
-
-#navbar,
-#footer {
-  width: 100vw;
-  height: 16.6vh;
-}
 
 #pages {
   margin: 0 auto;
   width: 70%;
 }
 
-input {
-  display: block;
-  border: 1px solid #A5A5A5;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #F0EFEA;
-  text-align: left;
-  font: normal normal bold 0.875rem/1.188rem Roboto;
-  color: #A5A5A5;
-}
+
+
+
+
+/*----------------------------------*\
+  #BUTTON ELEMENT
+\*----------------------------------*/
 
 #button {
   background: none;
-  border: 1px solid #A5A5A5;
+  border: 1px solid #a5a5a5;
   font: normal normal 900 1rem/1rem Roboto;
   color: inherit;
   text-align: center;
@@ -81,14 +80,22 @@ input {
   cursor: pointer;
 }
 
+
 #button:hover,
 #button:active,
 #button:focus {
-  border: 1px solid #96BB36;
-  background: #96BB36;
-  color: #FFFFFF;
+  border: 1px solid #96bb36;
+  background: #96bb36;
+  color: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
 }
+
+
+
+
+/*----------------------------------*\
+  #BODY-CONTAINER
+\*----------------------------------*/
 
 .container {
   display: flex;
@@ -102,39 +109,44 @@ input {
   margin-bottom: 8.13rem;
 }
 
-.container__tittleBox {
+
+.container__title-box {
   display: flex;
   justify-content: space-between;
   position: relative;
   width: 100%;
 }
 
-.container__title {
+
+.container__title-box--title {
   display: inline-block;
   font: normal normal bold 2.25rem/3rem Roboto Slab;
   text-transform: capitalize;
-  color: #96BB36;
+  color: #96bb36;
   padding-right: 0.65rem;
-  background-color: #F8F7F2;
+  background-color: #f8f7f2;
   z-index: 1;
 }
 
-.container__afterTitle {
+
+.container__title-box--line {
   position: absolute;
   top: 2.1rem;
   width: 100%;
   margin: 0 auto;
   z-index: 0;
-  border-bottom: 1px solid #A5A5A5;
+  border-bottom: 1px solid #a5a5a5;
 }
+
 
 .container__button {
   position: absolute;
   right: 0;
   top: 0;
   padding-left: 0.625rem;
-  background-color: #F8F7F2;
+  background-color: #f8f7f2;
 }
+
 
 .container__link {
   width: 41px;
@@ -142,17 +154,74 @@ input {
   display: flex;
   justify-content: center;
   border-radius: 50%;
-  background-color: #F0972A;
+  background-color: #f0972a;
   box-shadow: 0px 3px 6px #00000029;
 }
+
 
 .container__button img {
   margin: auto 0;
 }
 
-#footer {
-  display: flex;
-  align-items: center;
-  background: #626262;
-  color: #FFFFFF;
+
+
+
+
+/*----------------------------------*\
+  #BUTTON ELEMENT
+\*----------------------------------*/
+
+#button {
+  background: none;
+  border: 1px solid #a5a5a5;
+  font: normal normal 900 1rem/1rem Roboto;
+  color: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+#button:hover,
+#button:active,
+#button:focus {
+  border: 1px solid #96bb36;
+  background: #96bb36;
+  color: #ffffff;
+  box-shadow: 0px 3px 6px #00000029;
+}
+
+
+
+
+
+/*----------------------------------*\
+  #SPAN ELEMENT
+\*----------------------------------*/
+
+span {
+  font: normal normal bold 1rem/1rem Roboto Slab;
+  color: #f0972a;
+}
+
+
+
+
+
+/*----------------------------------*\
+  #INPUT ELEMENT
+\*----------------------------------*/
+
+input {
+  display: block;
+  border: 1px solid #a5a5a5;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f0efea;
+  text-align: left;
+  font: normal normal bold 0.875rem/1.188rem Roboto;
+  color: #a5a5a5;
 }

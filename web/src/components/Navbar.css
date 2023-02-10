@@ -1,57 +1,85 @@
+/*----------------------------------*\
+  #NAVBAR COMPONENT
+\*----------------------------------*/
+
 .navbar-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100%;
+  align-items: center;
+  height: 16.6vh;
   width: 70%;
   margin: 0 auto;
-  letter-spacing: 0;
-  opacity: 1;
 }
 
-.navbar-logo {
-  display: flex;
-  justify-content: center;
-  height: 100%;
+
+.navbar-container__logo {
   cursor: pointer;
 }
 
-.navbar-logo img {
-  width: 177px;
+
+.navbar-container__logo img {
+  width: 100%;
 }
 
-.navbar-types {
+
+.navbar-container__category {
   display: flex;
   flex-direction: row;
   width: 34%;
   justify-content: space-between;
-  gap: 0 1.08vh;
-  margin: auto;
 }
 
-.navbar-links {
+
+.navbar-container__category--links {
   font: normal normal bold 1.125rem/1.5rem Roboto;
   text-align: center;
   text-transform: uppercase;
-  color: #A5A5A5;
+  color: #a5a5a5;
   text-decoration: none;
 }
 
-.navbar-links:active,
-.navbar-links:focus,
-.navbar-links:hover {
-  color: #F0972A;
+
+.navbar-container__category--links:active,
+.navbar-container__category--links:focus,
+.navbar-container__category--links:hover {
+  color: #f0972a;
 }
 
-.navbar-types__circles {
+
+.navbar-container__category--circles {
   height: 0.5rem;
   width: 0.5rem;
   border-radius: 50%;
-  background: #F0972A;
+  background: #f0972a;
   margin: auto;
 }
 
-.navbar-types__login-circles {
+
+.navbar__logged-out,
+.navbar__logged-in {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto 0px;
+}
+
+
+
+
+
+/*----------------------------------*\
+  #NAVBAR LOGGED IN COMPONENT
+\*----------------------------------*/
+
+.navbar__logged-in {
+  gap: 0 1.08vh;
+  min-width: 20vw;
+}
+
+
+.navbar__logged-in--circles {
   height: 0.5rem;
   width: 0.5rem;
   border-radius: 50%;
@@ -59,67 +87,60 @@
   margin: auto;
 }
 
-.navbar-users,
-.navbar__logged-users {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: auto 0px;
+
+.navbar__logged-in--links {
+  font: normal normal 900 1.125rem/1.5rem Roboto;
+  text-transform: uppercase;
+  border-bottom: 0.125rem solid #b5b5b4;
 }
 
-.navbar-users {
+
+.one {
+  color: #96bb36;
+}
+
+
+.two {
+  color: #f0972a;
+}
+
+
+.three {
+  color: #b5b5b4;
+}
+
+
+.one:hover,
+.two:hover,
+.three:hover {
+  color: #626262;
+  border-bottom: 0.125rem solid #626262;
+}
+
+
+
+
+
+/*----------------------------------*\
+  #NAVBAR LOGGED out COMPONENT
+\*----------------------------------*/
+
+.navbar__logged-out {
   width: 25%;
 }
 
-.navbar__logged-users {
-  gap: 0 1.08vh;
-  min-width: 20vw;
+
+.navbar__logged-out div {
+  color: #f0972a;
+  font: normal normal 900 1rem/1.31rem Roboto;
 }
 
-.navbar-users div {
-  margin: auto;
-  color: #F0972A;
-  font-size: 1rem;
-  font-weight: 900;
-}
 
-.navbar-login {
+.navbar__logged-out--button-login {
   width: 32%;
 }
 
-.navbar-create {
+
+.navbar__logged-out--button-create {
   width: 53%;
-}
-
-.navbar__logged-users .login-links {
-  font: normal normal 900 1.125rem/1.5rem Roboto;
-  text-transform: uppercase;
-  border-bottom: 0.125rem solid #B5B5B4;
-}
-
-.navbar__logged-users .one {
-  color: #96BB36;
-}
-
-.navbar__logged-users .one:hover {
-  color: #626262;
-  border-bottom: 0.125rem solid #626262;
-}
-
-.navbar__logged-users .two {
-  color: #F0972A;
-}
-
-.navbar__logged-users .two:hover {
-  color: #626262;
-  border-bottom: 0.125rem solid #626262;
-}
-
-.navbar__logged-users .three {
-  color: #B5B5B4;
-}
-
-.navbar__logged-users .three:hover {
-  color: #626262;
-  border-bottom: 0.125rem solid #626262;
 }
