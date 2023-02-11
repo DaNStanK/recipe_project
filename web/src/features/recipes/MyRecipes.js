@@ -37,11 +37,8 @@ export const MyRecipes = () => {
    }, [user?.token]);
 
    return (
-
       <div className="container">
-
          <div className="container__title-box">
-
             <h2 className="container__title-box--title">My Recipes</h2>
             <div className="container__title-box--line"></div>
             <div className="container__button">
@@ -49,22 +46,15 @@ export const MyRecipes = () => {
                   <img src={addIcon} alt="add icon" />
                </Link>
             </div>
-
          </div>
-
          <div className="container__table">
-
             <div className="container__table--title-box">
-
                <div className="inner-left">
-
                   <div><span>Recipe Title</span></div>
                   <div><span>Category</span></div>
                   <div><span>Created On</span></div>
-
                </div>
                <div className="inner-right"><span>Delete</span></div>
-
             </div>
 
             {recipes &&
@@ -78,7 +68,6 @@ export const MyRecipes = () => {
             }
 
          </div>
-
       </div>
    );
 

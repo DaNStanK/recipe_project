@@ -22,14 +22,11 @@ export const Home = () => {
 
   return (
     <div className="home">
-
       <div className="container">
-
         <div className="container__title-box">
           <h2 className="container__title-box--title">Fresh & new</h2>
           <div className="container__title-box--line"></div>
         </div>
-
 
         {recipesByNewestDate &&
           <div className="container__recipes">
@@ -38,12 +35,10 @@ export const Home = () => {
             ))}
           </div>}
 
-
         <div className="container__title-box">
           <h2 className="container__title-box--title">Most Popular Recipes</h2>
           <div className="container__title-box--line"></div>
         </div>
-
 
         {recipesByMostLikes &&
           <div className="container__recipes">
@@ -53,7 +48,6 @@ export const Home = () => {
           </div>}
 
       </div>
-
     </div>
   );
 };

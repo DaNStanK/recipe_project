@@ -12,7 +12,6 @@ export const CreateRecipes = () => {
    return (
 
       <div className="container">
-
          <div className="container__title-box">
             <h2 className="container__title-box--title">My Recipes</h2>
             <div className="container__title-box--line"></div>
@@ -22,10 +21,9 @@ export const CreateRecipes = () => {
                </Link>
             </div>
          </div>
-
          <RecipeCreateForm />
-
       </div>
+
    );
 
 };

@@ -31,24 +31,19 @@ export const RecipeExcerpt = ({ recipe, setRecipes }) => {
    return (
 
       <div className="recipe-excerpt">
-
          <div
             className="recipe-excerpt__inner-left"
             onClick={() => navigate(`/recipes/${recipe._id}`)}
          >
-
             <div className="recipe-excerpt__inner-left--title">{recipe.title}</div>
             <div className="recipe-excerpt__inner-left--category">{recipe.category}</div>
             <div className="recipe-excerpt__inner-left--date">
                {format(new Date(recipe.created_on), 'dd.MM.yyyy')}
             </div>
-
          </div>
-
          <div className="recipe-excerpt__inner-right" onClick={handleDelete}>
             <img src={garbageIcon} alt="remove icon" />
          </div>
-
       </div>
 
    );

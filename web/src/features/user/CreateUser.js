@@ -24,9 +24,7 @@ export const CreateUser = () => {
    const navigate = useNavigate();
 
    const handleSubmit = useCallback(e => {
-
       e.preventDefault();
-
       createUser({
          email: email.current.value,
          first_name: first_name.current.value,
@@ -35,37 +33,25 @@ export const CreateUser = () => {
          password: password.current.value,
          password2: password2.current.value
       });
-
       return navigate('/users');
-
    }, [navigate]);
 
    return (
 
       <div className="container">
-
          <div className="container__title-box">
-
             <h2 className="container__title-box--title">Create Account</h2>
-
             <div className="container__title-box--line"></div>
-
          </div>
-
-
          <div className="container__create-user">
-
             <div className="container__create-user--description-box">
                <h1><span>Create your</span> <br /> account</h1>
                <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis minima suscipit dolorem maiores aliquam possimus recusandae saepe quibusdam atque fugit nihil tempora quisquam ipsam repellendus veritatis animi, ratione, delectus pariatur.
                </p>
             </div>
-
             <div className="container__create-user--input-box">
-
                <form className="create-user__inputs" onSubmit={handleSubmit}>
-
                   <label>
                      <span>First Name</span>
                      <input
@@ -74,8 +60,6 @@ export const CreateUser = () => {
                         ref={first_name}
                      />
                   </label>
-
-
                   <label>
                      <span>Last Name</span>
                      <input
@@ -84,8 +68,6 @@ export const CreateUser = () => {
                         ref={last_name}
                      />
                   </label>
-
-
                   <label>
                      <span>Email</span>
                      <input
@@ -94,8 +76,6 @@ export const CreateUser = () => {
                         ref={email}
                      />
                   </label>
-
-
                   <label>
                      <span>Birthday</span>
                      <input
@@ -104,8 +84,6 @@ export const CreateUser = () => {
                         ref={birthday}
                      />
                   </label>
-
-
                   <label>
                      <span>Password</span>
                      <input
@@ -114,8 +92,6 @@ export const CreateUser = () => {
                         ref={password}
                      />
                   </label>
-
-
                   <label>
                      <span>Retype password</span>
                      <input
@@ -124,17 +100,12 @@ export const CreateUser = () => {
                         ref={password2}
                      />
                   </label>
-
-
                   <button id="button" className="create-user__inputs--button">Create Account</button>
-
                </form>
-
             </div>
-
          </div>
-
       </div >
 
    );
+
 };
