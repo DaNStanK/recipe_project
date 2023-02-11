@@ -1,8 +1,12 @@
+/*----------------------------------*\
+  #VIEW-RECIPE COMPONENT
+\*----------------------------------*/
+
 .view-recipe {
    display: flex;
    flex-direction: column;
-   width: 1027px;
-   height: 599px;
+   width: 55vw;
+   height: 72vh;
    background: #FFFFFF 0% 0% no-repeat padding-box;
    box-shadow: 0px 10px 20px #00000012;
    border: 1px solid #D8D8D8;
@@ -10,93 +14,122 @@
    letter-spacing: 0;
    opacity: 1;
    margin: auto;
-   padding: 22px 32px;
+   padding: 1.4rem 2rem;
 }
+
 
 .view-recipe__title-box {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
-   margin-bottom: 17px;
+   margin-bottom: 1.1rem;
 }
+
 
 .view-recipe__title-box h1 {
    text-align: left;
-   font: normal normal bold 2.375rem/3.125rem Roboto Slab;
+   font: normal normal bold 2.4rem/3.1rem Roboto Slab;
    color: #F0972A;
 }
+
 
 .view-recipe__title-box img {
    cursor: pointer;
 }
 
+
 .view-recipe__container-box {
    display: flex;
    flex-direction: row;
-   gap: 43px;
+   gap: 2.7rem;
    text-align: left;
    font: normal normal normal 1rem/1.313rem Roboto;
    color: #A5A5A5;
 }
 
+
 .view-recipe__img {
    object-fit: cover;
    vertical-align: top;
    width: 100%;
-   height: 243px;
+   height: 29vh;
    border-radius: 5px;
 }
 
-.view-recipe__left-section {
+
+.view-recipe__container-box--left-section {
    width: 50%;
 }
+
 
 .view-recipe__title-category {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
-   margin-top: 22px;
+   margin-top: 1.4rem;
 }
+
 
 .view-recipe__short-description {
-   height: 126px;
-   margin-top: 17px;
+   height: 15.2vh;
+   margin-top: 1.1rem;
+   font: normal normal normal 1rem/1.3rem Roboto;
 }
 
-.view-recipe__title-category,
-h2 {
+
+.view-recipe__title-category h2 {
    text-align: left;
    font: normal normal bold 1.125rem/1.5rem Roboto Slab;
    color: #96BB36;
 }
 
+
 .view-recipe__category {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   font-family: Roboto Slab;
-   font-weight: bold;
-   text-align: center;
-   font-size: 0.875rem;
+   font: normal normal bold 0.9rem/1.2rem Roboto Slab;
    color: white;
    background-color: #96BB36;
-   min-width: 61px;
-   height: 26px;
+   padding: 0.3rem 0.7rem;
+   height: 3.1vh;
    border-radius: 15px;
 }
 
-.view-recipe__left-section .recipe__descriptionIcons {
+
+.view-recipe__container-box--left-section .view-recipe__icons {
    margin-top: 25px;
 }
+
+
+.view-recipe__icons{
+   display: flex;
+   flex-direction: row;
+   gap: 0.5rem;
+}
+
+
+.view-recipe__icons--container {
+   display: flex;
+   flex-direction: row;
+   gap: 0.5rem;
+   color: #626262;
+   font: normal normal bold 0.8rem/1rem Roboto Slab;
+}
+
 
 .view-recipe__right-section {
    display: flex;
    flex-direction: column;
-   gap: 15px;
+   gap: 0.9rem;
    width: 50%;
 }
 
+
+.view-recipe__right-section h2 {
+   font: normal normal bold 1.1rem/1.5rem Roboto Slab;
+   color: #96BB36;
+}
+
+
 .view-recipe__right-section p {
-   padding-right: 10px;
+   padding-right: 0.6rem;
    overflow-wrap: break-word;
 }

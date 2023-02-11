@@ -25,16 +25,13 @@ export const App = () => {
       <Routes>
          {/* default route */}
          <Route path="/" element={<Layout />}>
-
             <Route index element={<Home />} />
-
             {/* users sub-routes */}
             <Route path="users">
                <Route index element={<Login />} />
                <Route path="create" element={<CreateUser />} />
                <Route path="edit" element={<EditUser />} />
             </Route>
-
             {/* recipes sub-routes */}
             <Route path="recipes">
                <Route index element={<MyRecipes />} />
@@ -42,13 +39,10 @@ export const App = () => {
                <Route path=":recipeID" element={<EditRecipe />} />
                <Route path="category/:category" element={<RecipesByCategory />} />
             </Route>
-
          </Route>
-
-
          <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
 
    );
+
 };

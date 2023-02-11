@@ -57,7 +57,6 @@ export const RecipeCreateForm = () => {
    return (
 
       <form className="create-recipe" onSubmit={handleSubmit}>
-
          <div className="create-recipe__left-box">
             <span>Recipe Image</span>
             {filename &&
@@ -73,7 +72,6 @@ export const RecipeCreateForm = () => {
                />
             </label>
          </div>
-
          <div className="create-recipe__middle-box">
             <div>
                <label>
@@ -81,9 +79,7 @@ export const RecipeCreateForm = () => {
                   <input className="create-recipe__middle-box--title" type="text" name="title" ref={title} />
                </label>
             </div>
-
             <div className="create-recipe__middle-box--inner-middle">
-
                <label htmlFor="category" className="category">
                   <span>Category</span><br />
                   <select name="category" ref={category} id="category" >
@@ -95,12 +91,10 @@ export const RecipeCreateForm = () => {
                      <input type="number" name="preparation_time" ref={preparation_time} />
                   </select>
                </label>
-
                <label className="preparation-time">
                   <span>Preparation Time</span>
                   <input type="number" name="preparation_time" ref={preparation_time} />
                </label>
-
                <label className="persons-number">
                   <span>No. People</span>
                   <input
@@ -110,22 +104,18 @@ export const RecipeCreateForm = () => {
                   />
                </label>
             </div>
-
             <label className="create-recipe__middle-box--short-description">
                <span>Short Description</span>
                <textarea name="short_description" ref={short_description} />
             </label>
-
             <button id="button">Save</button>
          </div>
-
          <div className="create-recipe__right-box">
             <label>
                <span>Recipe</span>
                <textarea name="long_description" ref={long_description} />
             </label>
          </div>
-
       </form>
 
    );

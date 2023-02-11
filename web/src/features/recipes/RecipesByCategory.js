@@ -23,27 +23,27 @@ export const RecipesByCategory = () => {
       setRecipes(prevState => prevState = recipesStore.filter(recipe => recipe.category === category));
    }, [category, recipesStore]);
 
+
    return (
 
       <div className="container">
-
          <div className="container__title-box">
             <h2 className="container__title-box--title">{category}</h2>
             <div className="container__title-box--line"></div>
          </div>
 
-         {recipes &&
-            <div className="container__recipes">
-               {recipes &&
-                  recipes.map(recipe => (
-                     <RecipesBody
-                        key={recipe._id}
-                        recipe={recipe}
-                     />
-                  ))}
-            </div>}
+         {recipes && <div className="container__recipes">
+            {recipes &&
+               recipes.map(recipe => (
+                  <RecipesBody
+                     key={recipe._id}
+                     recipe={recipe}
+                  />
+               ))}
+         </div>}
 
       </div>
 
    );
+
 };
