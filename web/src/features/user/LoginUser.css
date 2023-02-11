@@ -1,65 +1,58 @@
-.container__box {
+/*----------------------------------*\
+  #LOGIN-USER
+\*----------------------------------*/
+
+.container__login-box {
    display: flex;
    flex-direction: row;
-   gap: 10px;
    width: 100%;
-   letter-spacing: 0px;
-   opacity: 1;
 }
 
-.description__box {
+
+.container__login-box--description {
    display: flex;
    flex-direction: column;
-   gap: 29px;
+   justify-content: space-between;
    width: 62%;
-   margin-right: 144px;
+   margin-right: 9rem;
 }
 
-.description__box h1 {
-   text-align: left;
+
+.container__login-box--description span,
+.container__login-box--description h1 {
    font: normal bold 2.875rem/3.75rem Roboto Slab;
-   color: #626262;
 }
 
-.description__box p {
+
+.container__login-box--description h1 {
+   color: #626262;
+   margin-bottom: 1.81rem;
+}
+
+
+.container__login-box--description p {
    word-break: break-all;
-   width: 100%;
    font: normal normal normal 1.25rem/1.63rem Roboto Slab;
    color: #A5A5A5;
 }
 
-.login__inputs {
+
+.container__login-box--inputs {
    display: flex;
    flex-direction: column;
-   gap: 23px;
+   gap: 1.44rem;
    width: 38%;
 }
 
-.container__label input {
+
+.container__login-box--inputs input {
+   margin-top: 0.63rem;
    width: 66%;
 }
 
-.button__login {
-   background: none;
-   border: 1px solid #A5A5A5;
-   font: normal normal bold 1rem/1rem Roboto;
-   text-align: center;
-   text-transform: uppercase;
-   text-decoration: none;
-   color: inherit;
-   padding: 9.91px 10px 9.09px 10px;
+
+.container__login-box--inputs button {
    width: 27%;
    height: 40px;
-   border-radius: 5px;
-   margin-top: 19px;
-   cursor: pointer;
-}
-
-.button__login:hover,
-.button__login:active,
-.button__login:focus {
-   border: 1px solid #96BB36;
-   background: #96BB36;
-   color: #FFFFFF;
-   box-shadow: 0px 3px 6px #00000029;
+   margin-top: 1.19rem;
 }

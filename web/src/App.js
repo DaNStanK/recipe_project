@@ -21,6 +21,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 export const App = () => {
 
    return (
+
       <Routes>
          {/* default route */}
          <Route path="/" element={<Layout />}>
@@ -48,5 +49,6 @@ export const App = () => {
          <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
+
    );
 };

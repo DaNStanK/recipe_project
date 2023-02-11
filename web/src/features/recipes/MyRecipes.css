@@ -1,17 +1,29 @@
-.container__inputBox {
+/*----------------------------------*\
+  #MY-RECIPES COMPONENT
+\*----------------------------------*/
+
+.container__table {
    display: flex;
    flex-direction: column;
-   gap: 10px;
-   cursor: pointer;
+   gap: 0.63rem;
 }
 
-.innerLeft {
+.container__table--title-box {
    display: flex;
    flex-direction: row;
-   width: 50%;
-   justify-content: space-around;
+   justify-content: space-between;
+   width: 100%;
+   font: normal normal bold 1rem/1.3rem Roboto;
 }
 
-.innerRight {
-   margin-right: 30px;
+.inner-left {
+   display: flex;
+   justify-content: space-between;
+   flex-direction: row;
+   width: 50%;
+   padding: 0 0.3rem 0 2rem;
+}
+
+.inner-right {
+   margin-right: 1.7rem;
 }

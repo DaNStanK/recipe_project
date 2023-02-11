@@ -1,24 +1,36 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
+import { getRecipes } from "./recipesSlice";
+
 import { getUser } from "../user/userSlice";
+
 import { fetchUpdateRecipe } from "./recipesSlice";
 
 import { storeFile } from "../../fetch/fetchRecipes";
 
 
-export const RecipeEditForm = ({ recipe }) => {
+export const RecipeEditForm = ({ recipeID }) => {
+
+   const recipe = useSelector(getRecipes)
+      .filter(recipe => recipe._id === recipeID)
+      .reduce((acc, curr) => curr, {});
 
    const [data, setData] = useState(recipe);
+
    const user = useSelector(getUser);
+
    const navigate = useNavigate();
+
    const dispatch = useDispatch();
 
    const dataChange = e => {
       setData(prevState => prevState = {
          ...prevState,
-         [e.target.name]: isNaN(e.target.value) ? e.target.value : +e.target.value
+         [e.target.name]: [e.target.name] !== ("preparation_time" || "number_persons") ? e.target.value : +e.target.value
       });
    };
 
@@ -40,11 +52,15 @@ export const RecipeEditForm = ({ recipe }) => {
    };
 
    return (
-      <div className="container-form">
-         <div className="box-left">
+
+      <div className="create-recipe">
+
+         <div className="create-recipe__left-box">
             <span>Recipe Image</span>
+
             <img src={`../../uploads/${data?.image_url}`} alt="recipe pic" />
-            <label className="fileUpload"> UPLOAD
+
+            <label className="file-upload"> UPLOAD
                <input
                   name="image_url"
                   type="file"
@@ -53,12 +69,14 @@ export const RecipeEditForm = ({ recipe }) => {
                />
             </label>
          </div>
-         <div className="box-middle">
+
+         <div className="create-recipe__middle-box">
             <div>
                <label>
                   <span>Recipe Title</span>
+
                   <input
-                     className="recipe-title"
+                     className="create-recipe__middle-box--title"
                      type="text"
                      name="title"
                      value={data.title}
@@ -66,11 +84,12 @@ export const RecipeEditForm = ({ recipe }) => {
                   />
                </label>
             </div>
-            <div className="middle-innerBox">
-               <label htmlFor="category" >
+
+            <div className="create-recipe__middle-box--inner-middle">
+               <label className="category" htmlFor="category" >
                   <span>Category</span><br />
+
                   <select
-                     classSeveral changes including img pathName="category"
                      name="category"
                      defaultValue={data.category}
                      onChange={dataChange}
@@ -83,40 +102,48 @@ export const RecipeEditForm = ({ recipe }) => {
                      <option value="dinner">Dinner</option>
                   </select>
                </label>
+
                <label>
                   <span>Preparation Time</span>
+
                   <input
                      className="preparation-time"
                      type="text"
                      name="preparation_time"
-                     value={String(data.preparation_time)}
+                     value={data.preparation_time}
                      onChange={dataChange}
                   />
                </label>
+
                <label >
                   <span>No. People</span>
                   <input
                      className="persons-number"
-                     type="number"
+                     type="text"
                      name="number_persons"
                      value={data.number_persons}
                      onChange={dataChange}
                   />
                </label>
             </div>
-            <label className="short-description">
+
+            <label className="create-recipe__middle-box--short-description">
                <span>Short Description</span>
+
                <textarea
                   name="short_description"
                   value={data.short_description}
                   onChange={dataChange}
                />
             </label>
+
             <button id="button" onClick={handleClick}>Save</button>
          </div>
-         <div className="box-right">
+
+         <div className="create-recipe__right-box">
             <label>
                <span>Recipe</span>
+
                <textarea
                   name="long_description"
                   value={data.long_description}
@@ -124,6 +151,8 @@ export const RecipeEditForm = ({ recipe }) => {
                />
             </label>
          </div>
+
       </div>
+
    );
 };

@@ -1,14 +1,17 @@
 import { useRef, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 
 import { fetchCreateRecipe } from "./recipesSlice";
+
 import { getUser } from "../user/userSlice";
+
 import { storeFile } from "../../fetch/fetchRecipes";
 
-export const RecipeCreateForm = () => {
 
-   const [filename, setFilename] = useState(null);
+export const RecipeCreateForm = () => {
 
    const title = useRef('');
    const category = useRef('');
@@ -17,8 +20,12 @@ export const RecipeCreateForm = () => {
    const short_description = useRef('');
    const long_description = useRef('');
 
+   const [filename, setFilename] = useState(null);
+
    const { user } = useSelector(getUser);
+
    const dispatch = useDispatch();
+
    const navigate = useNavigate();
 
    const uploadFile = async (e, token) => {
@@ -34,7 +41,7 @@ export const RecipeCreateForm = () => {
 
    const handleSubmit = e => {
       e.preventDefault();
-      let data = {
+      const data = {
          image_url: filename,
          title: title.current.value,
          category: category.current.value,
@@ -48,18 +55,16 @@ export const RecipeCreateForm = () => {
    };
 
    return (
-      <form className="container-form" onSubmit={handleSubmit}>
-         <div className="box-left">
+
+      <form className="create-recipe" onSubmit={handleSubmit}>
+
+         <div className="create-recipe__left-box">
             <span>Recipe Image</span>
-            {filename && <img
-               src={filename}
-               alt="recipe pic"
-            />}
-            {!filename && <img
-               src={'../../../../uploads/recipe.jpg'}
-               alt="recipe pic"
-            />}
-            <label className="fileUpload"> UPLOAD
+            {filename &&
+               <img src={filename} alt="recipe pic" />}
+            {!filename &&
+               <img src={'../../../../uploads/recipe.jpg'} alt="recipe pic" />}
+            <label className="file-upload"> UPLOAD
                <input
                   name="image_url"
                   type="file"
@@ -68,14 +73,17 @@ export const RecipeCreateForm = () => {
                />
             </label>
          </div>
-         <div className="box-middle">
+
+         <div className="create-recipe__middle-box">
             <div>
                <label>
                   <span>Recipe Title</span>
-                  <input className="recipe-title" type="text" name="title" ref={title} />
+                  <input className="create-recipe__middle-box--title" type="text" name="title" ref={title} />
                </label>
             </div>
-            <div className="middle-innerBox">
+
+            <div className="create-recipe__middle-box--inner-middle">
+
                <label htmlFor="category" className="category">
                   <span>Category</span><br />
                   <select name="category" ref={category} id="category" >
@@ -83,30 +91,42 @@ export const RecipeCreateForm = () => {
                      <option value="breakfast">Breakfast</option>
                      <option value="brunch">Brunch</option>
                      <option value="lunch">Lunch</option>
-                     <option value="dinner">Dinner</option>
+                     HTML && #BODY<span>Preparation Time</span>
+                     <input type="number" name="preparation_time" ref={preparation_time} />
                   </select>
                </label>
+
                <label className="preparation-time">
                   <span>Preparation Time</span>
                   <input type="number" name="preparation_time" ref={preparation_time} />
                </label>
+
                <label className="persons-number">
                   <span>No. People</span>
-                  <input type="number" name="number_persons" ref={number_persons} />
+                  <input
+                     type="number"
+                     name="number_persons"
+                     ref={number_persons}
+                  />
                </label>
             </div>
-            <label className="short-description">
+
+            <label className="create-recipe__middle-box--short-description">
                <span>Short Description</span>
                <textarea name="short_description" ref={short_description} />
             </label>
+
             <button id="button">Save</button>
          </div>
-         <div className="box-right">
+
+         <div className="create-recipe__right-box">
             <label>
                <span>Recipe</span>
                <textarea name="long_description" ref={long_description} />
             </label>
          </div>
+
       </form>
+
    );
 };

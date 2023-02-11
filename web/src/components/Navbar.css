@@ -122,7 +122,7 @@
 
 
 /*----------------------------------*\
-  #NAVBAR LOGGED out COMPONENT
+  #NAVBAR LOGGED OUT COMPONENT
 \*----------------------------------*/
 
 .navbar__logged-out {
@@ -138,9 +138,11 @@
 
 .navbar__logged-out--button-login {
   width: 32%;
+  padding: 0.75rem 0;
 }
 
 
 .navbar__logged-out--button-create {
+  padding: 0.75rem 0;
   width: 53%;
 }

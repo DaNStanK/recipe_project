@@ -1,9 +1,14 @@
 import "./Home.css";
+
 import { RecipesBody } from "./RecipesBody";
+
 import { useSelector } from "react-redux";
+
 import { getRecipes } from "./recipesSlice";
 
+
 export const Home = () => {
+
   const recipes = useSelector(getRecipes);
 
   const recipesByNewestDate = recipes
