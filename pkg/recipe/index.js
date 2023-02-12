@@ -51,32 +51,67 @@ const Recipe = mongoose.model(
 );
 
 const create = async (data) => {
-   const r = new Recipe(data);
-   return r.save();
+   try {
+      const r = new Recipe(data);
+      return r.save();
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const update = async (id, uid, data) => {
-   return Recipe.updateOne({ _id: id, author_id: uid }, data);
+   try {
+      return Recipe.updateOne({ _id: id, author_id: uid }, data);
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const getAll = async () => {
-   return Recipe.find({}).sort({ created_on: -1 });
+   try {
+      return Recipe.find({}).sort({ created_on: -1 });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const getById = async (id) => {
-   return Recipe.findOne({ _id: id });
+   try {
+      return Recipe.findOne({ _id: id });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const getUserRecipes = async (uid) => {
-   return Recipe.find({ author_id: uid });
+   try {
+      return Recipe.find({ author_id: uid });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const getCategory = async (name) => {
-   return Recipe.find({ category: name });
+   try {
+      return Recipe.find({ category: name });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const remove = async (id, uid) => {
-   return Recipe.deleteOne({ _id: id, author_id: uid });
+   try {
+      return Recipe.deleteOne({ _id: id, author_id: uid });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 module.exports = {
