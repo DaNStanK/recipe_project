@@ -87,8 +87,6 @@ export const RecipeCreateForm = () => {
                      <option value="breakfast">Breakfast</option>
                      <option value="brunch">Brunch</option>
                      <option value="lunch">Lunch</option>
-                     HTML && #BODY<span>Preparation Time</span>
-                     <input type="number" name="preparation_time" ref={preparation_time} />
                   </select>
                </label>
                <label className="preparation-time">
