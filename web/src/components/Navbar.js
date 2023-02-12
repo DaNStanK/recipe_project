@@ -10,8 +10,6 @@ import { useSelector } from "react-redux";
 
 import { getUser } from "../features/user/userSlice";
 
-import logoImg from "../icons/logo_color.svg";
-
 
 export const Navbar = () => {
 
@@ -20,10 +18,9 @@ export const Navbar = () => {
    const navigate = useNavigate();
 
    return (
-
       <nav className='navbar-container'>
          <div className="navbar-container__logo" onClick={() => navigate('/')}>
-            <img src={logoImg} alt="logo icon" />
+            <img src="/icons/logo_color.svg" alt="logo icon" />
          </div>
          <div className="navbar-container__category">
             <Link
@@ -46,13 +43,9 @@ export const Navbar = () => {
                className='navbar-container__category--links'
             >DINNER</Link>
          </div>
-
          {user?.isLoggedIn && <LoggedIn />}
-
-
          {!user?.isLoggedIn && <LoggedOut />}
       </nav>
-
    );
 
 };

@@ -2,18 +2,15 @@ import './Footer.css';
 
 import { Link } from 'react-router-dom';
 
-import logoImg from '../icons/logo_white.svg';
-
 
 export const Footer = () => {
 
    return (
-
       <div id="footer">
          <div className="footer-container">
             <div className="footer-container__logo">
                <Link to='/'>
-                  <img src={logoImg} alt="logo icon" />
+                  <img src="/icons/logo_white.svg" alt="logo icon" />
                </Link>
             </div>
             <div className="footer-container__types">
@@ -30,7 +27,6 @@ export const Footer = () => {
             </div>
          </div>
       </div>
-
    );
 
 };

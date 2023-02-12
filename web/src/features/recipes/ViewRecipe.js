@@ -1,13 +1,5 @@
 import "./ViewRecipe.css";
 
-import plateIcon from "../../icons/icon_plate.svg";
-
-import starIcon from "../../icons/icon_star.svg";
-
-import clockIcon from "../../icons/icon_time.svg";
-
-import closeIcon from "../../icons/icon_close.svg";
-
 import { useDispatch } from "react-redux";
 
 import { fetchUpdateRecipe } from "./recipesSlice";
@@ -34,7 +26,7 @@ export const ViewRecipe = ({ setView, recipe, isLoggedIn }) => {
             <div className="view-recipe__title-box">
                <h1>{recipe.title}</h1>
                <img
-                  src={closeIcon}
+                  src="/icons/icon_close.svg"
                   alt="Close icon"
                   onClick={() => setView(prevState => !prevState)}
                />
@@ -55,11 +47,11 @@ export const ViewRecipe = ({ setView, recipe, isLoggedIn }) => {
                   <p className="view-recipe__short-description">{recipe.short_description.substring(0, 330)}</p>
                   <div className="view-recipe__icons">
                      <div className="view-recipe__icons--container">
-                        <img src={clockIcon} alt="clock icon" />
+                        <img src="/icons/icon_time.svg" alt="clock icon" />
                         <h3>{recipe.preparation_time} min</h3>
                      </div>
                      <div className="view-recipe__icons--container">
-                        <img src={plateIcon} alt="plate icon" />
+                        <img src="/icons/icon_plate.svg" alt="plate icon" />
                         <h3>{recipe.number_persons} persons</h3>
                      </div>
                      <div className="view-recipe__icons--container">
@@ -67,14 +59,14 @@ export const ViewRecipe = ({ setView, recipe, isLoggedIn }) => {
                         {!isLoggedIn &&
                            <img
                               className="star-icon"
-                              src={starIcon}
+                              src="/icons/icon_star.svg"
                               alt="star pic"
                            />}
 
                         {isLoggedIn &&
                            <img
                               className="star-icon" alt="star pic"
-                              src={starIcon}
+                              src="/icons/icon_star.svg"
                               onClick={handleClick}
                            />}
 

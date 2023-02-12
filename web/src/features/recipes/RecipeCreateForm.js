@@ -62,7 +62,7 @@ export const RecipeCreateForm = () => {
             {filename &&
                <img src={filename} alt="recipe pic" />}
             {!filename &&
-               <img src={'../../../../uploads/recipe.jpg'} alt="recipe pic" />}
+               <img src="/images/recipe.jpg" alt="recipe pic" />}
             <label className="file-upload"> UPLOAD
                <input
                   name="image_url"

@@ -68,7 +68,7 @@ export const EditUser = () => {
 
          {data && <div className="edit-user">
             <div className="edit-user__image-box">
-               <img src={'../../../../uploads/avatar7_big.png'} alt="Avatar Img" />
+               <img src="/images/profile.png" alt="Avatar Img" />
                <label className="file-upload"> CHANGE AVATAR
                   <input
                      name="image_url"

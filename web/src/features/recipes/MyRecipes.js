@@ -12,8 +12,6 @@ import { getUser } from "../user/userSlice";
 
 import { getMyRecipes } from "../../fetch/fetchRecipes";
 
-import addIcon from "../../icons/icon_plus_white.svg";
-
 
 export const MyRecipes = () => {
 
@@ -43,7 +41,7 @@ export const MyRecipes = () => {
             <div className="container__title-box--line"></div>
             <div className="container__button">
                <Link className="container__link" to="/recipes/create">
-                  <img src={addIcon} alt="add icon" />
+                  <img src="/icons/icon_plus_white.svg" alt="add icon" />
                </Link>
             </div>
          </div>

@@ -4,8 +4,6 @@ import { useParams, Link } from "react-router-dom";
 
 import { RecipeEditForm } from "./RecipeEditForm";
 
-import backIcon from "../../icons/icon_back_white.svg";
-
 
 export const EditRecipe = () => {
 
@@ -18,7 +16,7 @@ export const EditRecipe = () => {
             <div className="container__title-box--line"></div>
             <div className="container__button">
                <Link className="container__link" to="/recipes">
-                  <img src={backIcon} alt="back icon" />
+                  <img src="/icons/icon_back_white.svg" alt="back icon" />
                </Link>
             </div>
          </div>
