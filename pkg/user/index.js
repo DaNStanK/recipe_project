@@ -34,24 +34,49 @@ const User = mongoose.model(
 );
 
 const create = async (data) => {
-   let u = new User(data);
-   return u.save();
+   try {
+      let u = new User(data);
+      return u.save();
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const getUserByEmail = async (email) => {
-   return User.findOne({ email });
+   try {
+      return User.findOne({ email });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 }
    ;
 const get = async (uid) => {
-   return User.findOne({ _id: uid });
+   try {
+      return User.findOne({ _id: uid });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const update = async (uid, data) => {
-   return User.updateOne({ _id: uid }, data);
+   try {
+      return User.updateOne({ _id: uid }, data);
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 const remove = async (id) => {
-   return User.remove({ _id: id });
+   try {
+      return User.remove({ _id: id });
+   } catch (error) {
+      console.log(error);
+      return error;
+   }
 };
 
 module.exports = {
