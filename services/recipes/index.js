@@ -8,7 +8,9 @@ const api = express();
 db.init();
 
 api.use(express.json());
+
 api.get('/api/v1/recipes/category/:category', recipes.getByCategory);
+
 api.use(
    jwt({
       algorithms: ['HS256'],
