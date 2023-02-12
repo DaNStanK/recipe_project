@@ -38,6 +38,7 @@ export const RecipesByCategory = () => {
                   <RecipesBody
                      key={recipe._id}
                      recipe={recipe}
+                     setRecipes={setRecipes}
                   />
                ))}
          </div>}

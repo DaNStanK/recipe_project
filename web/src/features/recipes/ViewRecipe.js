@@ -7,17 +7,27 @@ import { fetchUpdateRecipe } from "./recipesSlice";
 import { useCallback } from "react";
 
 
-export const ViewRecipe = ({ setView, recipe, isLoggedIn }) => {
+export const ViewRecipe = ({ setView, recipe, isLoggedIn, setRecipes }) => {
 
    const dispatch = useDispatch();
 
    const handleClick = useCallback((e) => {
+
       e.preventDefault();
+
+      setRecipes(prevState => prevState.map(r => {
+         if (r?._id === recipe?._id) {
+            return { ...r, likes: r.likes + 1 };
+         }
+         return r;
+      }));
+
       dispatch(fetchUpdateRecipe({
          data: { ...recipe, likes: recipe.likes + 1 },
          recipeID: recipe._id
       }));
-   }, [dispatch, recipe]);
+
+   }, [dispatch, recipe, setRecipes]);
 
 
    return (

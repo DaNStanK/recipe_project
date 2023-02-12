@@ -9,7 +9,7 @@ import { fetchUpdateRecipe } from "./recipesSlice";
 import { ViewRecipe } from "./ViewRecipe";
 
 
-export const RecipesBody = ({ recipe }) => {
+export const RecipesBody = ({ recipe, setRecipes }) => {
 
    const dispatch = useDispatch();
 
@@ -18,15 +18,24 @@ export const RecipesBody = ({ recipe }) => {
    const [view, setView] = useState(false);
 
    const handleClick = useCallback((e) => {
+
       e.preventDefault();
+
+      setRecipes(prevState => prevState.map(r => {
+         if (r?._id === recipe?._id) {
+            return { ...r, likes: r.likes + 1 };
+         }
+         return r;
+      }));
+
       dispatch(fetchUpdateRecipe({
          data: { ...recipe, likes: recipe.likes + 1 },
          recipeID: recipe._id
       }));
-   }, [dispatch, recipe]);
+
+   }, [dispatch, recipe, setRecipes]);
 
    return (
-
       <article className="recipe">
          <img
             className="recipe__image"
@@ -74,13 +83,13 @@ export const RecipesBody = ({ recipe }) => {
 
          {view && <div className="modal">
             <ViewRecipe
+               setRecipes={setRecipes}
                recipe={recipe}
                setView={setView}
                isLoggedIn={user?.isLoggedIn}
             />
          </div>}
       </article>
-
    );
 
 };
