@@ -6,14 +6,6 @@ import { getUser } from "../user/userSlice";
 
 import { fetchUpdateRecipe } from "./recipesSlice";
 
-import arrowIcon from "../../icons/icon_arrows_white.svg";
-
-import plateIcon from "../../icons/icon_plate.svg";
-
-import starIcon from "../../icons/icon_star.svg";
-
-import clockIcon from "../../icons/icon_time.svg";
-
 import { ViewRecipe } from "./ViewRecipe";
 
 
@@ -48,24 +40,24 @@ export const RecipesBody = ({ recipe }) => {
             </p>
             <div className="recipe__description-box--icons">
                <div>
-                  <img src={clockIcon} alt="clock pic" />
+                  <img src="/icons/icon_time.svg" alt="clock pic" />
                   <h3>{recipe.preparation_time} min</h3>
                </div>
                <div>
-                  <img src={plateIcon} alt="plate pic" />
+                  <img src="/icons/icon_plate.svg" alt="plate pic" />
                   <h3>{recipe.number_persons} persons</h3>
                </div>
                <div>
 
                   {!user?.isLoggedIn && <img
                      className="star-icon"
-                     src={starIcon}
+                     src="/icons/icon_star.svg"
                      alt="star pic"
                   />}
 
                   {user?.isLoggedIn && <img
                      className="star-icon" alt="star pic"
-                     src={starIcon}
+                     src="/icons/icon_star.svg"
                      onClick={handleClick}
                   />}
 
@@ -77,7 +69,7 @@ export const RecipesBody = ({ recipe }) => {
             <p>{recipe.category}</p>
          </div>
          <div className="recipe__icon" onClick={() => setView(prevState => !prevState)}>
-            <img src={arrowIcon} alt="arrowIcon" />
+            <img src="/icons/icon_arrows_white.svg" alt="arrowIcon" />
          </div>
 
          {view && <div className="modal">

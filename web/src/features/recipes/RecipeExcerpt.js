@@ -10,8 +10,6 @@ import { fetchDeleteRecipe } from "./recipesSlice";
 
 import { useCallback } from "react";
 
-import garbageIcon from "../../icons/icon_trashcan.svg";
-
 
 export const RecipeExcerpt = ({ recipe, setRecipes }) => {
 
@@ -42,7 +40,7 @@ export const RecipeExcerpt = ({ recipe, setRecipes }) => {
             </div>
          </div>
          <div className="recipe-excerpt__inner-right" onClick={handleDelete}>
-            <img src={garbageIcon} alt="remove icon" />
+            <img src="/icons/icon_trashcan.svg" alt="remove icon" />
          </div>
       </div>
 
