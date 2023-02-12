@@ -42,7 +42,7 @@ export const RecipesBody = ({ recipe }) => {
             alt="recipe pic"
          />
          <div className="recipe__description-box">
-            <span>{recipe.title}</span>
+            <span className="recipe__description-box--title">{recipe.title}</span>
             <p className="recipe__description-box--description">
                {recipe.short_description.substring(0, 200)}...
             </p>
@@ -81,7 +81,11 @@ export const RecipesBody = ({ recipe }) => {
          </div>
 
          {view && <div className="modal">
-            <ViewRecipe recipe={recipe} setView={setView} />
+            <ViewRecipe
+               recipe={recipe}
+               setView={setView}
+               isLoggedIn={user?.isLoggedIn}
+            />
          </div>}
       </article>
 

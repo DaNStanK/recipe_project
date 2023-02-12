@@ -8,20 +8,16 @@ import clockIcon from "../../icons/icon_time.svg";
 
 import closeIcon from "../../icons/icon_close.svg";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import { getUser } from "../user/userSlice";
+import { useDispatch } from "react-redux";
 
 import { fetchUpdateRecipe } from "./recipesSlice";
 
 import { useCallback } from "react";
 
 
-export const ViewRecipe = ({ setView, recipe }) => {
+export const ViewRecipe = ({ setView, recipe, isLoggedIn }) => {
 
    const dispatch = useDispatch();
-
-   const { user } = useSelector(getUser);
 
    const handleClick = useCallback((e) => {
       e.preventDefault();
@@ -68,14 +64,14 @@ export const ViewRecipe = ({ setView, recipe }) => {
                      </div>
                      <div className="view-recipe__icons--container">
 
-                        {!user?.isLoggedIn &&
+                        {!isLoggedIn &&
                            <img
                               className="star-icon"
                               src={starIcon}
                               alt="star pic"
                            />}
 
-                        {user?.isLoggedIn &&
+                        {isLoggedIn &&
                            <img
                               className="star-icon" alt="star pic"
                               src={starIcon}

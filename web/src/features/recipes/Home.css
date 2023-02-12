@@ -48,6 +48,10 @@
    text-transform: capitalize;
 }
 
+.recipe__description-box--title {
+   font: normal normal bold 1.3rem/1.6rem Roboto Slab;
+}
+
 
 .recipe__description-box--description {
    font: normal normal normal 0.88rem/1.19rem Roboto;
@@ -110,14 +114,14 @@
    display: flex;
    justify-content: center;
    position: absolute;
-   bottom: 19px;
-   right: 27px;
+   bottom: 1.2rem;
+   right: 2.3rem;
    background-color: #96BB36;
    width: 1.75rem;
    height: 1.75rem;
    border-radius: 5px;
    padding: 0.5rem;
-   cursor: pointer
+   cursor: pointer;
 }
 
 
