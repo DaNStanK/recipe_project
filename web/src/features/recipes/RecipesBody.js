@@ -81,7 +81,11 @@ export const RecipesBody = ({ recipe }) => {
          </div>
 
          {view && <div className="modal">
-            <ViewRecipe recipe={recipe} setView={setView} />
+            <ViewRecipe
+               recipe={recipe}
+               setView={setView}
+               isLoggedIn={user?.isLoggedIn}
+            />
          </div>}
       </article>
 
