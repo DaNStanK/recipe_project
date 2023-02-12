@@ -79,7 +79,7 @@
 
 .view-recipe__title-category h2 {
    text-align: left;
-   font: normal normal bold 1.125rem/1.5rem Roboto Slab;
+   font: normal normal bold 1.1rem/1.5rem Roboto Slab;
    color: #96BB36;
 }
 
@@ -94,24 +94,32 @@
 }
 
 
-.view-recipe__container-box--left-section .view-recipe__icons {
-   margin-top: 25px;
-}
-
-
-.view-recipe__icons{
+.view-recipe__icons {
    display: flex;
    flex-direction: row;
-   gap: 0.5rem;
+   gap: 0.81rem;
+   margin-top: 1.6rem;
 }
 
 
 .view-recipe__icons--container {
    display: flex;
    flex-direction: row;
-   gap: 0.5rem;
-   color: #626262;
+   gap: 0.31rem;
+   align-items: center;
+   justify-content: flex-start;
    font: normal normal bold 0.8rem/1rem Roboto Slab;
+   color: #626262;
+}
+
+
+.view-recipe__icons img {
+   height: 1.9vh;
+}
+
+
+.view-recipe__icons .star-icon {
+   cursor: pointer;
 }
 
 
