@@ -9,74 +9,76 @@ import { getAllRecipes } from "../../fetch/fetchRecipes";
 
 export const Home = () => {
 
-  const [recipes, setRecipes] = useState();
+   const [recipes, setRecipes] = useState();
 
-  let recipesByMostLikes;
+   let recipesByMostLikes;
 
-  let recipesByNewestDate;
+   let recipesByNewestDate;
 
-  if (recipes) {
-    recipesByNewestDate = recipes
-      .map(recipe => recipe = { ...recipe, created_on: Date.parse(recipe.created_on) })
-      .splice(0, 3);
+   if (recipes) {
+      recipesByNewestDate = recipes
+         .map(recipe => recipe = { ...recipe, created_on: Date.parse(recipe.created_on) })
+         .splice(0, 3);
 
-    recipesByMostLikes = recipes
-      .map(recipe => recipe)
-      .sort((a, b) => b.likes - a.likes)
-      .splice(0, 6);
-  }
+      recipesByMostLikes = recipes
+         .map(recipe => recipe)
+         .sort((a, b) => b.likes - a.likes)
+         .splice(0, 6);
+   }
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const getRecipes = await getAllRecipes();
-        if (getRecipes !== `Not Found`) {
-          return setRecipes(prevState => prevState = getRecipes);
-        }
-      } catch (error) {
-        console.log(error);
-        return error;
-      }
-    })();
-  }, []);
+   useEffect(() => {
+      (async () => {
+         try {
+            const getRecipes = await getAllRecipes();
+            if (getRecipes !== `Not Found`) {
+               return setRecipes(prevState => prevState = getRecipes);
+            }
+         } catch (error) {
+            console.log(error);
+            return error;
+         }
+      })();
+   }, []);
 
 
-  return (
-    <div className="home">
-      <div className="container">
-        <div className="container__title-box">
-          <h2 className="container__title-box--title">Fresh & new</h2>
-          <div className="container__title-box--line"></div>
-        </div>
+   return (
+      <div className="home">
+         <div className="container">
+            <div className="container__title-box">
+               <h2 className="container__title-box--title">Fresh & new</h2>
+               <div className="container__title-box--line"></div>
+            </div>
 
-        {recipesByNewestDate &&
-          <div className="container__recipes">
-            {recipesByNewestDate.map(recipe => (
-              <RecipesBody
-                key={recipe?._id}
-                recipe={recipe}
-                setRecipes={setRecipes}
-              />
-            ))}
-          </div>}
+            {recipesByNewestDate &&
+               <div className="container__recipes">
+                  {recipesByNewestDate.map(recipe => (
+                     <RecipesBody
+                        key={recipe?._id}
+                        recipe={recipe}
+                        setRecipes={setRecipes}
+                     />
+                  ))}
+               </div>
+            }
 
-        <div className="container__title-box">
-          <h2 className="container__title-box--title">Most Popular Recipes</h2>
-          <div className="container__title-box--line"></div>
-        </div>
+            <div className="container__title-box">
+               <h2 className="container__title-box--title">Most Popular Recipes</h2>
+               <div className="container__title-box--line"></div>
+            </div>
 
-        {recipesByMostLikes &&
-          <div className="container__recipes">
-            {recipesByMostLikes.map(recipe => (
-              <RecipesBody
-                key={recipe?._id}
-                recipe={recipe}
-                setRecipes={setRecipes}
-              />
-            ))}
-          </div>}
+            {recipesByMostLikes &&
+               <div className="container__recipes">
+                  {recipesByMostLikes.map(recipe => (
+                     <RecipesBody
+                        key={recipe?._id}
+                        recipe={recipe}
+                        setRecipes={setRecipes}
+                     />
+                  ))}
+               </div>
+            }
 
+         </div>
       </div>
-    </div>
-  );
+   );
 };
