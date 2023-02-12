@@ -18,10 +18,33 @@ import { EditUser } from "./features/user/EditUser";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+
+import { getAllRecipes } from "./fetch/fetchRecipes";
+
+import { fetchRecipes } from "./features/recipes/recipesSlice";
+
 export const App = () => {
 
-   return (
+   const dispatch = useDispatch();
 
+   useEffect(() => {
+      (async () => {
+         try {
+            const getRecipes = await getAllRecipes();
+            if (getRecipes !== `Not Found`) {
+               dispatch(fetchRecipes());
+            }
+         } catch (error) {
+            console.log(error);
+            return error;
+         }
+      })();
+   }, [dispatch]);
+
+   return (
       <Routes>
          {/* default route */}
          <Route path="/" element={<Layout />}>
@@ -42,7 +65,6 @@ export const App = () => {
          </Route>
          <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-
    );
 
 };
