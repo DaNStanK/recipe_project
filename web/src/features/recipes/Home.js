@@ -2,23 +2,44 @@ import "./Home.css";
 
 import { RecipesBody } from "./RecipesBody";
 
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-import { getRecipes } from "./recipesSlice";
+import { getAllRecipes } from "../../fetch/fetchRecipes";
 
 
 export const Home = () => {
 
-  const recipes = useSelector(getRecipes);
+  const [recipes, setRecipes] = useState();
 
-  const recipesByNewestDate = recipes
-    .map(recipe => recipe = { ...recipe, created_on: Date.parse(recipe.created_on) })
-    .splice(0, 3);
+  let recipesByMostLikes;
 
-  const recipesByMostLikes = recipes
-    .map(recipe => recipe)
-    .sort((a, b) => b.likes - a.likes)
-    .splice(0, 6);
+  let recipesByNewestDate;
+
+  if (recipes) {
+    recipesByNewestDate = recipes
+      .map(recipe => recipe = { ...recipe, created_on: Date.parse(recipe.created_on) })
+      .splice(0, 3);
+
+    recipesByMostLikes = recipes
+      .map(recipe => recipe)
+      .sort((a, b) => b.likes - a.likes)
+      .splice(0, 6);
+  }
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const getRecipes = await getAllRecipes();
+        if (getRecipes !== `Not Found`) {
+          return setRecipes(prevState => prevState = getRecipes);
+        }
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    })();
+  }, []);
+
 
   return (
     <div className="home">
@@ -31,7 +52,11 @@ export const Home = () => {
         {recipesByNewestDate &&
           <div className="container__recipes">
             {recipesByNewestDate.map(recipe => (
-              <RecipesBody key={recipe._id} recipe={recipe} />
+              <RecipesBody
+                key={recipe?._id}
+                recipe={recipe}
+                setRecipes={setRecipes}
+              />
             ))}
           </div>}
 
@@ -43,7 +68,11 @@ export const Home = () => {
         {recipesByMostLikes &&
           <div className="container__recipes">
             {recipesByMostLikes.map(recipe => (
-              <RecipesBody key={recipe._id} recipe={recipe} />
+              <RecipesBody
+                key={recipe?._id}
+                recipe={recipe}
+                setRecipes={setRecipes}
+              />
             ))}
           </div>}
 

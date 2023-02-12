@@ -7,7 +7,7 @@ export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async (arg,
       return response;
    } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.message);
    }
 });
 
@@ -18,7 +18,7 @@ export const fetchCreateRecipe = createAsyncThunk('recipes/fetchCreateRecipe', a
       return response;
    } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.message);
    }
 });
 
@@ -29,7 +29,7 @@ export const fetchUpdateRecipe = createAsyncThunk('recipes/fetchUpdateRecipe', a
       return response;
    } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.message);
    }
 });
 
@@ -40,7 +40,7 @@ export const fetchDeleteRecipe = createAsyncThunk('recipes/fetchDeleteRecipe', a
       return response;
    } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkAPI.rejectWithValue(err.message);
    }
 });
 

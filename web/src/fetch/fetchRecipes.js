@@ -16,9 +16,9 @@ export const getAllRecipes = async () => {
 
       const result = await response.json();
       return result;
-   } catch (err) {
-      console.log(err.message);
-      return err;
+   } catch (error) {
+      console.log(error.message);
+      return error.message;
    }
 };
 
@@ -42,9 +42,9 @@ export const createRecipes = async (data, token) => {
 
       const output = await response.json();
       return output;
-   } catch (err) {
-      console.log(err.message);
-      return err;
+   } catch (error) {
+      console.log(error.message);
+      return error.message;
    }
 };
 
@@ -76,7 +76,7 @@ export const updateRecipes = async (data, recipeID, token) => {
       return output;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
 
@@ -100,7 +100,7 @@ export const getRecipesByCategory = async (categoryName) => {
       return output;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
 
@@ -150,7 +150,7 @@ export const getRecipe = async (recipeID, token) => {
       return output;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
 
@@ -175,7 +175,7 @@ export const deleteRecipe = async (recipeID, token) => {
       return output;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
 
@@ -204,6 +204,6 @@ export const storeFile = async (e, token) => {
       return output.fileName;
    } catch (err) {
       console.log(err.message);
-      return err;
+      return err.message;
    }
 };
