@@ -58,11 +58,13 @@ export const recipesSlice = createSlice({
       builder
          .addCase(fetchRecipes.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.entries = action.payload;
+            if (action.payload !== "Not Found") {
+               state.entries = action.payload;
+            }
          })
          .addCase(fetchCreateRecipe.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.entries = { ...action.payload };
+            state.entries.push(action.payload);
          })
          .addCase(fetchUpdateRecipe.fulfilled, (state, action) => {
             state.status = 'succeeded';
