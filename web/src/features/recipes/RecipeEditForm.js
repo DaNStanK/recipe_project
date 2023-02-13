@@ -37,8 +37,8 @@ export const RecipeEditForm = ({ recipeID }) => {
    const uploadFile = async (e, token) => {
       try {
          e.preventDefault();
-         let filename = await storeFile(e, token);
-         return setData(prevState => prevState = { ...prevState, image_url: filename });
+         let fileURI = await storeFile(e, token);
+         return setData(prevState => prevState = { ...prevState, image_url: fileURI });
       } catch (err) {
          console.log(err.message);
          return err;
@@ -56,7 +56,7 @@ export const RecipeEditForm = ({ recipeID }) => {
       <div className="create-recipe">
          <div className="create-recipe__left-box">
             <span>Recipe Image</span>
-            <img src={`../../uploads/${data?.image_url}`} alt="recipe pic" />
+            <img src={`/../../../uploads/${data?.image_url}`} alt="recipe pic" />
             <label className="file-upload"> UPLOAD
                <input
                   name="image_url"

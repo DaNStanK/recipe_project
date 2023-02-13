@@ -22,8 +22,6 @@ import { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { getAllRecipes } from "./fetch/fetchRecipes";
-
 import { fetchRecipes } from "./features/recipes/recipesSlice";
 
 export const App = () => {
@@ -31,17 +29,7 @@ export const App = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      (async () => {
-         try {
-            const getRecipes = await getAllRecipes();
-            if (getRecipes !== `Not Found`) {
-               dispatch(fetchRecipes());
-            }
-         } catch (error) {
-            console.log(error);
-            return error;
-         }
-      })();
+      dispatch(fetchRecipes());
    }, [dispatch]);
 
    return (

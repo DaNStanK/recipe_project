@@ -9,7 +9,7 @@ import { fetchUpdateRecipe } from "./recipesSlice";
 import { ViewRecipe } from "./ViewRecipe";
 
 
-export const RecipesBody = ({ recipe, setRecipes }) => {
+export const RecipesBody = ({ recipe }) => {
 
    const dispatch = useDispatch();
 
@@ -18,22 +18,16 @@ export const RecipesBody = ({ recipe, setRecipes }) => {
    const [view, setView] = useState(false);
 
    const handleClick = useCallback((e) => {
-
       e.preventDefault();
 
-      setRecipes(prevState => prevState.map(r => {
-         if (r?._id === recipe?._id) {
-            return { ...r, likes: r.likes + 1 };
-         }
-         return r;
-      }));
+      if (recipe?.author_id === user?.uid) {
+         dispatch(fetchUpdateRecipe({
+            data: { ...recipe, likes: recipe.likes + 1 },
+            recipeID: recipe._id
+         }));
+      }
 
-      dispatch(fetchUpdateRecipe({
-         data: { ...recipe, likes: recipe.likes + 1 },
-         recipeID: recipe._id
-      }));
-
-   }, [dispatch, recipe, setRecipes]);
+   }, [dispatch, recipe, user?.uid]);
 
    return (
       <article className="recipe">
@@ -81,14 +75,15 @@ export const RecipesBody = ({ recipe, setRecipes }) => {
             <img src="/icons/icon_arrows_white.svg" alt="arrowIcon" />
          </div>
 
-         {view && <div className="modal">
-            <ViewRecipe
-               setRecipes={setRecipes}
-               recipe={recipe}
-               setView={setView}
-               isLoggedIn={user?.isLoggedIn}
-            />
-         </div>}
+         {view &&
+            <div className="modal">
+               <ViewRecipe
+                  recipe={recipe}
+                  setView={setView}
+                  user={user}
+               />
+            </div>
+         }
       </article>
    );
 

@@ -1,7 +1,5 @@
 import "./MyRecipes.css";
 
-import { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 
 import { RecipeExcerpt } from "./RecipeExcerpt";
@@ -10,29 +8,21 @@ import { useSelector } from "react-redux";
 
 import { getUser } from "../user/userSlice";
 
-import { getMyRecipes } from "../../fetch/fetchRecipes";
+import { getRecipes } from "./recipesSlice";
 
 
 export const MyRecipes = () => {
 
+   const recipes = useSelector(getRecipes);
+
    const { user } = useSelector(getUser);
 
-   const [recipes, setRecipes] = useState(null);
+   let myRecipes;
 
-   useEffect(() => {
-      (async () => {
-         try {
-            let response = await getMyRecipes(user?.token);
-            if (typeof response === 'string') {
-               return null;
-            }
-            return setRecipes(prevState => prevState = response);
-         } catch (err) {
-            console.log(err);
-            return err;
-         }
-      })();
-   }, [user?.token]);
+   if (recipes !== 0) {
+      myRecipes = recipes.filter(recipe => recipe?.author_id === user?.uid);
+   }
+
 
    return (
       <div className="container">
@@ -55,12 +45,11 @@ export const MyRecipes = () => {
                <div className="inner-right"><span>Delete</span></div>
             </div>
 
-            {recipes &&
-               recipes.map(recipe => (
+            {myRecipes &&
+               myRecipes.map(recipe => (
                   <RecipeExcerpt
                      key={recipe._id}
                      recipe={recipe}
-                     setRecipes={setRecipes}
                   />
                ))
             }

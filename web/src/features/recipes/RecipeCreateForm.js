@@ -20,7 +20,7 @@ export const RecipeCreateForm = () => {
    const short_description = useRef('');
    const long_description = useRef('');
 
-   const [filename, setFilename] = useState(null);
+   const [filename, setFilename] = useState();
 
    const { user } = useSelector(getUser);
 
@@ -31,8 +31,8 @@ export const RecipeCreateForm = () => {
    const uploadFile = async (e, token) => {
       try {
          e.preventDefault();
-         let fileName = await storeFile(e, token);
-         return setFilename(prevState => prevState = fileName);
+         let fileURI = await storeFile(e, token);
+         return setFilename(prevState => prevState = fileURI);
       } catch (err) {
          console.log(err.message);
          return err;
@@ -60,7 +60,7 @@ export const RecipeCreateForm = () => {
          <div className="create-recipe__left-box">
             <span>Recipe Image</span>
             {filename &&
-               <img src={filename} alt="recipe pic" />}
+               <img src={`/../../../uploads/${filename}`} alt="recipe pic" />}
             {!filename &&
                <img src="/images/recipe.jpg" alt="recipe pic" />}
             <label className="file-upload"> UPLOAD

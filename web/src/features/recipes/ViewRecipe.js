@@ -7,27 +7,21 @@ import { fetchUpdateRecipe } from "./recipesSlice";
 import { useCallback } from "react";
 
 
-export const ViewRecipe = ({ setView, recipe, isLoggedIn, setRecipes }) => {
+export const ViewRecipe = ({ setView, recipe, user }) => {
 
    const dispatch = useDispatch();
 
    const handleClick = useCallback((e) => {
-
       e.preventDefault();
 
-      setRecipes(prevState => prevState.map(r => {
-         if (r?._id === recipe?._id) {
-            return { ...r, likes: r.likes + 1 };
-         }
-         return r;
-      }));
+      if (recipe?.author_id === user?.uid) {
+         dispatch(fetchUpdateRecipe({
+            data: { ...recipe, likes: recipe.likes + 1 },
+            recipeID: recipe._id
+         }));
+      }
 
-      dispatch(fetchUpdateRecipe({
-         data: { ...recipe, likes: recipe.likes + 1 },
-         recipeID: recipe._id
-      }));
-
-   }, [dispatch, recipe, setRecipes]);
+   }, [dispatch, recipe, user?.uid]);
 
 
    return (
@@ -66,14 +60,14 @@ export const ViewRecipe = ({ setView, recipe, isLoggedIn, setRecipes }) => {
                      </div>
                      <div className="view-recipe__icons--container">
 
-                        {!isLoggedIn &&
+                        {!user?.isLoggedIn &&
                            <img
                               className="star-icon"
                               src="/icons/icon_star.svg"
                               alt="star pic"
                            />}
 
-                        {isLoggedIn &&
+                        {user?.isLoggedIn &&
                            <img
                               className="star-icon" alt="star pic"
                               src="/icons/icon_star.svg"
