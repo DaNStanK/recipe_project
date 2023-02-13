@@ -1,31 +1,36 @@
 import "./Home.css";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
 import { RecipesBody } from "./RecipesBody";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getRecipes } from "./recipesSlice";
+import { fetchRecipes, getRecipes } from "./recipesSlice";
 
 
 export const RecipesByCategory = () => {
 
    const { category } = useParams();
 
+   const dispatch = useDispatch();
+
    const recipesStore = useSelector(getRecipes);
 
-   const [recipes, setRecipes] = useState('');
+   let recipes;
+
+   if (recipesStore.length !== 0) {
+      recipes = recipesStore.filter(recipe => recipe.category === category);
+   }
 
    useEffect(() => {
-      setRecipes(prevState => prevState = recipesStore.filter(recipe => recipe.category === category));
-   }, [category, recipesStore]);
+      dispatch(fetchRecipes());
+   }, [dispatch]);
 
 
    return (
-
       <div className="container">
          <div className="container__title-box">
             <h2 className="container__title-box--title">{category}</h2>
@@ -38,13 +43,9 @@ export const RecipesByCategory = () => {
                   <RecipesBody
                      key={recipe._id}
                      recipe={recipe}
-                     setRecipes={setRecipes}
                   />
                ))}
          </div>}
-
       </div>
-
    );
-
 };

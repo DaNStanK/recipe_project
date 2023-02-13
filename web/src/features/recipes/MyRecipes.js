@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 
 import { RecipeExcerpt } from "./RecipeExcerpt";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getUser } from "../user/userSlice";
 
-import { getRecipes } from "./recipesSlice";
+import { fetchRecipes, getRecipes } from "./recipesSlice";
+
+import { useEffect } from "react";
 
 
 export const MyRecipes = () => {
 
    const recipes = useSelector(getRecipes);
+
+   const dispatch = useDispatch();
 
    const { user } = useSelector(getUser);
 
@@ -22,6 +26,10 @@ export const MyRecipes = () => {
    if (recipes !== 0) {
       myRecipes = recipes.filter(recipe => recipe?.author_id === user?.uid);
    }
+
+   useEffect(() => {
+      dispatch(fetchRecipes());
+   }, [dispatch]);
 
 
    return (
