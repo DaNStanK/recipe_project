@@ -87,6 +87,7 @@ export const RecipeCreateForm = () => {
                      <option value="breakfast">Breakfast</option>
                      <option value="brunch">Brunch</option>
                      <option value="lunch">Lunch</option>
+                     <option value="dinner">Dinner</option>
                   </select>
                </label>
                <label className="preparation-time">

@@ -2,9 +2,11 @@ import "./Home.css";
 
 import { RecipesBody } from "./RecipesBody";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getRecipes } from "./recipesSlice";
+import { fetchRecipes, getRecipes } from "./recipesSlice";
+
+import { useEffect } from "react";
 
 
 export const Home = () => {
@@ -14,6 +16,8 @@ export const Home = () => {
    let recipesByNewestDate;
 
    let recipesByMostLikes;
+
+   const dispatch = useDispatch();
 
    if (recipes.length !== 0) {
       recipesByNewestDate = recipes
@@ -25,6 +29,10 @@ export const Home = () => {
          .sort((a, b) => b.likes - a.likes)
          .splice(0, 6);
    }
+
+   useEffect(() => {
+      dispatch(fetchRecipes());
+   }, [dispatch]);
 
 
    return (
