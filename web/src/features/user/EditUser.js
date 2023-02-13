@@ -42,14 +42,14 @@ export const EditUser = () => {
       }
    };
 
-   const dataChange = useCallback((e) => {
+   const dataChange = (e) => {
       setData(prevState => {
          return {
             ...prevState,
             [e.target.name]: ['birthday'] ? new Date(e.target.value) : e.target.value
          };
       });
-   });
+   };
 
    const handleSubmit = useCallback((e) => {
       e.preventDefault();
