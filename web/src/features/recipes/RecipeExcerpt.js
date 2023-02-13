@@ -11,19 +11,16 @@ import { fetchDeleteRecipe } from "./recipesSlice";
 import { useCallback } from "react";
 
 
-export const RecipeExcerpt = ({ recipe, setRecipes }) => {
+export const RecipeExcerpt = ({ recipe }) => {
 
    const navigate = useNavigate();
 
    const dispatch = useDispatch();
 
    const handleDelete = useCallback(() => {
-
       dispatch(fetchDeleteRecipe({ recipeID: recipe?._id }));
-      setRecipes(prevState => prevState.filter(r => r?._id !== recipe?._id));
       return navigate('/recipes');
-
-   }, [dispatch, navigate, recipe?._id, setRecipes]);
+   }, [dispatch, navigate, recipe?._id]);
 
 
    return (
